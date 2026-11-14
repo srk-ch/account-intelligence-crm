@@ -1,9 +1,62 @@
 {
  "fetched": {
   "signals": {
-   "at": "2026-11-14T09:02:05.065Z",
+   "at": "2026-11-14T10:42:55.707Z",
    "data": {
-    "signals": []
+    "signals": [
+     {
+      "id": "champion_leaves",
+      "account": "A",
+      "dated": "2026-11-17",
+      "title": "Eastern Counties: Rhys Calder is moving on",
+      "summary": "Rhys Calder has emailed to say he leaves the drone programme in January. No successor is named. Every call on file before the handover was with him alone.",
+      "records": [
+       {
+        "kind": "email",
+        "path": "A/emails/2026-11-17_rhys_moving.txt",
+        "text": "From: Rhys Calder\nTo: (the CSM on the account)\nDate: 17 November 2026\nSubject: A change on my side\n\nA quick note so you hear it from me. I am moving to another role in the new year and will hand over the drone programme in January. My successor has not been named yet.\n\nAnything we have agreed stands. Until January, keep sending things to the programme office and I will make sure they land.\n\nRhys\n"
+       }
+      ],
+      "set_off_at": "2026-11-14T09:30:38.755Z"
+     },
+     {
+      "id": "urgent_request",
+      "account": "A",
+      "dated": "2026-11-18",
+      "title": "Eastern Counties: Westmere needs an answer before a public event",
+      "summary": "Insp. Karen Mbeki has written directly, and logged a ticket, ahead of a large public event on 5 December. She wants two things settled in writing this week: dates for training more operators before the day, and who answers if a dock fails on the day. Nobody has replied.",
+      "records": [
+       {
+        "kind": "email",
+        "path": "A/emails/2026-11-18_karen_event.txt",
+        "text": "From: Insp. Karen Mbeki\nTo: (the CSM on the account)\nDate: 18 November 2026\nSubject: Public event, 5 December\n\nWe are policing a large public event on Saturday 5 December and I want the docks to carry more of it than they do now.\n\nWhatever was said last week, I need two things settled in writing this week.\n1. Operators. How many more of my officers can be trained before the day, and when.\n2. Cover on the day. If a dock fails, who do I call and how fast does anyone answer.\n\nI am logging this as a ticket as well, so it has a number.\n\nKaren Mbeki\nWestmere drone unit\n"
+       },
+       {
+        "kind": "request",
+        "path": "A/requests.csv",
+        "note": "Row to add to the account's requests log.",
+        "text": "request_id,opened,from,summary,status,owner,last_update,how_it_arrived\nFB-11206,2026-11-18,Westmere drone unit,\"Operator training and support cover before a public event on 5 December. Marked urgent by the requester.\",Open,,2026-11-18,Support ticket\n"
+       }
+      ],
+      "set_off_at": "2026-11-14T09:30:42.574Z"
+     },
+     {
+      "id": "usage_drop",
+      "account": "B",
+      "dated": "2026-11-30",
+      "title": "Aldermoor: three docks that fly most nights have stopped",
+      "summary": "New weekly usage for Aldermoor, 2 to 29 November. Three docks that flew most nights flew nothing in the last two weeks. All three stayed online. No ticket has been raised and nobody at the customer has said anything.",
+      "records": [
+       {
+        "kind": "usage",
+        "path": "B/usage_weekly.csv",
+        "note": "Rows to add to the account's weekly usage.",
+        "text": "week_start,dock_id,flights,days_online\n2026-11-02,AD-01,1,7\n2026-11-09,AD-01,0,7\n2026-11-16,AD-01,0,7\n2026-11-23,AD-01,0,7\n2026-11-02,AD-02,6,7\n2026-11-09,AD-02,7,7\n2026-11-16,AD-02,0,7\n2026-11-23,AD-02,0,7\n2026-11-02,AD-03,0,7\n2026-11-09,AD-03,0,7\n2026-11-16,AD-03,1,7\n2026-11-23,AD-03,0,7\n2026-11-02,AD-04,0,7\n2026-11-09,AD-04,1,7\n2026-11-16,AD-04,0,7\n2026-11-23,AD-04,0,7\n2026-11-02,AD-05,6,7\n2026-11-09,AD-05,7,7\n2026-11-16,AD-05,0,7\n2026-11-23,AD-05,0,7\n2026-11-02,AD-06,0,7\n2026-11-09,AD-06,0,7\n2026-11-16,AD-06,0,7\n2026-11-23,AD-06,1,7\n2026-11-02,AD-07,0,7\n2026-11-09,AD-07,0,7\n2026-11-16,AD-07,1,7\n2026-11-23,AD-07,0,7\n2026-11-02,AD-08,6,7\n2026-11-09,AD-08,7,7\n2026-11-16,AD-08,5,7\n2026-11-23,AD-08,6,7\n2026-11-02,AD-09,1,7\n2026-11-09,AD-09,0,7\n2026-11-16,AD-09,0,7\n2026-11-23,AD-09,0,7\n2026-11-02,AD-10,5,7\n2026-11-09,AD-10,6,7\n2026-11-16,AD-10,0,7\n2026-11-23,AD-10,0,7\n2026-11-02,AD-11,0,7\n2026-11-09,AD-11,0,7\n2026-11-16,AD-11,1,7\n2026-11-23,AD-11,0,7\n2026-11-02,AD-12,0,7\n2026-11-09,AD-12,1,7\n2026-11-16,AD-12,0,7\n2026-11-23,AD-12,0,7\n2026-11-02,AD-13,1,7\n2026-11-09,AD-13,0,7\n2026-11-16,AD-13,0,7\n2026-11-23,AD-13,0,7\n2026-11-02,AD-14,0,7\n2026-11-09,AD-14,0,7\n2026-11-16,AD-14,0,7\n2026-11-23,AD-14,0,7\n"
+       }
+      ],
+      "set_off_at": "2026-11-14T10:39:16.120Z"
+     }
+    ]
    }
   },
   "whoami": {
@@ -48,11 +101,11 @@
    }
   },
   "accounts": {
-   "at": "2026-11-14T08:38:25.063Z",
+   "at": "2026-11-14T10:43:57.602Z",
    "data": {
     "format": "account-quest-v2-export/1",
     "player": "REDACTED-PLAYER-ID",
-    "exported_at": "2026-11-14T08:38:20.005Z",
+    "exported_at": "2026-11-14T10:43:52.742Z",
     "minute": 87,
     "world_closed": true,
     "accounts": [
@@ -946,7 +999,7 @@
    }
   },
   "paperwork_A": {
-   "at": "2026-11-14T08:40:28.994Z",
+   "at": "2026-11-14T10:46:01.585Z",
    "data": {
     "account": "A",
     "records": [
@@ -3040,7 +3093,7 @@
    }
   },
   "paperwork_B": {
-   "at": "2026-11-14T08:41:31.102Z",
+   "at": "2026-11-14T10:44:59.603Z",
    "data": {
     "account": "B",
     "records": [
@@ -5178,6 +5231,581 @@
     "id": "dataflow_pack",
     "name": "dataflow_pack.txt",
     "text": "Data-flow pack: Tarn Valley Constabulary\nPrepared by FlytBase engineering for the force's data protection impact assessment. Draft for review.\n\n1. Data flows\n- Video and telemetry travel from the dock to the force's own command system over an encrypted link.\n- Nothing is sent to a third party. Support staff see flight health data only, never video, unless the force opens a ticket and grants access.\n\n2. Retention\n- Live video is not kept by default.\n- Recorded flights are kept for the period the force sets, then deleted automatically. The force's current policy setting is 31 days.\n- Flight logs (times, routes, battery) are kept for 12 months for maintenance.\n\n3. Storage location\n- Recordings and logs are stored in the region the force chose at set-up. They do not leave it.\n\n4. Access controls\n- Named users only, each with their own login and a role set by the force.\n- Every view, download and deletion is recorded in an audit log the force can export.\n\nOpen questions for the force\n- Confirm the retention period the assessment should state.\n- Confirm who in the force approves new user accounts.\n"
+   }
+  },
+  "list_paperwork": {
+   "at": "2026-11-14T10:47:40.591Z",
+   "data": {
+    "readme": "# Account records (data pack)\n\nThese are the records FlytBase holds on your accounts from before you took them over: contracts, deal\nhistory, call notes, emails, the requests log and weekly usage. Everything here is fictional.\n\nIt is the record, not the answer. It shows what was sold, what was said to us and what the docks did.\nIt does not say why. What you learned this morning is the other half: your own export.\n\nPer account:\n\n- `profile.json`: who is on file, and what is not on file.\n- `deal_history.json`: the commercial history up to the handover, and what was on file as open.\n- `contract.txt`: a summary of the order form.\n- `invoices.json`: what was invoiced and paid.\n- `calls_index.json`: every call on file, with its summary and actions. `calls/` holds the notes\n  or transcript where one was kept.\n- `mail_log.json`: every email on file, written by people and sent automatically. `emails/` holds\n  the longer threads.\n- `tickets.json`: every support ticket, with its conversation.\n- `requests.csv`: customer success's own list of requests it was tracking at the handover, which\n  also holds requests that never became tickets.\n- `internal_notes.json`: notes about the account from FlytBase's internal channel (A and B).\n- `flights.csv`: every flight on record to 31 October 2026: date, start time, dock, minutes,\n  scheduled or manual, and how it ended. Earlier flights were not kept in this record.\n- `usage_weekly.csv`: the same flights counted by dock and week, with days online.\n- `devices.json`, `device_events.csv`: the docks and what they reported (offline, back online,\n  software updates, faults, short connection drops).\n- `users.json`: logins on the account and how often each signs in (A and B).\n\nDock ids are FlytBase's own. Which force, plant or site each dock sits at was not copied into\nthese records, and a login does not say where its user works.\n\nFor all accounts: `team.json` (FlytBase colleagues),\n`feature_requests.json` (the feature request log across customers) and `release_notes.json`.\n\nMost of what is here is routine. That is what an account's records look like.\n\nThings to keep in mind:\n\n- A statement by a customer is that person's statement. Check it against usage and against what you\n  were told this morning.\n- The records stop at the handover. Deal stages, promises and outcomes from this morning are only in\n  your own export.\n- New things can arrive while you build. Check `/signals`.\n",
+    "accounts": [
+     {
+      "account": "A",
+      "open": true,
+      "files": [
+       {
+        "path": "calls/2025-06-24_enquiry_call.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2025-09-02_pilot_scoping.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2025-10-21_pilot_midpoint.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2025-12-16_pilot_review.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2026-01-13_order_call.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2026-02-17_install_kickoff.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2026-03-24_install_check_in.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2026-04-28_install_close.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2026-05-19_intro_call.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2026-06-02_check_in.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2026-06-30_check_in.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2026-07-22_check_in.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2026-08-19_check_in.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2026-09-09_check_in.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2026-10-06_check_in.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2026-10-20_check_in.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls_index.json",
+        "kind": "calls_index"
+       },
+       {
+        "path": "contract.txt",
+        "kind": "contract"
+       },
+       {
+        "path": "deal_history.json",
+        "kind": "deal_history"
+       },
+       {
+        "path": "device_events.csv",
+        "kind": "device_events"
+       },
+       {
+        "path": "devices.json",
+        "kind": "devices"
+       },
+       {
+        "path": "emails/2026-07-09_rhys_tender.txt",
+        "kind": "email"
+       },
+       {
+        "path": "emails/2026-08-11_karen_batteries.txt",
+        "kind": "email"
+       },
+       {
+        "path": "emails/2026-09-03_usage_question.txt",
+        "kind": "email"
+       },
+       {
+        "path": "emails/2026-10-02_rhys_stadium.txt",
+        "kind": "email"
+       },
+       {
+        "path": "emails/2026-10-28_renewal.txt",
+        "kind": "email"
+       },
+       {
+        "path": "flights.csv",
+        "kind": "flights"
+       },
+       {
+        "path": "internal_notes.json",
+        "kind": "internal_notes"
+       },
+       {
+        "path": "invoices.json",
+        "kind": "invoices"
+       },
+       {
+        "path": "mail_log.json",
+        "kind": "mail_log"
+       },
+       {
+        "path": "profile.json",
+        "kind": "profile"
+       },
+       {
+        "path": "requests.csv",
+        "kind": "requests"
+       },
+       {
+        "path": "tickets.json",
+        "kind": "tickets"
+       },
+       {
+        "path": "usage_weekly.csv",
+        "kind": "usage"
+       },
+       {
+        "path": "users.json",
+        "kind": "users"
+       }
+      ]
+     },
+     {
+      "account": "B",
+      "open": true,
+      "files": [
+       {
+        "path": "calls/2025-08-19_enquiry_call.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2025-10-07_trial_kickoff.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2025-12-11_trial_review.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2026-01-08_order_call.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2026-02-10_rollout_kickoff.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2026-03-17_rollout_check_in.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2026-04-23_rollout_close.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2026-05-21_intro_call.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2026-06-11_check_in.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2026-07-14_check_in.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2026-08-25_check_in.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls/2026-10-13_check_in.txt",
+        "kind": "call"
+       },
+       {
+        "path": "calls_index.json",
+        "kind": "calls_index"
+       },
+       {
+        "path": "contract.txt",
+        "kind": "contract"
+       },
+       {
+        "path": "deal_history.json",
+        "kind": "deal_history"
+       },
+       {
+        "path": "device_events.csv",
+        "kind": "device_events"
+       },
+       {
+        "path": "devices.json",
+        "kind": "devices"
+       },
+       {
+        "path": "emails/2026-07-16_stefan_savings.txt",
+        "kind": "email"
+       },
+       {
+        "path": "emails/2026-09-18_beatriz_alerts.txt",
+        "kind": "email"
+       },
+       {
+        "path": "emails/2026-09-22_stefan_case_study.txt",
+        "kind": "email"
+       },
+       {
+        "path": "emails/2026-10-08_finance_mailbox.txt",
+        "kind": "email"
+       },
+       {
+        "path": "flights.csv",
+        "kind": "flights"
+       },
+       {
+        "path": "internal_notes.json",
+        "kind": "internal_notes"
+       },
+       {
+        "path": "invoices.json",
+        "kind": "invoices"
+       },
+       {
+        "path": "mail_log.json",
+        "kind": "mail_log"
+       },
+       {
+        "path": "profile.json",
+        "kind": "profile"
+       },
+       {
+        "path": "requests.csv",
+        "kind": "requests"
+       },
+       {
+        "path": "tickets.json",
+        "kind": "tickets"
+       },
+       {
+        "path": "usage_weekly.csv",
+        "kind": "usage"
+       },
+       {
+        "path": "users.json",
+        "kind": "users"
+       }
+      ]
+     },
+     {
+      "account": "K",
+      "open": true,
+      "files": [
+       {
+        "path": "contract.txt",
+        "kind": "contract"
+       },
+       {
+        "path": "deal_history.json",
+        "kind": "deal_history"
+       },
+       {
+        "path": "device_events.csv",
+        "kind": "device_events"
+       },
+       {
+        "path": "devices.json",
+        "kind": "devices"
+       },
+       {
+        "path": "emails/2026-10-19_dana_when.txt",
+        "kind": "email"
+       },
+       {
+        "path": "invoices.json",
+        "kind": "invoices"
+       },
+       {
+        "path": "mail_log.json",
+        "kind": "mail_log"
+       },
+       {
+        "path": "profile.json",
+        "kind": "profile"
+       },
+       {
+        "path": "requests.csv",
+        "kind": "requests"
+       },
+       {
+        "path": "tickets.json",
+        "kind": "tickets"
+       },
+       {
+        "path": "usage_weekly.csv",
+        "kind": "usage"
+       }
+      ]
+     }
+    ],
+    "team": "/pack/team",
+    "signals": "/signals"
+   }
+  },
+  "paperwork_K": {
+   "at": "2026-11-14T10:47:41.278Z",
+   "data": {
+    "account": "K",
+    "records": [
+     {
+      "path": "contract.txt",
+      "kind": "contract",
+      "text": "ORDER SUMMARY (customer success copy)\nCustomer: Kestrel Estates, ordered through a local installer acting as reseller\nOrder placed: August 2026\nCurrency: pounds sterling\n\nWhat was ordered\n- 1 dock with aircraft, and the FlytBase platform.\n- Installation by the installer. Not by FlytBase.\n\nPrice and term\n- 14,000 a year for the platform subscription, paid in full through the installer.\n- Term: 14 September 2026 to 13 September 2027.\n- No automatic renewal.\n\nNot included\n- Operator training or certification. The reseller order form leaves these to the reseller.\n- Onboarding by FlytBase customer success.\n- Any site survey beyond the installed position.\n\nSupport\n- Standard support: support desk in business hours.\n"
+     },
+     {
+      "path": "deal_history.json",
+      "kind": "deal_history",
+      "data": {
+       "account": "K",
+       "currency": "GBP",
+       "history": [
+        {
+         "date": "2026-08",
+         "what": "Order through a reseller",
+         "detail": "A local installer ordered 1 dock and a one-year platform subscription for Kestrel Estates. The installer's order notes describe the purpose as mapping the whole estate."
+        },
+        {
+         "date": "2026-09-14",
+         "what": "Installed",
+         "detail": "Dock installed by the installer. See the install note in the account's files."
+        },
+        {
+         "date": "2026-09-14",
+         "what": "Term starts",
+         "detail": "14,000 a year, paid in full through the installer.",
+         "value": 14000
+        },
+        {
+         "date": "2026-10-19",
+         "what": "First contact from the customer",
+         "detail": "Dana Whitfield emails to ask when the dock starts flying. Automatic acknowledgement only."
+        },
+        {
+         "date": "2026-11",
+         "what": "Assigned to customer success",
+         "detail": "No onboarding call was ever held. The account passes to you."
+        }
+       ],
+       "on_file_as_open_at_handover": [
+        {
+         "what": "Go-live of the one dock",
+         "value": null,
+         "basis": "Paid for and not flying. Nothing on file says why."
+        }
+       ],
+       "note": "What the estate needs, and what any next step is worth, is in the account brief and in what you find out."
+      }
+     },
+     {
+      "path": "device_events.csv",
+      "kind": "device_events",
+      "text": "date,time,dock_id,event,detail\n2026-09-14,15:05,KE-D01,registered,Registered by the reseller\n2026-09-16,03:37,KE-D01,software_update,\n"
+     },
+     {
+      "path": "devices.json",
+      "kind": "devices",
+      "data": {
+       "note": "The dock registered to this account. `commissioned` is empty: no commissioning flight is on record.",
+       "docks": [
+        {
+         "dock_id": "KE-D01",
+         "dock_serial": "FBD40W45166",
+         "aircraft_serial": "FBA97B85639",
+         "model": "Standard dock, 2025 model",
+         "registered": "2026-09-14",
+         "commissioned": null,
+         "software": "2026.09",
+         "last_seen_online": "2026-11-13"
+        }
+       ]
+      }
+     },
+     {
+      "path": "emails/2026-10-19_dana_when.txt",
+      "kind": "email",
+      "text": "From: Dana Whitfield, Kestrel Estates\nTo: FlytBase (general address)\nDate: 19 October 2026\nSubject: Our dock\n\nHello,\n\nWe had a dock installed on the gatehouse roof five weeks ago. It has been paid for. It has not\nflown. The firm that installed it has stopped answering.\n\nWho do I speak to, and when does it start?\n\nDana Whitfield\nEstate manager\n\n---\nFrom: FlytBase (automatic reply)\nDate: 19 October 2026\n\nThank you for your message. A member of the team will be in touch.\n\n[No further reply on file.]\n"
+     },
+     {
+      "path": "invoices.json",
+      "kind": "invoices",
+      "data": {
+       "currency": "GBP",
+       "note": "From FlytBase Accounts. Sold through a reseller: the reseller was invoiced, not the customer.",
+       "invoices": [
+        {
+         "number": "INV-26-0921",
+         "issued": "2026-09-14",
+         "what": "First year, 1 dock, platform subscription",
+         "amount": 14000,
+         "status": "Paid",
+         "paid": "2026-09-14",
+         "note": "Paid in full by the reseller."
+        }
+       ],
+       "first_year_total": 14000
+      }
+     },
+     {
+      "path": "mail_log.json",
+      "kind": "mail_log",
+      "data": {
+       "note": "Every email on file for the account, oldest first: written by people, and sent automatically by the platform. The threads in emails/ are listed here by path.",
+       "mail": [
+        {
+         "thread": "T002",
+         "kind": "automatic",
+         "date": "2026-09-14",
+         "from": "FlytBase notifications (automatic)",
+         "to": "The reseller (a local installer)",
+         "subject": "We have your request FB-10923",
+         "body": "Your request \"Dock registered\" has been logged as FB-10923. The support desk answers tickets in order of arrival, in business hours."
+        },
+        {
+         "thread": "T003",
+         "kind": "automatic",
+         "date": "2026-09-14",
+         "from": "FlytBase notifications (automatic)",
+         "to": "The reseller (a local installer)",
+         "subject": "FB-10923 is closed. How did we do?",
+         "body": "Your request FB-10923 has been closed. Two questions on how it went: a short survey is linked here."
+        },
+        {
+         "thread": "T004",
+         "kind": "automatic",
+         "date": "2026-09-14",
+         "from": "FlytBase notifications (automatic)",
+         "to": "Account administrator (reseller's login)",
+         "subject": "Your dock is registered",
+         "body": "Dock KE-D01 is registered to Kestrel Estates. It will appear as ready once it has passed its checks and flown a commissioning flight."
+        },
+        {
+         "thread": "T001",
+         "kind": "person",
+         "date": "2026-10-19",
+         "from": "Dana Whitfield",
+         "to": "FlytBase general address",
+         "subject": "(see file)",
+         "path": "emails/2026-10-19_dana_when.txt",
+         "note": "Full text in the file."
+        },
+        {
+         "thread": "T005",
+         "kind": "automatic",
+         "date": "2026-10-19",
+         "from": "FlytBase notifications (automatic)",
+         "to": "Dana Whitfield",
+         "subject": "We have your message",
+         "body": "Thank you for writing to FlytBase. Your message has been received."
+        }
+       ]
+      }
+     },
+     {
+      "path": "profile.json",
+      "kind": "profile",
+      "data": {
+       "account": "K",
+       "name": "Kestrel Estates",
+       "currency": "GBP",
+       "sector": "Private residential estate",
+       "what_they_bought": "1 dock and the FlytBase platform, bought through a local installer.",
+       "flytbase_side": {
+        "commercial_owner": null,
+        "csm": [
+         {
+          "who": "you",
+          "from": "2026-11"
+         }
+        ],
+        "note": "Sold through a reseller. No FlytBase colleague has spoken to this customer."
+       },
+       "contacts_on_file": [
+        {
+         "id": "k_dana_1yo",
+         "name": "Dana Whitfield",
+         "role": "Estate manager",
+         "on_file_since": "2026-09",
+         "last_contact_before_handover": "2026-10-19",
+         "note": "Named on the installer's order. Her one email to us got an automatic acknowledgement only."
+        }
+       ],
+       "not_on_file": [
+        "Anyone else at the estate.",
+        "A working contact for the installer. Their phone and email no longer answer.",
+        "A record of any flight."
+       ],
+       "renewal": {
+        "term_ends": "2027-09-13",
+        "annual_value": 14000
+       }
+      }
+     },
+     {
+      "path": "requests.csv",
+      "kind": "requests",
+      "text": "request_id,opened,from,summary,status,owner,last_update,how_it_arrived\n(none),2026-10-19,\"Dana Whitfield, estate manager\",\"Asked when the dock will start flying. Automatic acknowledgement sent. No reply from a person.\",Open,,2026-10-19,Email to the general address\n"
+     },
+     {
+      "path": "tickets.json",
+      "kind": "tickets",
+      "data": {
+       "note": "Every support ticket on the account, oldest first. Ticket numbers run across all FlytBase customers. requests.csv is customer success's own list of what it was tracking at the handover, which also holds requests that never became tickets.",
+       "tickets": [
+        {
+         "id": "FB-10923",
+         "opened": "2026-09-14",
+         "requester": "The reseller (a local installer)",
+         "subject": "Dock registered",
+         "category": "accounts",
+         "status": "Closed",
+         "closed": "2026-09-14",
+         "assignee": "Support desk",
+         "first_response_hours": 2,
+         "conversation": [
+          {
+           "date": "2026-09-14",
+           "from": "The reseller (a local installer)",
+           "text": "Dock registered."
+          },
+          {
+           "date": "2026-09-14",
+           "from": "Support desk",
+           "text": "Registered to Kestrel Estates on the reseller's order."
+          }
+         ]
+        }
+       ]
+      }
+     },
+     {
+      "path": "usage_weekly.csv",
+      "kind": "usage",
+      "text": "week_start,dock_id,flights,days_online\n2026-09-14,KE-D01,0,7\n2026-09-21,KE-D01,0,7\n2026-09-28,KE-D01,0,7\n2026-10-05,KE-D01,0,7\n2026-10-12,KE-D01,0,7\n2026-10-19,KE-D01,0,7\n2026-10-26,KE-D01,0,7\n"
+     }
+    ]
    }
   }
  },

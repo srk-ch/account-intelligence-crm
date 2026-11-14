@@ -2,6 +2,7 @@
 // Rules: every row carries sources[]; sources are filtered against ids that really exist; unbacked claims
 // are shown apart and never added into the backed total.
 
+import { buildPaperworkAccount } from "./paperwork_account.js";
 const DAY = 86_400_000;
 const iso = (d) => new Date(d).toISOString().slice(0, 10);
 const addDays = (n, from = Date.now()) => iso(from + n * DAY);
@@ -207,7 +208,7 @@ export function buildCrm(store) {
     acc.offers.forEach((o) => (refs[o.id] = { kind: "deal", label: o.title, meta: `Offer to ${o.pitch_to} · ${o.status}` }));
     acc.stakeholders.forEach((s) => (refs[s.id] = { kind: "person", label: `${s.name}, ${s.role}`, meta: `${s.relationship} with us` }));
     exp.files.filter((f) => f.account === acc.id).forEach((f) => (refs[f.id] = { kind: "file", label: f.title, meta: F["file_" + f.id]?.data?.text ? String(F["file_" + f.id].data.text).split(/[\r\n\t ]+/).join(" ").slice(0, 320) + "…" : "Data room file" }));
-    pw.forEach((r) => (refs[P(r.path)] = { kind: "record", label: r.path, meta: "Paperwork record on file" }));
+    pw.forEach((r) => (refs[P(r.path)] = { kind: "record", label: r.path, meta: r.text ? String(r.text).split(/[\r\n\t ]+/).join(" ").slice(0, 320) + "…" : JSON.stringify(r.data || "").slice(0, 320) + "…" }));
     signals.forEach((s) => (refs[s.id] = { kind: "signal", label: s.title, meta: s.detail }));
     const ceiling = acc.opportunities.filter((o) => o.worth_up_to && o !== renewalOpp).reduce((n, o) => n + o.worth_up_to, 0);
     q4.sort((a, b) => ({ high: 0, med: 1, low: 2 }[a.sev] - { high: 0, med: 1, low: 2 }[b.sev]));
@@ -222,6 +223,12 @@ export function buildCrm(store) {
       ...acc.offers.map((o) => ({ id: o.id, title: o.title, col: o.status === "won" ? "agreed" : "offer", amount: o.value, person: o.pitch_to, blocker: null }))];
     const metrics = { facts: acc.facts.length, verified: acc.facts.filter((f) => f.status === "verified").length, opps: acc.opportunities.length, agreed: acc.opportunities.filter((o) => o.stage === "agreed").length };
     out.accounts.push({ id: acc.id, name: acc.name, refs, kpis, pipeline, metrics, usage: { series, docks: docks.length, flyingNow: flyingNow.length, last4 }, timeline, q1, q2, q3, q4: q4.sort((a, b) => ({ high: 0, med: 1, low: 2 }[a.sev] - { high: 0, med: 1, low: 2 }[b.sev])), q5 });
+  }
+  // accounts that have paperwork but no discovery export (for example a third account dropped mid-build)
+  const have = new Set(out.accounts.map((a) => a.id));
+  for (const k of Object.keys(F)) {
+    const mm = k.match(/^paperwork_(.+)$/);
+    if (mm && !have.has(mm[1]) && F[k]?.data?.records) out.accounts.push(buildPaperworkAccount(mm[1], F[k].data.records, signals));
   }
   return out;
 }

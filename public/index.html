@@ -351,7 +351,7 @@ const dLong=d=>{try{return new Date(d+"T12:00:00").toLocaleDateString("en-GB",{w
 const rel=n=>n<0?`${-n}d overdue`:n===0?"today":n===1?"tomorrow":`in ${n} days`;
 const hue=s=>[...s].reduce((a,c)=>(a*31+c.charCodeAt(0))%360,7);
 const initials=n=>n.replace(/^(Insp\.|Dr\.?|Mr\.?|Ms\.?)\s*/i,"").split(/\s+/).map(w=>w[0]).slice(0,2).join("").toUpperCase();
-const short=n=>n.name.includes("Eastern")?"EC":"AI";
+const short=n=>n.name.split(/\s+/).slice(0,2).map(w=>w[0]).join("").toUpperCase();
 
 const money=(n,c)=>c+Math.round(n).toLocaleString("en-GB");
 function compBar(a){
@@ -397,7 +397,7 @@ function driversMetrics(a){
   const R=52,C=2*Math.PI*R;let off=0;
   const arcs=seg.map(s=>{const len=s[1]/tot*C;const el=`<circle cx="70" cy="70" r="${R}" fill="none" stroke="${s[2]}" stroke-width="26" stroke-dasharray="${(len-2).toFixed(1)} ${C.toFixed(1)}" stroke-dashoffset="${(-off).toFixed(1)}" transform="rotate(-90 70 70)"/>`;off+=len;return el}).join("");
   return `<div class="duo"><section class="panel glass"><div class="pbar"><h2 style="margin:0">Where the value sits</h2><span class="cap2">${esc(cs)} by status</span></div><div class="donut"><svg viewBox="0 0 140 140" role="img" aria-label="Book split">${arcs}<text x="70" y="66" text-anchor="middle" class="dn">${esc(k.backed)}</text><text x="70" y="82" text-anchor="middle" class="ds">backed</text></svg><div class="leg2">${seg.map(s=>`<div><i style="background:${s[2]}"></i>${esc(s[0])} <b>(${Math.round(s[1]/tot*100)}%)</b><small>${money(s[1],cs)}</small></div>`).join("")}</div></div></section>
-  <section class="panel glass"><div class="pbar"><h2 style="margin:0">Health metrics</h2><span class="cap2">from the data on file</span></div><div class="rings">${ring((m.verified||0)/Math.max(m.facts||1,1),"Facts verified",`${m.verified||0} of ${m.facts||0} facts`,"#5b8def")}${ring((m.agreed||0)/Math.max(m.opps||1,1),"Deals agreed",`${m.agreed||0} of ${m.opps||0} deals`,"#f2cf4d")}${ring((a.usage?.flyingNow||0)/Math.max(a.usage?.docks||1,1),"Docks flying",`${a.usage?.flyingNow||0} of ${a.usage?.docks||0}, last 4 weeks`,"#8fa0b3")}</div></section></div>`;
+  <section class="panel glass"><div class="pbar"><h2 style="margin:0">Health metrics</h2><span class="cap2">from the data on file</span></div><div class="rings">${ring((m.verified||0)/Math.max(m.facts||1,1),"Facts verified",(m.facts?`${m.verified||0} of ${m.facts} facts`:"no discovery export"),"#5b8def")}${ring((m.agreed||0)/Math.max(m.opps||1,1),"Deals agreed",`${m.agreed||0} of ${m.opps||0} deals`,"#f2cf4d")}${ring((a.usage?.flyingNow||0)/Math.max(a.usage?.docks||1,1),"Docks flying",`${a.usage?.flyingNow||0} of ${a.usage?.docks||0}, last 4 weeks`,"#8fa0b3")}</div></section></div>`;
 }
 function overview(a){return pipelinePanel(a)+driversMetrics(a)}
 
