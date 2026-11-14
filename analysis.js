@@ -195,8 +195,7 @@ export function buildCrm(store) {
     acc.opportunities.forEach((o) => (refs[o.id] = { kind: "deal", label: o.title, meta: `Stage: ${o.stage}${o.blocker ? " · Blocker (" + o.blocker.status + "): " + o.blocker.text : ""}` }));
     acc.offers.forEach((o) => (refs[o.id] = { kind: "deal", label: o.title, meta: `Offer to ${o.pitch_to} · ${o.status}` }));
     acc.stakeholders.forEach((s) => (refs[s.id] = { kind: "person", label: `${s.name}, ${s.role}`, meta: `${s.relationship} with us` }));
-    exp.files.filter((f) => f.account === acc.id).forEach((f) => (refs[f.id] = { kind: "file", label: f.title, meta: F["file_" + f.id]?.data?.text ? String(F["file_" + f.id].data.text).replace(/[
-	 ]+/g, " ").slice(0, 320) + "…" : "Data room file" }));
+    exp.files.filter((f) => f.account === acc.id).forEach((f) => (refs[f.id] = { kind: "file", label: f.title, meta: F["file_" + f.id]?.data?.text ? String(F["file_" + f.id].data.text).split(/[\r\n\t ]+/).join(" ").slice(0, 320) + "…" : "Data room file" }));
     pw.forEach((r) => (refs[P(r.path)] = { kind: "record", label: r.path, meta: "Paperwork record on file" }));
     signals.forEach((s) => (refs[s.id] = { kind: "signal", label: s.title, meta: s.detail }));
     const ceiling = acc.opportunities.filter((o) => o.worth_up_to && o !== renewalOpp).reduce((n, o) => n + o.worth_up_to, 0);
