@@ -5115,6 +5115,70 @@
      }
     ]
    }
+  },
+  "file_roi_spreadsheet": {
+   "at": "2026-11-14T09:43:23.018Z",
+   "data": {
+    "id": "roi_spreadsheet",
+    "name": "roi_spreadsheet.csv",
+    "text": "plant,guard_hours_replaceable_per_year,guard_rate_eur,saving_eur,contract_reduced,booked_by_finance\nPlant 1,3600,23,82800,No,\nPlant 2,2900,23,66700,,\nPlant 3,4100,23,94300,no,\nPlant 4,3300,23,75900,,\nPlant 5,2800,23,64400,no,\nPlant 6,3900,23,89700,No,\nPlant 7,4200,23,96600,,\nPlant 8,3000,23,69000,,\nPlant 9,3700,23,85100,No,\nPlant 10,2600,23,59800,,\nPlant 11,3100,23,71300,No,\nPlant 12,2700,23,62100,,\nPlant 13,2900,23,66700,,\nPlant 14,3000,23,69000,No,\nTOTAL (rounded),,,1200000,,\nnote,assumes drones replace guard patrol hours above; contracts unchanged,,,,\nsum check,,,1053400,,difference is rounding and plant 15 estimate\n"
+   }
+  },
+  "file_insurer_premium_letter": {
+   "at": "2026-11-14T09:43:23.460Z",
+   "data": {
+    "id": "insurer_premium_letter",
+    "name": "insurer_premium_letter.txt",
+    "text": "Halden Mutual Industrial Insurance\nTo: Insurance and Risk Manager, Aldermoor Industrial Group\n\nSubject: Property and site security premium, current policy year\n\nFollowing our survey, we have applied a premium reduction of 6% to the nine Aldermoor plants where\nautomated drone patrols were reported as active at the time of survey. On the current schedule this\nis approximately EUR 180,000 a year.\n\nThe reduction reflects the reported patrol coverage. At our next review, in five months, we will ask\nfor consistent flight logs by plant for the period. Plants without regular patrol records may not\nretain the reduction.\n\nPlants covered: 1, 2, 3, 4, 5, 6, 7, 8, 9\n\nYours sincerely,\nUnderwriting, Halden Mutual\n"
+   }
+  },
+  "file_plant7_checklist": {
+   "at": "2026-11-14T09:44:25.632Z",
+   "data": {
+    "id": "plant7_checklist",
+    "name": "plant7_checklist.txt",
+    "text": "Plant 7 night patrol checklist (B. Alonso, informal)\n\nBefore 22:00\n[ ] Check dock status light and battery on the app\n[ ] Confirm weather is inside limits\n[ ] Patrol route A (perimeter fence) and route B (loading yard) scheduled\n\nDuring the night\n[ ] Alert arrives on manager phone -> look at the clip within 5 minutes\n[ ] If real: call the guard desk directly (contractor does not watch drone alerts)\n[ ] Log the alert in the sheet: time, route, outcome\n\nMorning\n[ ] Export last night's flights\n[ ] Note any missed patrols and why\n\nTwo attempted break-ins deterred so far this year (see sheet). Not shared with head office.\n"
+   }
+  },
+  "file_network_plan": {
+   "at": "2026-11-14T09:45:27.489Z",
+   "data": {
+    "id": "network_plan",
+    "name": "network_plan.txt",
+    "text": "ALDERMOOR GROUP IT: NETWORK SEGMENTATION PLAN (extract)\nOwner: Group IT infrastructure\nStart: in four months from today. Rollout plant by plant over six weeks.\n\nSummary\n- All plant OT and IoT devices move to segmented VLANs with default-deny outbound.\n- Exceptions must be requested per device class with ports, destinations and an owner.\n\nException register (current)\n| Device class        | Plants | Ports / destinations     | Owner     | Status   |\n| CCTV NVR            | all    | 443 to vendor cloud      | Security  | Approved |\n| Access control      | all    | 8443 to HQ               | Facilities| Approved |\n| Drone docks         | ?      | ?                        | ?         | NOT LISTED |\n\nKnown link quality issues: plants 11, 12, 13, 14 (4G backup only, frequent drops).\nNote: IT was not involved in the drone dock installs.\n"
+   }
+  },
+  "file_flight_log_force_month": {
+   "at": "2026-11-14T09:46:29.645Z",
+   "data": {
+    "id": "flight_log_force_month",
+    "name": "flight_log_force_month.csv",
+    "text": "force,month,docks_installed,docks_with_live_flights,live_missions,training_flights,notes\nWESTMERE,05/2026,18,16,128,6,\nWestmere Constabulary,06/2026,18,12,72,4,\nWESTMERE,07/2026,18,11,44,7,\nWestmere,2026-08,18,11,44,5,\nWestmere,2026-09,18,16,144,3,\nWestmere,2026-10,18,14,126,8,\nWestmere,2026-10,18,14,126,8,\nMetro Central,05/2026,9,6,30,3,\nMetro Central Police,Jun 2026,9,7,35,2,\nMetro Central Police,2026-08,9,8,56,2,\nMETRO CTRL,Sep 2026,9,7,28,2,\nMETRO CTRL,10/2026,9,3,21,4,\nTARN VALLEY POLICE,2026-05,4,0,0,0,awaiting sign-off\nTARN VALLEY POLICE,2026-06,4,0,0,0,awaiting sign-off\nTARN VALLEY POLICE,2026-07,4,0,0,0,\nTarn Valley,Aug-26,4,0,0,0,\nTARN VALLEY POLICE,Sep 2026,4,0,0,0,\nTarn Vly,10/2026,4,0,0,0,\nNorwold Police,05/2026,4,0,0,5,training only\nNORWOLD,06/2026,4,0,0,5,trg\nNorwold Police,Jul 2026,4,0,0,6,trg\nNORWOLD,08/2026,4,0,0,3,\nNORWOLD,Sep-26,4,0,0,5,trg\nNORWOLD,Oct-26,4,0,0,2,training only\nWestmere,Oct 2026,18,14,,,\"re-sent, see above\"\n"
+   }
+  },
+  "file_support_ticket_history": {
+   "at": "2026-11-14T09:47:31.575Z",
+   "data": {
+    "id": "support_ticket_history",
+    "name": "support_ticket_history.csv",
+    "text": "ticket_id,opened,account,requester,subject,status,assignee,last_update\nFB-10412,2026-06-29,ECPA - Tarn Valley,\"DPO, Tarn Valley\",\"Request: data-flow documents for DPIA (flows, retention, storage location, access)\",Open,,2026-06-29\nFB-10412,29/06/2026,ECPA - Tarn Valley,\"DPO, Tarn Valley\",RE: Request: data-flow documents for DPIA,Open,(unassigned),14/08/2026\nFB-10577,2026-07-15,ECPA - Westmere,Westmere drone unit,Dock 7 lid sensor fault,Closed,Field team,2026-07-19\nFB-10650,Jul 28 2026,ECPA Westmere,Westmere drone unit,Training request: new operators,Closed,CS,Aug 02 2026\nFB-10781,2026-08-21,Metro Central,Metro Central ops,Flight report export format,Closed,Support,2026-08-25\nFB-10903,2026-09-10,Aldermoor - Plant 11,Plant 11 site,Dock offline (link drops),Pending customer,Support,2026-09-30\nFB-10944,18/09/2026,Aldermoor P07,Plant 7 manager,Alert routing question,Closed,Support,20/09/2026\n"
+   }
+  },
+  "file_helicopter_cost_overtime": {
+   "at": "2026-11-14T09:48:33.667Z",
+   "data": {
+    "id": "helicopter_cost_overtime",
+    "name": "helicopter_cost_overtime.csv",
+    "text": "record_type,period,unit,hours_or_qty,cost_gbp,code,comment\nHELI,05/2026,air support hours,53,,ASU,rate per contract\nHELI,Jun-26,air support hours,51,,ASU,\nHELI,Jul 2026,air support hours,53,,ASU,rate per contract\nHELI,Aug-26,air support hours,47,,ASU,rate per contract\nHELI,2026-09,air support hours,51,,ASU,rate per contract\nHELI,2026-10,air support hours,46,,ASU,\"all-in rate 1,500/hr\"\nHELI,rate,per flying hour,1,1500,ASU,\"all-in: crew, fuel, maintenance\"\nOT,05/2026,PC Hale,9,,PATROL,drone?\nOT,May 2026,PC Mistry J,6,,OPSSUP,\nOT,2026-05,PS R. Odum,6,,OPS SUP,\nOT,05/2026,PC A. Hale,6,,EVENT,misc\nOT,May-26,PC Hale,3,,OPS SUP,\nOT,2026-06,PC A. Hale,13,,EVENT,misc\nOT,2026-06,PC Mistry J,3,,OPSSUP,\nOT,06/2026,PC Hale,6,,OPSSUP,inc. dock duty\nOT,Jun 2026,PS R. Odum,13,,PATROL,\nOT,2026-06,PC A. Hale,7,,EVENT,\nOT,06/2026,PC S. Okafor,12,,OPSSUP,misc\nOT,2026-06,PC S. Okafor,10,,OPSSUP,\nOT,2026-07,PC Hale,6,,OPSSUP,\nOT,07/2026,PC Hale,14,,PATROL,inc. dock duty\nOT,Jul-26,PC Hale,7,,PATROL,misc\nOT,Jul 2026,PC S. Okafor,6,,OPS SUP,\nOT,07/2026,PC Mistry J,14,,EVENT,inc. dock duty\nOT,Jul 2026,PC Mistry J,4,,EVENT,drone?\nOT,2026-07,PC J. Mistry,3,,EVENT,\nOT,Jul-26,PC A. Hale,3,,OPS-SUP,inc. dock duty\nOT,Aug 2026,PC L. Grant,13,,OPSSUP,drone?\nOT,Aug 2026,PC Hale,12,,OPS SUP,inc. dock duty\nOT,Aug-26,PS R. Odum,6,,OPSSUP,misc\nOT,2026-08,PS R. Odum,4,,OPS-SUP,\nOT,Aug-26,PC Hale,11,,OPS-SUP,inc. dock duty\nOT,Aug-26,PC S. Okafor,12,,EVENT,\nOT,2026-09,PS R. Odum,10,,OPS-SUP,inc. dock duty\nOT,2026-09,PC A. Hale,12,,PATROL,misc\nOT,2026-09,PC A. Hale,10,,OPS-SUP,\nOT,Sep-26,PC L. Grant,13,,OPS-SUP,misc\nOT,09/2026,PC J. Mistry,13,,OPS-SUP,misc\nOT,2026-09,PC Hale,4,,PATROL,\nOT,09/2026,PC Hale,11,,PATROL,drone?\nOT,Sep 2026,PC Mistry J,10,,PATROL,drone?\nOT,2026-10,PC J. Mistry,13,,OPS SUP,misc\nOT,2026-10,PC L. Grant,13,,OPSSUP,\nOT,Oct 2026,PC A. Hale,10,,OPS SUP,misc\nOT,10/2026,PC L. Grant,2,,EVENT,drone?\nOT,2026-10,PC S. Okafor,8,,OPS-SUP,inc. dock duty\nOT,2026-10,PC A. Hale,3,,EVENT,\nOT,Oct 2026,PC J. Mistry,10,,EVENT,\nOT,,PC Hale,,,OPS-SUP,hours missing\n"
+   }
+  },
+  "file_dataflow_pack": {
+   "at": "2026-11-14T09:49:35.587Z",
+   "data": {
+    "id": "dataflow_pack",
+    "name": "dataflow_pack.txt",
+    "text": "Data-flow pack: Tarn Valley Constabulary\nPrepared by FlytBase engineering for the force's data protection impact assessment. Draft for review.\n\n1. Data flows\n- Video and telemetry travel from the dock to the force's own command system over an encrypted link.\n- Nothing is sent to a third party. Support staff see flight health data only, never video, unless the force opens a ticket and grants access.\n\n2. Retention\n- Live video is not kept by default.\n- Recorded flights are kept for the period the force sets, then deleted automatically. The force's current policy setting is 31 days.\n- Flight logs (times, routes, battery) are kept for 12 months for maintenance.\n\n3. Storage location\n- Recordings and logs are stored in the region the force chose at set-up. They do not leave it.\n\n4. Access controls\n- Named users only, each with their own login and a role set by the force.\n- Every view, download and deletion is recorded in an audit log the force can export.\n\nOpen questions for the force\n- Confirm the retention period the assessment should state.\n- Confirm who in the force approves new user accounts.\n"
+   }
   }
  },
  "log": [
