@@ -32,6 +32,8 @@ node --env-file=.env dev-dev-server.js
 The first start fetches everything (about 10 minutes at one call a minute); the page fills in as data
 arrives and refreshes itself every minute.
 
+Live: https://account-intelligence-crm.vercel.app
+
 ## Deploy
 Any Node host (Render, Railway, Fly). Start command `node dev-dev-server.js`. Set `AQ_TOKEN` as a server
 environment variable. The token is only read on the server and is never sent to the browser or stored in

@@ -9,7 +9,7 @@
   "whoami": {
    "at": "2026-11-14T09:03:06.946Z",
    "data": {
-    "player_id": "f2d113db-4d0b-4710-89ed-3b836b84bfb6",
+    "player_id": "REDACTED-PLAYER-ID",
     "your_morning_over": true,
     "new_accounts": [],
     "pack": [
@@ -51,7 +51,7 @@
    "at": "2026-11-14T08:38:25.063Z",
    "data": {
     "format": "account-quest-v2-export/1",
-    "player": "f2d113db-4d0b-4710-89ed-3b836b84bfb6",
+    "player": "REDACTED-PLAYER-ID",
     "exported_at": "2026-11-14T08:38:20.005Z",
     "minute": 87,
     "world_closed": true,
