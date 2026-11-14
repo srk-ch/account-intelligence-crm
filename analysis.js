@@ -216,7 +216,12 @@ export function buildCrm(store) {
     const series = weeks.map((w) => ({ w, flights: usage.filter((u) => u.week_start === w).reduce((n, u) => n + Number(u.flights || 0), 0), docks: new Set(usage.filter((u) => u.week_start === w && Number(u.flights) > 0).map((u) => u.dock_id)).size }));
     const timeline = [...q3.map((m) => ({ date: m.due, label: "Move " + m.rank, kind: "move" })), ...(profile.renewal ? [{ date: profile.renewal.term_ends, label: "Contract term ends", kind: "deadline" }] : [])]
       .concat(signals.filter((s) => (!s.account || s.account === acc.id) && /5 dec/i.test(s.detail)).map(() => ({ date: "2026-12-05", label: "Westmere public event", kind: "deadline" })));
-    out.accounts.push({ id: acc.id, name: acc.name, refs, kpis, usage: { series, docks: docks.length, flyingNow: flyingNow.length, last4 }, timeline, q1, q2, q3, q4: q4.sort((a, b) => ({ high: 0, med: 1, low: 2 }[a.sev] - { high: 0, med: 1, low: 2 }[b.sev])), q5 });
+    const stakeNames = acc.stakeholders.map((s) => s.name);
+    const personFor = (o) => { const c = {}; for (const id of o.evidence || []) { const f = fact(id); if (f && stakeNames.includes(f.said_by)) c[f.said_by] = (c[f.said_by] || 0) + 1; } return Object.entries(c).sort((x, y) => y[1] - x[1])[0]?.[0] || ""; };
+    const pipeline = [...acc.opportunities.map((o) => ({ id: o.id, title: o.title, col: ["agreed", "qualified"].includes(o.stage) ? o.stage : "identified", amount: o.worth_up_to, blocker: o.blocker?.status || null, person: personFor(o) })),
+      ...acc.offers.map((o) => ({ id: o.id, title: o.title, col: o.status === "won" ? "agreed" : "offer", amount: o.value, person: o.pitch_to, blocker: null }))];
+    const metrics = { facts: acc.facts.length, verified: acc.facts.filter((f) => f.status === "verified").length, opps: acc.opportunities.length, agreed: acc.opportunities.filter((o) => o.stage === "agreed").length };
+    out.accounts.push({ id: acc.id, name: acc.name, refs, kpis, pipeline, metrics, usage: { series, docks: docks.length, flyingNow: flyingNow.length, last4 }, timeline, q1, q2, q3, q4: q4.sort((a, b) => ({ high: 0, med: 1, low: 2 }[a.sev] - { high: 0, med: 1, low: 2 }[b.sev])), q5 });
   }
   return out;
 }

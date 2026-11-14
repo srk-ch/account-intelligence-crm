@@ -20,16 +20,16 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;min-height:100vh;font:14.5px/1.55 var(--font);color:var(--ink);background:radial-gradient(1200px 700px at 12% -10%,#f7f8fb 0,transparent 60%),linear-gradient(160deg,var(--bg2),var(--bg1));-webkit-font-smoothing:antialiased;padding:18px}
+body{margin:0;min-height:100vh;font:14.5px/1.55 var(--font);color:var(--ink);background:radial-gradient(900px 600px at 80% -10%,#cfd9f7 0,transparent 60%),radial-gradient(800px 500px at 0% 100%,#d9d6f2 0,transparent 55%),linear-gradient(135deg,#e6ebf7,#dde4f4);-webkit-font-smoothing:antialiased;padding:18px}
 button{font-family:inherit}
 .num{font-variant-numeric:tabular-nums}
 
 /* shell */
-.shell{max-width:1360px;margin:0 auto;background:var(--shell);border-radius:42px;box-shadow:0 30px 80px -30px rgba(20,24,40,.28),inset 0 0 0 1px rgba(255,255,255,.8);display:grid;grid-template-columns:78px minmax(0,1fr);min-height:calc(100vh - 36px)}
+.shell{max-width:1360px;margin:0 auto;background:rgba(247,248,252,.74);backdrop-filter:blur(22px);border-radius:42px;box-shadow:0 30px 80px -30px rgba(20,24,40,.28),inset 0 0 0 1px rgba(255,255,255,.8);display:grid;grid-template-columns:78px minmax(0,1fr);min-height:calc(100vh - 36px)}
 
 /* rail */
 .rail{z-index:30;padding:22px 0 22px 20px;display:flex;flex-direction:column;align-items:center;gap:10px;position:sticky;top:18px;align-self:start;height:calc(100vh - 36px)}
-.logo{width:46px;height:46px;border-radius:50%;background:var(--card);display:grid;place-items:center;box-shadow:var(--sh);margin-bottom:10px}
+.rail .logo{display:none}.logo{width:46px;height:46px;border-radius:50%;background:var(--card);display:grid;place-items:center;box-shadow:var(--sh);margin-bottom:10px}
 .rb{width:46px;height:46px;border-radius:50%;border:0;background:var(--card);display:grid;place-items:center;cursor:pointer;color:var(--ink2);box-shadow:var(--sh);text-decoration:none;position:relative;transition:transform .15s,background .15s}
 .rb:hover{transform:translateY(-1px);color:var(--ink)}
 .rb.on{background:var(--ink);color:#fff}
@@ -65,7 +65,7 @@ button{font-family:inherit}
 .avs small{font-size:12px;color:var(--mute);font-weight:600;margin-left:4px}
 
 /* panels */
-.panel{scroll-margin-top:84px;background:var(--panel);border-radius:var(--r-xl);padding:26px 26px 28px;margin-top:20px;position:relative}
+.panel{scroll-margin-top:84px;background:rgba(255,255,255,.5);box-shadow:inset 0 0 0 1px rgba(255,255,255,.85),0 18px 40px -26px rgba(40,60,120,.3);border-radius:var(--r-xl);padding:26px 26px 28px;margin-top:20px;position:relative}
 .panel>h2::before{content:attr(data-n);display:inline-grid;place-items:center;width:30px;height:30px;margin-right:12px;border-radius:50%;background:var(--ink);color:#fff;font:700 14px var(--font);vertical-align:2px}
 .panel>h2[data-n='✎']::before{background:var(--green)}
 .panel>h2{font:700 20px/1.2 var(--font);letter-spacing:-.015em;margin:0}
@@ -188,6 +188,34 @@ footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin
 .loading{padding:110px 0;text-align:center;color:var(--ink2);font-weight:600;font-size:18px}
 
 
+/* brand + overview */
+.brand{display:flex;align-items:center;gap:9px;font:500 22px var(--font);letter-spacing:-.03em;margin-right:8px}.brand b{font-weight:800}
+.pbar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:18px;justify-content:space-between}
+.pbar h2::before{display:none}
+.seg{display:flex;gap:6px;background:rgba(255,255,255,.55);padding:6px;border-radius:999px;margin:0 auto}
+.seg button{border:0;background:rgba(255,255,255,.8);font-weight:600;font-size:13px;padding:9px 18px;border-radius:999px;cursor:pointer;color:var(--ink2)}
+.seg button.on{background:var(--ink);color:#fff}
+.cap2{font-size:12.5px;color:var(--mute);font-weight:600}
+.kb{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.kh{border:1.5px solid rgba(13,14,17,.13);border-radius:999px;text-align:center;padding:9px;font-weight:600;font-size:13.5px;background:rgba(255,255,255,.55)}
+.kh span{color:var(--mute);font-weight:700;margin-left:4px}
+.kcol{display:flex;flex-direction:column;gap:14px;margin-top:18px}
+.kc{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.9);border:0;border-radius:32px;padding:10px 16px 10px 10px;box-shadow:var(--sh);position:relative;text-align:left;cursor:pointer;font:inherit;color:var(--ink);transition:transform .18s,box-shadow .18s}
+.kc:hover{transform:translateY(-2px);box-shadow:0 16px 30px -14px rgba(20,24,40,.3)}
+.kc+.kc::before{content:"";position:absolute;top:-12px;left:50%;width:7px;height:7px;margin-left:-3px;border-radius:50%;background:#c9d1e3;border:2px solid #eef1f9}
+.kc .ava{width:46px;height:46px;flex:none}
+.kc b{display:block;font-size:14px;line-height:1.25;letter-spacing:-.01em}
+.kc small{display:block;color:var(--mute);font-size:11.5px;font-weight:500;margin-top:2px}
+.kc .ic{margin-left:auto;color:var(--ink2);flex:none;display:grid}
+.kempty{color:var(--mute);font-size:13px;text-align:center;padding:16px 0}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.donut{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.donut svg{width:170px;flex:none}.donut .dn{font:800 16px var(--font);fill:var(--ink)}.donut .ds{font:600 9px var(--font);fill:var(--mute)}
+.leg2{display:grid;gap:12px;font-size:13.5px;font-weight:600}.leg2 i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}.leg2 small{display:block;color:var(--mute);font-weight:500;margin-left:18px}
+.rings{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center}
+.ringw svg{width:100%;max-width:130px}.ringw text{font:800 20px var(--font);fill:var(--ink)}.ringw b{display:block;font-size:13px;margin-top:4px}.ringw small{color:var(--mute);font-weight:500;font-size:11.5px}
+@media (max-width:1100px){.kb{grid-template-columns:1fr 1fr}.duo{grid-template-columns:1fr}.brand span{display:none}}
+@media (max-width:640px){.kb{grid-template-columns:1fr}.rings{grid-template-columns:1fr}}
 /* polish */
 @keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .panel,.brief,.events,.tl{animation:up .55s cubic-bezier(.2,.7,.2,1) both}
@@ -246,6 +274,7 @@ footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin
 <div class="shell">
   <nav class="rail" id="rail" aria-label="Sections">
     <div class="logo" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0d0e11" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5"/></svg></div>
+    <a class="rb" href="#overview" data-s="overview"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/></svg><span class="tip">Overview</span></a>
     <a class="rb" href="#q1" data-s="q1"><svg viewBox="0 0 24 24"><rect x="4" y="3.5" width="16" height="17" rx="3"/><path d="M8 9h8M8 13h8M8 17h4"/></svg><span class="tip">Book</span></a>
     <a class="rb" href="#q2" data-s="q2"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.4-3.2 2.7-5 5.5-5s5.1 1.800 5.500 5"/><circle cx="17" cy="9" r="2.4"/><path d="M16 14.200c2.800-.3 4.600 1.200 5 4"/></svg><span class="tip">Power</span></a>
     <a class="rb" href="#q3" data-s="q3"><svg viewBox="0 0 24 24"><circle cx="5.500" cy="12" r="2"/><circle cx="18.500" cy="6" r="2"/><circle cx="18.500" cy="18" r="2"/><path d="M7.500 12h4c2 0 2-6 5-6M11.500 12c3 0 3 6 5 6"/></svg><span class="tip">First moves</span></a>
@@ -258,8 +287,9 @@ footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin
 
   <div class="main">
     <header class="top">
+      <div class="brand"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0d0e11" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5"/></svg><span>account<b>review</b></span></div>
       <div class="pills" id="pills">
-        <a class="pill" href="#q1" data-s="q1">Book</a><a class="pill" href="#q2" data-s="q2">Power</a><a class="pill" href="#q3" data-s="q3">First moves</a><a class="pill" href="#q4" data-s="q4">Risks</a><a class="pill" href="#q5" data-s="q5">Unknowns</a><a class="pill" href="#notes" data-s="notes">Write back</a>
+        <a class="pill" href="#overview" data-s="overview">Overview</a><a class="pill" href="#q1" data-s="q1">Book</a><a class="pill" href="#q2" data-s="q2">Power</a><a class="pill" href="#q3" data-s="q3">First moves</a><a class="pill" href="#q4" data-s="q4">Risks</a><a class="pill" href="#q5" data-s="q5">Unknowns</a><a class="pill" href="#notes" data-s="notes">Write back</a>
       </div>
       <div class="tools"><span class="status" id="status"><i></i>Loading</span>
         <button class="ib" id="refresh" type="button" aria-label="Refresh"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.300 6.300M20 4v7h-7"/></svg></button></div>
@@ -309,6 +339,29 @@ function usageChart(a){
   const delta=prev4?Math.round((last4-prev4)/prev4*100):0;
   return `<div class="chart"><div class="hd"><h3>Flights per week</h3><span>${a.usage.flyingNow} of ${a.usage.docks} docks flew in the last 4 weeks · ${last4} flights vs ${prev4} in the 4 before (${delta>0?"+":""}${delta}%)</span></div><svg viewBox="0 0 ${W} ${H+2}" role="img" aria-label="Flights per week">${bars}${lbl}</svg></div>`;
 }
+let flt="all";
+const ICON={check:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 12.5 4.5 4.5L14 8.5M10 16.5l.5.5L21 7"/></svg>',clock:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>',dots:'<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>',plus:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v8M8 12h8"/></svg>'};
+function pipelinePanel(a){
+  const k=a.kpis,cs=k.currency,P=a.pipeline||[];
+  const cols=[["identified","Identified"],["qualified","Qualified"],["agreed","Agreed and won"],["offer","Open offers"]];
+  const keep=p=>flt==="all"||(flt==="blocked"&&p.blocker==="open")||(flt==="booked"&&p.col==="agreed")||(flt==="notcounted"&&p.col!=="agreed");
+  const sub=p=>p.col==="agreed"?`${money(p.amount||0,cs)} booked`:p.col==="qualified"?`up to ${money(p.amount||0,cs)} · blocker ${p.blocker||"none"}`:p.col==="offer"?`${money(p.amount||0,cs)} offer · not accepted`:p.amount?`up to ${money(p.amount,cs)}`:"no value on file";
+  const ic=p=>p.col==="agreed"?ICON.check:p.col==="qualified"?ICON.clock:p.col==="offer"?ICON.plus:ICON.dots;
+  const tabs=[["all","All deals"],["blocked","Blocked"],["booked","Booked"],["notcounted","Not counted"]];
+  return `<section class="panel glass" id="overview"><div class="pbar"><h2 style="margin:0">Deal pipeline</h2><div class="seg" role="tablist">${tabs.map(t=>`<button type="button" class="${flt===t[0]?"on":""}" data-flt="${t[0]}">${t[1]}</button>`).join("")}</div><button class="ib" type="button" onclick="window.print()" aria-label="Print"><svg viewBox="0 0 24 24"><path d="M7 9V4h10v5M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2M7 14h10v6H7z"/></svg></button></div>
+    <div class="kb">${cols.map(([c,t])=>{const items=P.filter(p=>p.col===c&&keep(p));return `<div><div class="kh">${t} <span>${items.length}</span></div><div class="kcol">${items.map(p=>`<button type="button" class="kc" data-id="${esc(p.id)}"><span class="ava ${p.col==="agreed"?"ally":""}" style="background:hsl(${hue(p.person||p.title)} 65% 90%);color:hsl(${hue(p.person||p.title)} 45% 28%)">${esc(initials(p.person||p.title))}</span><span><b>${esc(p.title)}</b><small>${esc(sub(p))}</small></span><span class="ic">${ic(p)}</span></button>`).join("")||'<div class="kempty">Nothing here</div>'}</div></div>`}).join("")}</div></section>`;
+}
+function ring(pct,label,cap,col){const r=44,c=2*Math.PI*r,d=c*Math.max(0,Math.min(1,pct));return `<div class="ringw"><svg viewBox="0 0 110 110"><circle cx="55" cy="55" r="${r}" fill="none" stroke="#e1e6f1" stroke-width="10"/><circle cx="55" cy="55" r="${r}" fill="none" stroke="${col}" stroke-width="10" stroke-linecap="round" stroke-dasharray="${d.toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90 55 55)"/><text x="55" y="61" text-anchor="middle">${Math.round(pct*100)}%</text></svg><b>${esc(label)}</b><small>${esc(cap)}</small></div>`}
+function driversMetrics(a){
+  const k=a.kpis,cs=k.currency,tot=k.bookedN+k.ceilingN+k.offersN||1,m=a.metrics||{};
+  const seg=[["Booked and backed",k.bookedN,"#5b8def"],["Pipeline ceilings",k.ceilingN,"#e2564f"],["Open offers",k.offersN,"#c7cfdd"]].filter(s=>s[1]>0);
+  const R=52,C=2*Math.PI*R;let off=0;
+  const arcs=seg.map(s=>{const len=s[1]/tot*C;const el=`<circle cx="70" cy="70" r="${R}" fill="none" stroke="${s[2]}" stroke-width="26" stroke-dasharray="${(len-2).toFixed(1)} ${C.toFixed(1)}" stroke-dashoffset="${(-off).toFixed(1)}" transform="rotate(-90 70 70)"/>`;off+=len;return el}).join("");
+  return `<div class="duo"><section class="panel glass"><div class="pbar"><h2 style="margin:0">Where the value sits</h2><span class="cap2">${esc(cs)} by status</span></div><div class="donut"><svg viewBox="0 0 140 140" role="img" aria-label="Book split">${arcs}<text x="70" y="66" text-anchor="middle" class="dn">${esc(k.backed)}</text><text x="70" y="82" text-anchor="middle" class="ds">backed</text></svg><div class="leg2">${seg.map(s=>`<div><i style="background:${s[2]}"></i>${esc(s[0])} <b>(${Math.round(s[1]/tot*100)}%)</b><small>${money(s[1],cs)}</small></div>`).join("")}</div></div></section>
+  <section class="panel glass"><div class="pbar"><h2 style="margin:0">Health metrics</h2><span class="cap2">from the data on file</span></div><div class="rings">${ring((m.verified||0)/Math.max(m.facts||1,1),"Facts verified",`${m.verified||0} of ${m.facts||0} facts`,"#5b8def")}${ring((m.agreed||0)/Math.max(m.opps||1,1),"Deals agreed",`${m.agreed||0} of ${m.opps||0} deals`,"#f2cf4d")}${ring((a.usage?.flyingNow||0)/Math.max(a.usage?.docks||1,1),"Docks flying",`${a.usage?.flyingNow||0} of ${a.usage?.docks||0}, last 4 weeks`,"#8fa0b3")}</div></section></div>`;
+}
+function overview(a){return pipelinePanel(a)+driversMetrics(a)}
+
 function render(){
   if(!data||!data.accounts){$("#view").innerHTML=`<div class="loading">Still reading the files (${esc((data?.fetched||[]).length)} of 10)…</div>`;return}
   const st=data.status||{};
@@ -324,17 +377,17 @@ function render(){
     :`<div class="quiet"><i class="status" style="padding:0;box-shadow:none;background:none"><i class="on"></i></i>No live events yet. New ones appear here, and flow into sections 3 to 5, as they arrive.</div>`;
 
   $("#view").innerHTML=`
-  <div class="head"><div><h1>${esc(a.name)}</h1><div class="sub">Account ${esc(a.id)} · ${new Date().toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"})} · Monday briefing</div></div>
+  <div class="head"><div><h1>Accounts Overview</h1><div class="sub"><b style="color:var(--ink)">${esc(a.name)}</b> · Account ${esc(a.id)} · ${new Date().toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"})} · Monday briefing</div></div>
     <div class="avs">${data.accounts.map((x,i)=>`<button class="av ${i===cur?"on":""}" data-tab="${i}" title="${esc(x.name)}" aria-label="${esc(x.name)}">${short(x)}${x.kpis.high?`<span class="bd">${x.kpis.high}</span>`:""}</button>`).join("")}<small>high risks</small></div></div>
 
   <div class="brief" style="margin-top:22px"><div class="card"><div class="lab">The short version</div>
     <p><em>${esc(k.backed)}</em> is on the books and backed by a signed order or a won offer, with a further ${esc(k.ceiling)} of pipeline not yet counted. ${k.claims?`<em class="bad">${k.claims} customer claim${k.claims>1?"s":""}</em> set apart because nothing backs ${k.claims>1?"them":"it"}.`:""} ${k.high?`${k.high} risk${k.high>1?"s are":" is"} high.`:""}</p></div>
     <div class="next"><div class="lab">Do this first</div><h3>${esc(m0.move)}</h3><div class="nrow"><span class="tg">${esc(dLong(m0.due))}</span><span class="tg">${esc(rel(dueDays(m0.due)))}</span></div></div></div>
-  ${events}${timeline(a)}
+  ${events}${overview(a)}${timeline(a)}
 
   <section class="panel" id="q1"><h2 data-n="1">What is the book worth?</h2><div class="cap">Each deal at a value we can back, with the file or person behind it. What we cannot back is set apart and never added in.</div>
     <div class="tiles"><div class="tile blk"><span>Backed total</span><b class="num">${esc(k.backed)}</b></div><div class="tile"><span>Pipeline ceilings, not counted</span><b class="num">${esc(k.ceiling)}</b></div><div class="tile"><span>Claims set apart</span><b class="num">${k.claims}</b></div><div class="tile"><span>High-severity risks</span><b class="num" style="color:${k.high?"var(--red)":"inherit"}">${k.high}</b></div></div>
-    ${compBar(a)}<div class="grp">Booked and backed <span>counts toward the total</span></div>
+    <div class="grp">Booked and backed <span>counts toward the total</span></div>
     <div class="rows">${booked.map(r=>`<div class="row"><div class="t">${esc(r.deal)}<small>${esc(r.basis||"")}</small></div>${receipts(r.sources,R)}<div class="v num">${esc(r.value)}</div></div>`).join("")}</div>
     ${ceil.length?`<div class="grp">Pipeline ceilings <span>not counted: blockers still open</span></div><div class="rows soft">${ceil.map(r=>`<div class="row"><div class="t">${esc(r.deal)}<small>${esc(r.basis||"")}</small></div>${receipts(r.sources,R)}<div class="v num">${esc(r.value)}</div></div>`).join("")}</div>`:""}
     ${ben.length?`<div class="grp">Customer benefit <span>verified, but not FlytBase revenue</span></div><div class="rows soft">${ben.map(r=>`<div class="row"><div class="t">${esc(r.deal)}<small>${esc(r.basis||"")}</small></div>${receipts(r.sources,R)}<div class="v num">${esc(r.value)}</div></div>`).join("")}</div>`:""}
@@ -386,9 +439,11 @@ function bind(){
     try{const r=await fetch("/api/note",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({text,account:$("#na").value,kind:$("#nk").value})});
       const j=await r.json();$("#nm").textContent=r.ok?"Saved to the game.":(j.error||"Could not save.");if(r.ok)$("#nt").value=""}catch(err){$("#nm").textContent="Could not save: "+err.message}$("#ng").disabled=false};
 }
-let io;function spy(){io&&io.disconnect();io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)document.querySelectorAll("[data-s]").forEach(a=>a.classList.toggle("on",a.dataset.s===e.target.id))})},{rootMargin:"-25% 0px -65% 0px"});document.querySelectorAll("section.panel").forEach(s=>io.observe(s))}
+let io;function spy(){io&&io.disconnect();io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)document.querySelectorAll("[data-s]").forEach(a=>a.classList.toggle("on",a.dataset.s===e.target.id))})},{rootMargin:"-25% 0px -65% 0px"});document.querySelectorAll("section.panel[id]").forEach(s=>io.observe(s))}
 document.addEventListener("click",e=>{
   const c=e.target.closest(".chip");if(c){showReceipt(c.dataset.id);return}
+  const fl=e.target.closest("[data-flt]");if(fl){flt=fl.dataset.flt;render();return}
+  const kc=e.target.closest(".kc");if(kc){showReceipt(kc.dataset.id);return}
   const t=e.target.closest("[data-tab]");if(t){cur=+t.dataset.tab;render();return}
   if(!e.target.closest("#drawer")){$("#drawer").classList.remove("open");document.querySelectorAll(".chip.sel").forEach(x=>x.classList.remove("sel"))}
 });
