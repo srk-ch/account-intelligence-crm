@@ -214,7 +214,7 @@ export function buildCrm(store) {
     const openOffers = acc.offers.filter((o) => o.status !== "won").reduce((n, o) => n + o.value, 0);
     const kpis = { backed: money(total), ceiling: money(ceiling), bookedN: total, ceilingN: ceiling, offersN: openOffers, high: q4.filter((r) => r.sev === "high").length, moves: q3.length, claims: q1.unbacked.filter((r) => /claimed/.test(r.value)).length, currency: cur };
     const series = weeks.map((w) => ({ w, flights: usage.filter((u) => u.week_start === w).reduce((n, u) => n + Number(u.flights || 0), 0), docks: new Set(usage.filter((u) => u.week_start === w && Number(u.flights) > 0).map((u) => u.dock_id)).size }));
-    const timeline = [...q3.map((m) => ({ date: m.due, label: "Move " + m.rank, kind: "move" })), ...(profile.renewal ? [{ date: profile.renewal.term_ends, label: "Contract term ends", kind: "deadline" }] : [])]
+    const timeline = [...q3.map((m) => ({ date: m.due, label: "Move " + m.rank, sub: m.deal, kind: "move" })), ...(profile.renewal ? [{ date: profile.renewal.term_ends, label: "Contract term ends", kind: "deadline" }] : [])]
       .concat(signals.filter((s) => (!s.account || s.account === acc.id) && /5 dec/i.test(s.detail)).map(() => ({ date: "2026-12-05", label: "Westmere public event", kind: "deadline" })));
     const stakeNames = acc.stakeholders.map((s) => s.name);
     const personFor = (o) => { const c = {}; for (const id of o.evidence || []) { const f = fact(id); if (f && stakeNames.includes(f.said_by)) c[f.said_by] = (c[f.said_by] || 0) + 1; } return Object.entries(c).sort((x, y) => y[1] - x[1])[0]?.[0] || ""; };
