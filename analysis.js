@@ -187,7 +187,18 @@ export function buildCrm(store) {
     }[acc.id].map(([gap, why, who]) => ({ gap, why, who }));
     if (signals.length) q5.push({ gap: "Details behind the live event(s) above", why: "Reaction is based on the first report only", who: "The customer contact named in the event" });
 
-    out.accounts.push({ id: acc.id, name: acc.name, q1, q2, q3, q4: q4.sort((a, b) => ({ high: 0, med: 1, low: 2 }[a.sev] - { high: 0, med: 1, low: 2 }[b.sev])), q5 });
+    const refs = {};
+    acc.facts.forEach((f) => (refs[f.id] = { kind: "fact", status: f.status, label: f.text, meta: `${f.said_by} · ${f.status}${f.verified_by ? " · verified by " + f.verified_by : ""}` }));
+    acc.opportunities.forEach((o) => (refs[o.id] = { kind: "deal", label: o.title, meta: `Stage: ${o.stage}${o.blocker ? " · Blocker (" + o.blocker.status + "): " + o.blocker.text : ""}` }));
+    acc.offers.forEach((o) => (refs[o.id] = { kind: "deal", label: o.title, meta: `Offer to ${o.pitch_to} · ${o.status}` }));
+    acc.stakeholders.forEach((s) => (refs[s.id] = { kind: "person", label: `${s.name}, ${s.role}`, meta: `${s.relationship} with us` }));
+    exp.files.filter((f) => f.account === acc.id).forEach((f) => (refs[f.id] = { kind: "file", label: f.title, meta: "Data room file" }));
+    pw.forEach((r) => (refs[P(r.path)] = { kind: "record", label: r.path, meta: "Paperwork record on file" }));
+    signals.forEach((s) => (refs[s.id] = { kind: "signal", label: s.title, meta: s.detail }));
+    const ceiling = acc.opportunities.filter((o) => o.worth_up_to && o !== renewalOpp).reduce((n, o) => n + o.worth_up_to, 0);
+    q4.sort((a, b) => ({ high: 0, med: 1, low: 2 }[a.sev] - { high: 0, med: 1, low: 2 }[b.sev]));
+    const kpis = { backed: money(total), ceiling: money(ceiling), high: q4.filter((r) => r.sev === "high").length, moves: q3.length, claims: q1.unbacked.filter((r) => /claimed/.test(r.value)).length, currency: cur };
+    out.accounts.push({ id: acc.id, name: acc.name, refs, kpis, q1, q2, q3, q4: q4.sort((a, b) => ({ high: 0, med: 1, low: 2 }[a.sev] - { high: 0, med: 1, low: 2 }[b.sev])), q5 });
   }
   return out;
 }

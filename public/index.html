@@ -3,72 +3,243 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Account CRM</title>
+<title>Account Intelligence</title>
+<meta name="description" content="Live account review for Eastern Counties Police Alliance and Aldermoor Industrial Group.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%234f46e5'/%3E%3Cpath d='M8 21l5-6 4 3 7-9' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <style>
-  :root{--bg:#f6f4ef;--card:#fff;--ink:#1c1b18;--mute:#6b6759;--line:#e3dfd3;--acc:#9a4a00;--ok:#1f7a3f;--warn:#b26a00;--bad:#b3261e}
-  @media (prefers-color-scheme:dark){:root{--bg:#161512;--card:#201f1b;--ink:#efece3;--mute:#a09b8b;--line:#34322b;--acc:#f0a050;--ok:#5fcf86;--warn:#f0b24a;--bad:#ff8a80}}
-  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,sans-serif}
-  header{padding:16px;border-bottom:1px solid var(--line);display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between}
-  h1{font-size:18px;margin:0}main{max-width:1100px;margin:0 auto;padding:16px}
-  .tabs{display:flex;gap:8px}.tabs button{padding:8px 14px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;cursor:pointer}
-  .tabs button.on{border-color:var(--acc);color:var(--acc);font-weight:600}
-  .live{border:1px solid var(--warn);border-radius:10px;padding:10px 14px;margin-bottom:16px;background:var(--card)}
-  .live b{color:var(--warn)}.ev{margin:6px 0}
-  section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:14px}
-  h2{font-size:15px;margin:0 0 2px}.q{color:var(--mute);font-size:13px;margin:0 0 10px}
-  table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:6px 8px;border-top:1px solid var(--line);vertical-align:top}th{color:var(--mute);font-weight:500;border-top:0}
-  .src{font:12px ui-monospace,monospace;color:var(--mute);background:var(--bg);border-radius:4px;padding:1px 5px;margin-right:4px;white-space:nowrap}
-  .tag{font-size:12px;border-radius:999px;padding:1px 8px;border:1px solid var(--line)}
-  .sev-high{color:var(--bad);border-color:var(--bad)}.sev-med{color:var(--warn);border-color:var(--warn)}.sev-low{color:var(--ok);border-color:var(--ok)}
-  .muted{color:var(--mute)}.apart{border-top:1px dashed var(--line);margin-top:8px;padding-top:8px}
-  form{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}input,select{padding:7px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}input{flex:1;min-width:200px}
-  button.go{padding:7px 14px;border:0;border-radius:6px;background:var(--acc);color:var(--bg);cursor:pointer}
-  .scroll{overflow-x:auto}
+:root{
+  --bg:#f5f6fa;--surface:#fff;--surface2:#f9fafc;--ink:#111827;--ink2:#4b5563;--mute:#8a92a3;--line:#e5e8ef;
+  --brand:#4f46e5;--brand-soft:#eef0ff;--hdr:#0f1629;--hdr-ink:#e8ebf5;
+  --ok:#15803d;--ok-bg:#e8f6ee;--warn:#b45309;--warn-bg:#fdf3e1;--bad:#b91c1c;--bad-bg:#fdeaea;--info:#1d4ed8;--info-bg:#e8f0fe;
+  --shadow:0 1px 2px rgba(16,24,40,.05),0 1px 3px rgba(16,24,40,.06);
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0b0f1a;--surface:#131a2b;--surface2:#0f1626;--ink:#eef1f8;--ink2:#b3bbcc;--mute:#7c869b;--line:#232c42;
+  --brand:#8b8cf8;--brand-soft:#1c2147;--hdr:#080c16;
+  --ok:#4ade80;--ok-bg:#12301f;--warn:#fbbf24;--warn-bg:#35280d;--bad:#f87171;--bad-bg:#3a1517;--info:#7aa7ff;--info-bg:#15233f;
+  --shadow:none}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:130px}
+body{margin:0;background:var(--bg);color:var(--ink);font:14.5px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+.num{font-variant-numeric:tabular-nums}
+
+/* header */
+.top{background:var(--hdr);color:var(--hdr-ink);position:sticky;top:0;z-index:20}
+.top-in{max-width:1180px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo{width:34px;height:34px;border-radius:9px;background:var(--brand);display:grid;place-items:center;flex:none}
+.titles{flex:1;min-width:220px}
+.titles h1{margin:0;font-size:16px;font-weight:650;letter-spacing:.01em}
+.titles p{margin:0;font-size:12.5px;color:#9aa4bd}
+.status{display:flex;align-items:center;gap:8px;font-size:12.5px;color:#c4cbe0;background:rgba(255,255,255,.07);border-radius:999px;padding:6px 12px}
+.dot{width:8px;height:8px;border-radius:50%;background:#9aa4bd}
+.dot.live{background:#34d399;box-shadow:0 0 0 3px rgba(52,211,153,.25)}
+.dot.warn{background:#fbbf24}
+.btn{font:inherit;font-size:13px;border:1px solid rgba(255,255,255,.2);background:transparent;color:var(--hdr-ink);border-radius:8px;padding:6px 12px;cursor:pointer}
+.btn:hover{background:rgba(255,255,255,.1)}
+.subnav{border-top:1px solid rgba(255,255,255,.08)}
+.subnav-in{max-width:1180px;margin:0 auto;padding:0 20px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.acct{display:flex;gap:4px;padding:8px 0;margin-right:18px}
+.acct button{font:inherit;font-size:13.5px;color:#aab3cc;background:transparent;border:1px solid transparent;border-radius:8px;padding:6px 12px;cursor:pointer}
+.acct button.on{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.18)}
+.jump{display:flex;gap:2px;overflow-x:auto}
+.jump a{color:#9aa4bd;text-decoration:none;font-size:13px;padding:11px 10px;white-space:nowrap;border-bottom:2px solid transparent}
+.jump a:hover{color:#fff;border-color:var(--brand)}
+
+main{max-width:1180px;margin:0 auto;padding:22px 20px 60px}
+
+/* KPI */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+.kpi .l{font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.kpi .v{font-size:26px;font-weight:700;margin:2px 0;letter-spacing:-.01em}
+.kpi .s{font-size:12.5px;color:var(--ink2)}
+.kpi.bad .v{color:var(--bad)}.kpi.ok .v{color:var(--ok)}
+
+/* banners */
+.live-box{border-radius:12px;padding:14px 16px;margin-bottom:18px;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow)}
+.live-box.hot{border-color:var(--warn);background:var(--warn-bg)}
+.live-box h3{margin:0 0 6px;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--warn)}
+.live-box.quiet{display:flex;gap:10px;align-items:center;color:var(--ink2);font-size:13.5px}
+.ev{padding:8px 0;border-top:1px solid rgba(180,83,9,.2)}.ev:first-of-type{border-top:0}
+.ev b{display:block}.ev small{color:var(--ink2)}
+
+/* sections */
+section.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:18px;box-shadow:var(--shadow)}
+.qh{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px}
+.qn{flex:none;width:34px;height:34px;border-radius:10px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;font-weight:700}
+.qh h2{margin:0;font-size:18px;letter-spacing:-.01em}
+.qh p{margin:2px 0 0;color:var(--ink2);font-size:13.5px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--surface)}
+th{background:var(--surface2);text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);font-weight:600;padding:10px 12px;white-space:nowrap}
+td{padding:11px 12px;border-top:1px solid var(--line);vertical-align:top}
+td.deal{font-weight:600;min-width:170px}
+td.val{white-space:nowrap;font-weight:600}
+tr.total td{background:var(--surface2);font-weight:700}
+.sub{margin-top:16px}
+.sub h4{margin:0 0 4px;font-size:13px;color:var(--warn)}
+.sub p{margin:0 0 8px;color:var(--ink2);font-size:13px}
+.sub .tw{border-style:dashed;border-color:var(--warn)}
+.pill{display:inline-block;font-size:12px;font-weight:600;border-radius:999px;padding:2px 9px;margin:1px 4px 1px 0;white-space:nowrap}
+.p-ally{background:var(--ok-bg);color:var(--ok)}.p-warm{background:var(--ok-bg);color:var(--ok);opacity:.85}
+.p-neutral{background:var(--info-bg);color:var(--info)}.p-guarded{background:var(--bad-bg);color:var(--bad)}
+.p-high{background:var(--bad-bg);color:var(--bad)}.p-med{background:var(--warn-bg);color:var(--warn)}.p-low{background:var(--ok-bg);color:var(--ok)}
+.p-stage{background:var(--brand-soft);color:var(--brand)}
+
+/* source chips */
+.chips{display:flex;flex-wrap:wrap;gap:4px;min-width:150px}
+.chip{font:11.5px ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid var(--line);background:var(--surface2);color:var(--ink2);border-radius:6px;padding:1px 6px;cursor:pointer;white-space:nowrap;max-width:210px;overflow:hidden;text-overflow:ellipsis}
+.chip:hover{border-color:var(--brand);color:var(--brand)}
+.chip.fact-verified{border-left:3px solid var(--ok)}.chip.fact-told{border-left:3px solid var(--info)}.chip.fact-claim{border-left:3px solid var(--warn)}
+.chip.k-deal{border-left:3px solid var(--brand)}.chip.k-person{border-left:3px solid #0891b2}.chip.k-signal{border-left:3px solid var(--bad)}
+.nosrc{color:var(--bad);font-size:12px}
+
+/* moves */
+.moves{display:grid;gap:12px}
+.move{display:grid;grid-template-columns:44px 1fr;gap:14px;border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--surface2)}
+.rank{width:38px;height:38px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:700}
+.move h3{margin:0 0 6px;font-size:15px;line-height:1.4}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 8px}
+.tag{font-size:12px;border:1px solid var(--line);border-radius:6px;padding:2px 8px;background:var(--surface);color:var(--ink2)}
+.tag b{color:var(--ink)}
+.why{color:var(--ink2);font-size:13.5px;margin:0 0 8px}
+
+/* risks */
+.risks{display:grid;gap:10px}
+.risk{display:grid;grid-template-columns:1fr auto;gap:6px 16px;border:1px solid var(--line);border-left-width:4px;border-radius:10px;padding:12px 14px;background:var(--surface2)}
+.risk.high{border-left-color:var(--bad)}.risk.med{border-left-color:var(--warn)}.risk.low{border-left-color:var(--ok)}
+.risk .t{font-weight:600}.risk .w{color:var(--ink2);font-size:13px}.risk .chips{grid-column:1/-1}
+
+/* note */
+.noteform{display:flex;gap:8px;flex-wrap:wrap}
+.noteform select,.noteform input{font:inherit;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:8px 10px}
+.noteform input{flex:1;min-width:220px}
+.go{font:inherit;font-weight:600;background:var(--brand);color:#fff;border:0;border-radius:8px;padding:8px 16px;cursor:pointer}
+.go:disabled{opacity:.6}
+#nm{margin-top:8px;font-size:13px;color:var(--ink2)}
+.notes{margin-top:12px;display:grid;gap:8px}
+.n{border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:var(--surface2);font-size:13.5px}
+.n small{color:var(--mute)}
+
+/* popover */
+#pop{position:fixed;right:18px;bottom:18px;width:min(420px,calc(100vw - 36px));background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.25);padding:16px 18px;display:none;z-index:50}
+#pop.show{display:block}
+#pop .k{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);font-weight:600}
+#pop .id{font:12px ui-monospace,monospace;color:var(--brand);word-break:break-all}
+#pop p{margin:8px 0 4px}#pop .m{color:var(--ink2);font-size:13px}
+#pop button{position:absolute;top:8px;right:10px;border:0;background:transparent;color:var(--mute);font-size:20px;cursor:pointer}
+
+footer{max-width:1180px;margin:0 auto;padding:0 20px 40px;color:var(--mute);font-size:12.5px}
+.empty{color:var(--mute);padding:14px}
+.loading{padding:60px 20px;text-align:center;color:var(--ink2)}
+.spin{width:28px;height:28px;border:3px solid var(--line);border-top-color:var(--brand);border-radius:50%;margin:0 auto 12px;animation:r 1s linear infinite}
+@keyframes r{to{transform:rotate(360deg)}}
+
+@media (max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}.move{grid-template-columns:1fr}.rank{width:30px;height:30px}.risk{grid-template-columns:1fr}.acct{margin-right:0}}
+@media print{.top{position:static}.btn,.noteform,#pop,.jump{display:none}body{background:#fff}section.card{break-inside:avoid;box-shadow:none}}
 </style>
 </head>
 <body>
-<header>
-  <h1>Account CRM <span class="muted" id="stamp"></span></h1>
-  <div class="tabs" id="tabs"></div>
+<header class="top">
+  <div class="top-in">
+    <div class="logo"><svg width="20" height="20" viewBox="0 0 32 32" fill="none"><path d="M6 22l7-8 5 4 8-11" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="titles"><h1>Account Intelligence</h1><p id="sub">Customer success review</p></div>
+    <div class="status" id="status"><span class="dot"></span><span>Loading</span></div>
+    <button class="btn" id="refresh" type="button">Refresh</button>
+  </div>
+  <div class="subnav"><div class="subnav-in">
+    <div class="acct" id="tabs"></div>
+    <nav class="jump" aria-label="Sections">
+      <a href="#q1">1 Book</a><a href="#q2">2 Power</a><a href="#q3">3 First moves</a><a href="#q4">4 Risks</a><a href="#q5">5 Unknowns</a><a href="#notes">Notes</a>
+    </nav>
+  </div></div>
 </header>
-<main>
-  <div id="live"></div>
-  <div id="view">Loading…</div>
-  <section><h2>Write a note back</h2><p class="q">Saved to the game with write_note.</p>
-    <form id="nf"><select id="na"></select><select id="nk"><option>next_step</option><option>risk</option><option>task</option><option>note</option></select><input id="nt" placeholder="What should be remembered or done?"><button class="go">Save</button></form>
-    <div id="nm" class="muted"></div></section>
-</main>
+
+<main id="view"><div class="loading"><div class="spin"></div>Loading account data…</div></main>
+<footer>Every figure cites where it came from: click a source chip to read the fact, file or record behind it. Amber means a claim nobody has verified; unbacked value is shown apart and never added into the total.</footer>
+
+<div id="pop" role="dialog" aria-live="polite"><button type="button" aria-label="Close" onclick="pop.classList.remove('show')">×</button><div class="k" id="pk"></div><div class="id" id="pid"></div><p id="pl"></p><div class="m" id="pm"></div></div>
+
 <script>
-const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const srcs=a=>(a||[]).map(s=>`<span class="src">${esc(s)}</span>`).join("")||'<span class="muted">no source</span>';
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 let data,cur=0;
-const table=(cols,rows)=>`<div class="scroll"><table><tr>${cols.map(c=>`<th>${esc(c[0])}</th>`).join("")}</tr>${rows.map(r=>`<tr>${cols.map(c=>`<td>${c[1](r)}</td>`).join("")}</tr>`).join("")||`<tr><td colspan="${cols.length}" class="muted">Nothing on file.</td></tr>`}</table></div>`;
-function render(){
-  if(!data||!data.accounts){document.getElementById("view").innerHTML=`<p class="muted">Still loading data from the game (one call a minute). Fetched so far: ${esc((data?.fetched||[]).join(", ")||"nothing yet")}. This page refreshes itself.</p>`;return}
-  document.getElementById("stamp").textContent="· updated "+new Date(data.generatedAt).toLocaleTimeString();
-  document.getElementById("tabs").innerHTML=data.accounts.map((a,i)=>`<button class="${i===cur?"on":""}" onclick="cur=${i};render()">${esc(a.id)} · ${esc(a.name)}</button>`).join("");
-  document.getElementById("na").innerHTML=data.accounts.map(a=>`<option value="${esc(a.id)}">${esc(a.id)} · ${esc(a.name)}</option>`).join("");
-  const l=data.live||{};
-  document.getElementById("live").innerHTML=(l.signals||[]).length?`<div class="live"><b>Live events (${l.signals.length})</b>${l.signals.map(s=>`<div class="ev"><span class="tag">${esc(s.account||"")}</span> ${esc(s.date||"")} <b>${esc(s.title)}</b> — ${esc(s.detail||"")} <span class="src">${esc(s.id||"signal")}</span> ${s.effect?`<div class="muted">→ ${esc(s.effect)}</div>`:""}</div>`).join("")}</div>`:`<div class="live muted">No live events yet. This page checks every few minutes.</div>`;
-  const a=data.accounts[cur];
-  document.getElementById("view").innerHTML=`
-  <section><h2>1 · What is the book worth?</h2><p class="q">Each deal at a value we can back. Unbacked value is shown apart, not added in.</p>
-    ${table([["Deal",r=>esc(r.deal)],["Backed value",r=>esc(r.value)],["Stage",r=>esc(r.stage||"")],["Backed by",r=>srcs(r.sources)]],a.q1.backed)}
-    <div class="apart"><b>Backed total:</b> ${esc(a.q1.backedTotal)} &nbsp; <span class="muted">Not backed (shown apart):</span> ${esc(a.q1.unbackedTotal)}</div>
-    ${a.q1.unbacked.length?table([["Claim",r=>esc(r.deal)],["Value claimed",r=>esc(r.value)],["Why not backed",r=>esc(r.why)],["Where it came from",r=>srcs(r.sources)]],a.q1.unbacked):""}</section>
-  <section><h2>2 · Who holds the power?</h2><p class="q">Per deal: who decides, pays, uses it, could block it, and where each stands with us.</p>
-    ${table([["Deal",r=>esc(r.deal)],["Decides",r=>esc(r.decides)],["Pays",r=>esc(r.pays)],["Uses",r=>esc(r.uses)],["Could block",r=>esc(r.blocks)],["Standing",r=>esc(r.standing)],["Source",r=>srcs(r.sources)]],a.q2)}</section>
-  <section><h2>3 · What do we do first?</h2><p class="q">First three moves, ranked, each with an owner, a date and the deal it moves.</p>
-    ${table([["#",r=>r.rank],["Move",r=>esc(r.move)],["Owner",r=>esc(r.owner)],["By",r=>esc(r.due)],["Deal",r=>esc(r.deal)],["Why",r=>esc(r.why)],["Source",r=>srcs(r.sources)]],a.q3)}</section>
-  <section><h2>4 · What is about to go wrong?</h2><p class="q">Deadlines at risk, people going cold, deals that are stuck, and when each turns bad.</p>
-    ${table([["Risk",r=>esc(r.risk)],["Turns bad",r=>esc(r.when)],["Severity",r=>`<span class="tag sev-${esc(r.sev||"med")}">${esc(r.sev||"med")}</span>`],["Source",r=>srcs(r.sources)]],a.q4)}</section>
-  <section><h2>5 · What do we still not know?</h2><p class="q">Gaps the plan rests on, and who could fill each.</p>
-    ${table([["Gap",r=>esc(r.gap)],["Why it matters",r=>esc(r.why)],["Who could fill it",r=>esc(r.who)]],a.q5)}</section>`;
+
+function chips(ids,refs){
+  if(!ids||!ids.length)return '<span class="nosrc">no source</span>';
+  return '<div class="chips">'+ids.map(id=>{const r=refs[id]||{};const cls=r.kind==="fact"?"fact-"+r.status:"k-"+(r.kind||"record");
+    return `<button type="button" class="chip ${cls}" data-id="${esc(id)}" title="${esc(r.label||id)}">${esc(id)}</button>`}).join("")+'</div>';
 }
-async function load(){try{data=await (await fetch("/api/crm")).json();render()}catch(e){document.getElementById("view").textContent="Cannot reach the server: "+e.message}}
-document.getElementById("nf").onsubmit=async e=>{e.preventDefault();const body={account:na.value,kind:nk.value,text:nt.value};if(!body.text)return;
-  const r=await fetch("/api/note",{method:"POST",body:JSON.stringify(body)});nm.textContent=r.ok?"Saved.":"Could not save: "+(await r.text());if(r.ok)nt.value=""};
-load();setInterval(load,60000);
+const table=(cols,rows,empty="Nothing on file.")=>`<div class="tw"><table><thead><tr>${cols.map(c=>`<th>${esc(c[0])}</th>`).join("")}</tr></thead><tbody>${
+  rows.length?rows.map(r=>`<tr class="${r._cls||""}">${cols.map(c=>`<td class="${c[2]||""}">${c[1](r)}</td>`).join("")}</tr>`).join(""):`<tr><td colspan="${cols.length}" class="empty">${empty}</td></tr>`}</tbody></table></div>`;
+const standingPills=s=>String(s||"").split("; ").map(p=>{const m=p.match(/^(.*): (\w+)$/);return m?`<span class="pill p-${m[2]}">${esc(m[1])} · ${esc(m[2])}</span>`:`<span class="muted">${esc(p)}</span>`}).join("");
+const fmtDate=d=>{try{return new Date(d+"T12:00:00").toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"})}catch{return d}};
+
+function render(){
+  if(!data||!data.accounts){$("#view").innerHTML=`<div class="loading"><div class="spin"></div>Still loading data (${esc((data?.fetched||[]).length)} of 10 sources). This page refreshes itself.</div>`;return}
+  const st=data.status||{};
+  $("#status").innerHTML=st.mode==="live"?`<span class="dot live"></span><span>Live · checked ${new Date(st.liveAt).toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"})}</span>`:`<span class="dot warn"></span><span>${st.mode==="connecting"?"Connecting to live feed":"Snapshot"}${st.dataAsOf?" · data as of "+new Date(st.dataAsOf).toLocaleString([], {day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}):""}</span>`;
+  $("#sub").textContent=data.accounts.map(a=>a.name).join("  ·  ");
+  $("#tabs").innerHTML=data.accounts.map((a,i)=>`<button type="button" class="${i===cur?"on":""}" data-tab="${i}">${esc(a.name.split(" ")[0]==="Eastern"?"Eastern Counties":"Aldermoor")} <span style="opacity:.6">· ${esc(a.id)}</span></button>`).join("");
+  const a=data.accounts[cur],R=a.refs||{},k=a.kpis||{};
+  const sigs=(data.live?.signals||[]).filter(s=>!s.account||s.account===a.id);
+  const allSigs=data.live?.signals||[];
+  const liveBox=allSigs.length?`<div class="live-box hot"><h3>Live events · ${allSigs.length} new</h3>${allSigs.map(s=>`<div class="ev"><b>${esc(s.title)} ${s.account?`<span class="pill p-med">Account ${esc(s.account)}</span>`:""}</b><small>${esc(s.date)}</small><div>${esc(s.detail)}</div></div>`).join("")}</div>`
+    :`<div class="live-box quiet"><span class="dot live"></span><span>No new live events since the data was pulled. New events appear here by themselves and flow into the risks, moves and unknowns below.</span></div>`;
+
+  $("#view").innerHTML=`
+  <div class="kpis">
+    <div class="kpi ok"><div class="l">Backed book</div><div class="v num">${esc(k.backed)}</div><div class="s">Signed contract + won offers</div></div>
+    <div class="kpi"><div class="l">Pipeline ceiling</div><div class="v num">${esc(k.ceiling)}</div><div class="s">Not counted: blockers still open</div></div>
+    <div class="kpi bad"><div class="l">High-severity risks</div><div class="v num">${k.high}</div><div class="s">See section 4</div></div>
+    <div class="kpi"><div class="l">Unbacked claims</div><div class="v num">${k.claims}</div><div class="s">Shown apart, not in the total</div></div>
+  </div>
+  ${liveBox}
+
+  <section class="card" id="q1"><div class="qh"><div class="qn">1</div><div><h2>What is the book worth?</h2><p>Each deal at a value we can back, with the file or person behind it. What we cannot back is shown apart.</p></div></div>
+    ${table([["Deal",r=>esc(r.deal),"deal"],["Value",r=>esc(r.value),"val"],["Stage",r=>r._cls?"":`<span class="pill p-stage">${esc(r.stage)}</span>`],["Backed by",r=>r._cls?"":chips(r.sources,R)]],[...a.q1.backed,{deal:"Backed total",value:a.q1.backedTotal,stage:"",sources:[],_cls:"total"}].map(r=>r._cls?{...r,_cls:"total"}:r))}
+    <div class="sub"><h4>Not backed: shown apart</h4><p>${esc(a.q1.unbackedTotal)}</p>
+    ${table([["Claim or offer",r=>esc(r.deal),"deal"],["Value",r=>esc(r.value),"val"],["Why it is not backed",r=>esc(r.why)],["Where it came from",r=>chips(r.sources,R)]],a.q1.unbacked)}</div>
+  </section>
+
+  <section class="card" id="q2"><div class="qh"><div class="qn">2</div><div><h2>Who holds the power?</h2><p>Per deal: who decides, who pays, who uses it, who could block it, and where each person stands with us.</p></div></div>
+    ${table([["Deal",r=>esc(r.deal),"deal"],["Decides",r=>esc(r.decides)],["Pays",r=>esc(r.pays)],["Uses",r=>esc(r.uses)],["Could block",r=>esc(r.blocks)],["Standing with us",r=>standingPills(r.standing)],["Sources",r=>chips(r.sources,R)]],a.q2)}
+  </section>
+
+  <section class="card" id="q3"><div class="qh"><div class="qn">3</div><div><h2>What do we do first?</h2><p>The first moves, ranked, each with an owner, a date and the deal it moves.</p></div></div>
+    <div class="moves">${a.q3.map(m=>`<div class="move"><div class="rank">${m.rank}</div><div><h3>${esc(m.move)}</h3>
+      <div class="meta"><span class="tag"><b>Owner</b> ${esc(m.owner)}</span><span class="tag"><b>By</b> ${esc(fmtDate(m.due))}</span><span class="tag"><b>Moves</b> ${esc(m.deal)}</span></div>
+      <p class="why">${esc(m.why)}</p>${chips(m.sources,R)}</div></div>`).join("")}</div>
+  </section>
+
+  <section class="card" id="q4"><div class="qh"><div class="qn">4</div><div><h2>What is about to go wrong?</h2><p>Deadlines at risk, requests going cold, deals that are stuck, and when each turns bad.</p></div></div>
+    <div class="risks">${a.q4.map(r=>`<div class="risk ${esc(r.sev)}"><div><div class="t">${esc(r.risk)}</div><div class="w">Turns bad: ${esc(r.when)}</div></div><div><span class="pill p-${esc(r.sev)}">${esc(r.sev)}</span></div>${chips(r.sources,R)}</div>`).join("")}</div>
+  </section>
+
+  <section class="card" id="q5"><div class="qh"><div class="qn">5</div><div><h2>What do we still not know?</h2><p>The gaps this plan rests on, why each matters, and who could fill it.</p></div></div>
+    ${table([["Gap",r=>esc(r.gap),"deal"],["Why it matters",r=>esc(r.why)],["Who could fill it",r=>esc(r.who)]],a.q5)}
+  </section>
+
+  <section class="card" id="notes"><div class="qh"><div class="qn">✎</div><div><h2>Write a note back</h2><p>Saved to the game with write_note, so the plan and the system of record stay in step.</p></div></div>
+    <form class="noteform" id="nf"><select id="na">${data.accounts.map(x=>`<option value="${esc(x.id)}" ${x.id===a.id?"selected":""}>${esc(x.id)} · ${esc(x.name)}</option>`).join("")}</select>
+    <select id="nk"><option value="next_step">Next step</option><option value="risk">Risk</option><option value="task">Task</option><option value="note">Note</option></select>
+    <input id="nt" maxlength="500" placeholder="What should be done or remembered?"><button class="go" id="ng">Save note</button></form><div id="nm" role="status"></div>
+    <div class="notes">${(data.notes||[]).slice(-6).reverse().map(n=>`<div class="n"><small>${esc(n.kind||"note")} · ${esc(n.account||"")} · ${esc(n.created_at||n.at||"")}</small><div>${esc(n.text||n.title||JSON.stringify(n))}</div></div>`).join("")}</div>
+  </section>`;
+  bind();
+}
+
+function bind(){
+  document.querySelectorAll(".chip").forEach(c=>c.onclick=e=>{e.stopPropagation();const id=c.dataset.id,r=data.accounts[cur].refs[id]||{};
+    $("#pk").textContent=({fact:"Fact",deal:"Deal",person:"Person",file:"Data room file",record:"Paperwork record",signal:"Live event"})[r.kind]||"Source";
+    $("#pid").textContent=id;$("#pl").textContent=r.label||"Source on file";$("#pm").textContent=r.meta||"";pop.classList.add("show")});
+  const nf=$("#nf");if(nf)nf.onsubmit=async e=>{e.preventDefault();const text=$("#nt").value.trim();if(!text)return;$("#ng").disabled=true;$("#nm").textContent="Saving…";
+    try{const r=await fetch("/api/note",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({text,account:$("#na").value,kind:$("#nk").value})});
+      const j=await r.json();$("#nm").textContent=r.ok?"Saved to the game.":(j.error||"Could not save.");if(r.ok)$("#nt").value=""}catch(err){$("#nm").textContent="Could not save: "+err.message}$("#ng").disabled=false};
+}
+document.addEventListener("click",e=>{const t=e.target.closest("[data-tab]");if(t){cur=+t.dataset.tab;render();scrollTo({top:0})}if(!e.target.closest("#pop")&&!e.target.closest(".chip"))pop.classList.remove("show")});
+async function load(){try{data=await (await fetch("/api/crm",{cache:"no-store"})).json();render()}catch(e){$("#view").innerHTML='<div class="loading">Cannot reach the server: '+esc(e.message)+"</div>"}}
+$("#refresh").onclick=load;load();setInterval(load,75000);
 </script>
 </body>
 </html>

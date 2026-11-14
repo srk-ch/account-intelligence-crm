@@ -1,3 +1,4 @@
 .env
+.vercel/
 data/
 node_modules/
