@@ -460,7 +460,7 @@ function render(){
 
   <section class="panel" id="q1"><h2 data-n="1">What is the book worth?</h2><div class="cap">Each deal at a value we can back, with the file or person behind it. What we cannot back is set apart and never added in.</div>
     <div class="tiles"><div class="tile blk"><span>Backed total</span><b class="num">${esc(k.backed)}</b></div><div class="tile"><span>Pipeline ceilings, not counted</span><b class="num">${esc(k.ceiling)}</b></div><div class="tile"><span>Claims set apart</span><b class="num">${k.claims}</b></div><div class="tile"><span>High-severity risks</span><b class="num" style="color:${k.high?"var(--red)":"inherit"}">${k.high}</b></div></div>
-    <div class="grp">Booked and backed <span>counts toward the total</span></div>
+    ${booked.length?`<div class="grp">Booked and backed <span>counts toward the total</span></div>`:""}
     <div class="rows">${booked.map(r=>`<div class="row"><div class="t">${esc(r.deal)}<small>${esc(r.basis||"")}</small></div>${receipts(r.sources,R)}<div class="v num">${esc(r.value)}</div></div>`).join("")}</div>
     ${ceil.length?`<div class="grp">Pipeline ceilings <span>not counted: blockers still open</span></div><div class="rows soft">${ceil.map(r=>`<div class="row"><div class="t">${esc(r.deal)}<small>${esc(r.basis||"")}</small></div>${receipts(r.sources,R)}<div class="v num">${esc(r.value)}</div></div>`).join("")}</div>`:""}
     ${ben.length?`<div class="grp">Customer benefit <span>verified, but not FlytBase revenue</span></div><div class="rows soft">${ben.map(r=>`<div class="row"><div class="t">${esc(r.deal)}<small>${esc(r.basis||"")}</small></div>${receipts(r.sources,R)}<div class="v num">${esc(r.value)}</div></div>`).join("")}</div>`:""}
