@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Account CRM</title>
+<style>
+  :root{--bg:#f6f4ef;--card:#fff;--ink:#1c1b18;--mute:#6b6759;--line:#e3dfd3;--acc:#9a4a00;--ok:#1f7a3f;--warn:#b26a00;--bad:#b3261e}
+  @media (prefers-color-scheme:dark){:root{--bg:#161512;--card:#201f1b;--ink:#efece3;--mute:#a09b8b;--line:#34322b;--acc:#f0a050;--ok:#5fcf86;--warn:#f0b24a;--bad:#ff8a80}}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,sans-serif}
+  header{padding:16px;border-bottom:1px solid var(--line);display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+  h1{font-size:18px;margin:0}main{max-width:1100px;margin:0 auto;padding:16px}
+  .tabs{display:flex;gap:8px}.tabs button{padding:8px 14px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;cursor:pointer}
+  .tabs button.on{border-color:var(--acc);color:var(--acc);font-weight:600}
+  .live{border:1px solid var(--warn);border-radius:10px;padding:10px 14px;margin-bottom:16px;background:var(--card)}
+  .live b{color:var(--warn)}.ev{margin:6px 0}
+  section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:14px}
+  h2{font-size:15px;margin:0 0 2px}.q{color:var(--mute);font-size:13px;margin:0 0 10px}
+  table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:6px 8px;border-top:1px solid var(--line);vertical-align:top}th{color:var(--mute);font-weight:500;border-top:0}
+  .src{font:12px ui-monospace,monospace;color:var(--mute);background:var(--bg);border-radius:4px;padding:1px 5px;margin-right:4px;white-space:nowrap}
+  .tag{font-size:12px;border-radius:999px;padding:1px 8px;border:1px solid var(--line)}
+  .sev-high{color:var(--bad);border-color:var(--bad)}.sev-med{color:var(--warn);border-color:var(--warn)}.sev-low{color:var(--ok);border-color:var(--ok)}
+  .muted{color:var(--mute)}.apart{border-top:1px dashed var(--line);margin-top:8px;padding-top:8px}
+  form{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}input,select{padding:7px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}input{flex:1;min-width:200px}
+  button.go{padding:7px 14px;border:0;border-radius:6px;background:var(--acc);color:var(--bg);cursor:pointer}
+  .scroll{overflow-x:auto}
+</style>
+</head>
+<body>
+<header>
+  <h1>Account CRM <span class="muted" id="stamp"></span></h1>
+  <div class="tabs" id="tabs"></div>
+</header>
+<main>
+  <div id="live"></div>
+  <div id="view">Loading…</div>
+  <section><h2>Write a note back</h2><p class="q">Saved to the game with write_note.</p>
+    <form id="nf"><select id="na"></select><select id="nk"><option>next_step</option><option>risk</option><option>task</option><option>note</option></select><input id="nt" placeholder="What should be remembered or done?"><button class="go">Save</button></form>
+    <div id="nm" class="muted"></div></section>
+</main>
+<script>
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const srcs=a=>(a||[]).map(s=>`<span class="src">${esc(s)}</span>`).join("")||'<span class="muted">no source</span>';
+let data,cur=0;
+const table=(cols,rows)=>`<div class="scroll"><table><tr>${cols.map(c=>`<th>${esc(c[0])}</th>`).join("")}</tr>${rows.map(r=>`<tr>${cols.map(c=>`<td>${c[1](r)}</td>`).join("")}</tr>`).join("")||`<tr><td colspan="${cols.length}" class="muted">Nothing on file.</td></tr>`}</table></div>`;
+function render(){
+  if(!data||!data.accounts){document.getElementById("view").innerHTML=`<p class="muted">Still loading data from the game (one call a minute). Fetched so far: ${esc((data?.fetched||[]).join(", ")||"nothing yet")}. This page refreshes itself.</p>`;return}
+  document.getElementById("stamp").textContent="· updated "+new Date(data.generatedAt).toLocaleTimeString();
+  document.getElementById("tabs").innerHTML=data.accounts.map((a,i)=>`<button class="${i===cur?"on":""}" onclick="cur=${i};render()">${esc(a.id)} · ${esc(a.name)}</button>`).join("");
+  document.getElementById("na").innerHTML=data.accounts.map(a=>`<option value="${esc(a.id)}">${esc(a.id)} · ${esc(a.name)}</option>`).join("");
+  const l=data.live||{};
+  document.getElementById("live").innerHTML=(l.signals||[]).length?`<div class="live"><b>Live events (${l.signals.length})</b>${l.signals.map(s=>`<div class="ev"><span class="tag">${esc(s.account||"")}</span> ${esc(s.date||"")} <b>${esc(s.title)}</b> — ${esc(s.detail||"")} <span class="src">${esc(s.id||"signal")}</span> ${s.effect?`<div class="muted">→ ${esc(s.effect)}</div>`:""}</div>`).join("")}</div>`:`<div class="live muted">No live events yet. This page checks every few minutes.</div>`;
+  const a=data.accounts[cur];
+  document.getElementById("view").innerHTML=`
+  <section><h2>1 · What is the book worth?</h2><p class="q">Each deal at a value we can back. Unbacked value is shown apart, not added in.</p>
+    ${table([["Deal",r=>esc(r.deal)],["Backed value",r=>esc(r.value)],["Stage",r=>esc(r.stage||"")],["Backed by",r=>srcs(r.sources)]],a.q1.backed)}
+    <div class="apart"><b>Backed total:</b> ${esc(a.q1.backedTotal)} &nbsp; <span class="muted">Not backed (shown apart):</span> ${esc(a.q1.unbackedTotal)}</div>
+    ${a.q1.unbacked.length?table([["Claim",r=>esc(r.deal)],["Value claimed",r=>esc(r.value)],["Why not backed",r=>esc(r.why)],["Where it came from",r=>srcs(r.sources)]],a.q1.unbacked):""}</section>
+  <section><h2>2 · Who holds the power?</h2><p class="q">Per deal: who decides, pays, uses it, could block it, and where each stands with us.</p>
+    ${table([["Deal",r=>esc(r.deal)],["Decides",r=>esc(r.decides)],["Pays",r=>esc(r.pays)],["Uses",r=>esc(r.uses)],["Could block",r=>esc(r.blocks)],["Standing",r=>esc(r.standing)],["Source",r=>srcs(r.sources)]],a.q2)}</section>
+  <section><h2>3 · What do we do first?</h2><p class="q">First three moves, ranked, each with an owner, a date and the deal it moves.</p>
+    ${table([["#",r=>r.rank],["Move",r=>esc(r.move)],["Owner",r=>esc(r.owner)],["By",r=>esc(r.due)],["Deal",r=>esc(r.deal)],["Why",r=>esc(r.why)],["Source",r=>srcs(r.sources)]],a.q3)}</section>
+  <section><h2>4 · What is about to go wrong?</h2><p class="q">Deadlines at risk, people going cold, deals that are stuck, and when each turns bad.</p>
+    ${table([["Risk",r=>esc(r.risk)],["Turns bad",r=>esc(r.when)],["Severity",r=>`<span class="tag sev-${esc(r.sev||"med")}">${esc(r.sev||"med")}</span>`],["Source",r=>srcs(r.sources)]],a.q4)}</section>
+  <section><h2>5 · What do we still not know?</h2><p class="q">Gaps the plan rests on, and who could fill each.</p>
+    ${table([["Gap",r=>esc(r.gap)],["Why it matters",r=>esc(r.why)],["Who could fill it",r=>esc(r.who)]],a.q5)}</section>`;
+}
+async function load(){try{data=await (await fetch("/api/crm")).json();render()}catch(e){document.getElementById("view").textContent="Cannot reach the server: "+e.message}}
+document.getElementById("nf").onsubmit=async e=>{e.preventDefault();const body={account:na.value,kind:nk.value,text:nt.value};if(!body.text)return;
+  const r=await fetch("/api/note",{method:"POST",body:JSON.stringify(body)});nm.textContent=r.ok?"Saved.":"Could not save: "+(await r.text());if(r.ok)nt.value=""};
+load();setInterval(load,60000);
+</script>
+</body>
+</html>
