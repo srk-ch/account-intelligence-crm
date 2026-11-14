@@ -73,28 +73,31 @@ export function buildCrm(store) {
       total += renewal.annual_value;
       q1.backed.push({
         deal: renewalOpp?.title || "Contract renewal",
-        value: `${money(renewal.annual_value)} a year (signed order, term ends ${renewal.term_ends})`,
+        value: `${money(renewal.annual_value)} a year`,
+        kind: "booked", amount: renewal.annual_value,
+        basis: `Signed order form, term ends ${renewal.term_ends}; invoices paid`,
         stage: renewalOpp ? renewalOpp.stage : "contract",
         sources: cite(renewalOpp?.id, P("contract.txt"), P("invoices.json"), P("profile.json"), backedEv(renewalOpp)),
       });
     }
     for (const o of acc.offers.filter((o) => o.status === "won")) {
       total += o.value;
-      q1.backed.push({ deal: o.title, value: money(o.value), stage: "won (agreed with " + o.pitch_to + ")", sources: cite(o.id) });
+      q1.backed.push({ deal: o.title, value: money(o.value), kind: "booked", amount: o.value, basis: "Offer won, agreed with " + o.pitch_to, stage: "won", sources: cite(o.id) });
     }
     for (const o of acc.opportunities.filter((o) => o.worth_up_to && o !== renewalOpp)) {
       q1.backed.push({
         deal: o.title,
-        value: `up to ${money(o.worth_up_to)} (ceiling, not counted)`,
+        kind: "ceiling", amount: o.worth_up_to, basis: o.blocker ? "Blocker: " + o.blocker.text : "No blocker recorded",
+        value: `up to ${money(o.worth_up_to)}`,
         stage: `${o.stage}${o.blocker ? ", blocker " + o.blocker.status : ""}`,
         sources: cite(o.id, backedEv(o)),
       });
     }
     q1.backedTotal = `${money(total)} (signed contract + won offers only)`;
     for (const o of acc.offers.filter((o) => o.status !== "won"))
-      q1.unbacked.push({ deal: o.title, value: money(o.value), why: `Offer to ${o.pitch_to}, not accepted yet`, sources: cite(o.id) });
+      q1.unbacked.push({ kind: "offer", deal: o.title, value: money(o.value), why: `Offer to ${o.pitch_to}, not accepted yet`, sources: cite(o.id) });
     for (const o of acc.opportunities.filter((o) => !o.worth_up_to && !/renew/i.test(o.title)))
-      q1.unbacked.push({ deal: o.title, value: "no value on file", why: `Stage ${o.stage}; nothing in writing to price it`, sources: cite(o.id, backedEv(o)) });
+      q1.unbacked.push({ kind: "unpriced", deal: o.title, value: "no value on file", why: `Stage ${o.stage}; nothing in writing to price it`, sources: cite(o.id, backedEv(o)) });
     const claimRows = {
       A: [["rc_appetite_0", "All four forces are keen", "Contradicted: only Westmere and Metro Central fly live", ["rc_appetite_2", P("usage_weekly.csv")]],
           ["rc_funding_0", "The alliance has the budget", "Contradicted: no pooled budget, each force's finance signs its own call-off", ["rc_funding_2", "hd_calloff_2"]],
@@ -102,9 +105,9 @@ export function buildCrm(store) {
       B: [["sr_roi_0", "ROI proven, about €1.2M a year saved", "Own spreadsheet of guard hours; no guard contract reduced, no saving booked", ["sr_roi_2", P("emails/2026-07-16_stefan_savings.txt")]],
           ["sr_roll_0", "13 of 15 plants flying", `Usage shows ${flyingNow.length} of ${docks.length} docks flew in the last 4 weeks, but there is no dock-to-plant list, so plants cannot be counted; Plant 11 reportedly does not use theirs`, [P("usage_weekly.csv"), "ba_other_1", "of_weak_1"]]],
     }[acc.id] || [];
-    for (const [id, deal, why, extra] of claimRows) if (fact(id)) q1.unbacked.push({ deal, value: "claimed, not backed", why, sources: cite(id, extra) });
+    for (const [id, deal, why, extra] of claimRows) if (fact(id)) q1.unbacked.push({ kind: "claim", deal, value: "claimed, not backed", said_by: fact(id).said_by, why, sources: cite(id, extra) });
     if (acc.id === "B")
-      q1.backed.push({ deal: "Hard saving: insurer premium cut (6% on nine plants)", value: "about €180,000 a year (customer benefit, not our revenue)", stage: "verified", sources: cite("jt_prem_2", "insurer_premium_letter") });
+      q1.backed.push({ deal: "Insurer premium cut (6% across nine plants)", value: "about €180,000 a year", kind: "benefit", amount: 180000, basis: "The customer's one verified saving, not FlytBase revenue", stage: "verified", sources: cite("jt_prem_2", "insurer_premium_letter") });
 
     // ================= Q2 =================
     const decide = {
