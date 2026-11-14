@@ -2,8 +2,8 @@
 
 **Live:** https://account-intelligence-crm.vercel.app
 
-A live CRM for two customer accounts (Eastern Counties Police Alliance, Aldermoor Industrial Group). It reads
-its data from the Account Quest MCP and answers five questions per account:
+A live CRM for three customer accounts (Eastern Counties Police Alliance, Aldermoor Industrial Group, Kestrel Estates). It reads
+its data from the Account Quest MCP and answers five questions per account (the third account arrived mid-build with paperwork only, and is built from its records):
 
 1. **What is the book worth?** Backed value only (signed contract + won offers); ceilings and unbacked claims are shown apart and never added in.
 2. **Who holds the power?** Per deal: who decides, pays, uses it, could block it, and where each person stands with us.

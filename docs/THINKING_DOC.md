@@ -3,7 +3,7 @@
 Live CRM: https://account-intelligence-crm.vercel.app  ·  Code: https://github.com/srk-ch/account-intelligence-crm
 
 ## What it does, and for whom
-A Monday-morning briefing for the customer success manager who inherits two accounts (Eastern Counties Police Alliance, Aldermoor Industrial Group). For each it answers five questions: what the book is worth, who holds the power, what to do first, what is about to go wrong, and what we still do not know. It reads live from the MCP and keeps itself current. The reader will challenge every number, so nothing on the page may be a guess dressed as a fact.
+A Monday-morning briefing for the customer success manager who inherits three accounts (Eastern Counties Police Alliance, Aldermoor Industrial Group, and Kestrel Estates, which arrived mid-build with paperwork only). For each it answers five questions: what the book is worth, who holds the power, what to do first, what is about to go wrong, and what we still do not know. It reads live from the MCP and keeps itself current. The reader will challenge every number, so nothing on the page may be a guess dressed as a fact.
 
 ## How it decides: the rules, and why
 1. **Backed value only.** The book counts a signed order plus offers actually won (£455,000 and €140,000). Pipeline "worth up to" values are ceilings, shown but never counted. *Why:* the brief calls a total copied from a champion weak, and in discovery the claims fell apart: Stefan's "€1.2M saved" is his own spreadsheet with no saving booked; Rhys's "the alliance has the budget" is contradicted by "no pooled budget, each force's CFO signs its own call-off". Claims are set apart beside the fact that contradicts them.
@@ -16,7 +16,7 @@ A Monday-morning briefing for the customer success manager who inherits two acco
 **Staying live.** One MCP call per refresh, never faster than the one-a-minute limit, watching events, `whoami` and notes. A new event shows at once and changes the risks, moves and unknowns; a change in the data queues a re-pull. Notes go back with `write_note`. The token lives only in a server variable.
 
 ## What it does not do yet
-- Dock-to-site mapping is not in the data, so usage is per dock, not per force or plant.
+- Dock-to-site mapping is not in the data, so usage is per dock, not per force or plant. The third account has no discovery export, so its plan comes from paperwork alone and is less certain than the other two.
 - Ranking is rule-based, not weighted by probability; move dates are my targets, only contract ends and event dates are fixed.
 - Live-event handling recognises known wording; an unfamiliar event is shown and logged as a risk but may not change the plan.
 - The live feed shares one call a minute across visitors.
