@@ -48,3 +48,21 @@ why, and the cost.
 - *"Is this AI-generated?"* Yes: built with Claude Code under my direction. I set the rules, checked the numbers and chose what to cut.
 - *"What would break it?"* An event type whose wording the rules do not recognise (it still shows and logs a risk); and the shared one-call-a-minute feed under heavy traffic.
 - *"What is not proven?"* Move dates are my targets; only the contract end and event dates are fixed in the data. Saving a note back to the game was not tested.
+
+## G. The third account, Kestrel Estates (released mid-build)
+- **Thought process:** the announcement said the new account's data is reachable "if your MCPs were connected the right way". That is a test of whether the build is wired to the feed or hard-coded to two accounts. So I did not hand-add Kestrel; I made the CRM find it.
+- **Decision: retrieve automatically.** `whoami` lists `new_accounts`; the CRM queues `get_new_account`, the paperwork, and every file by itself, one call a minute. I tested it by removing Kestrel from the store and watching it return in about six minutes. *Rejected:* a manual "fetch Kestrel" script, because the next surprise account would need me again.
+- **Decision: use the export, not only paperwork.** The export carries people, facts, deals, offers and files, so Q1 to Q5 are built from verified facts (`export_account.js`), not a thin fallback.
+- **What the facts decided:** booked contract £14,000 is the backed value; the go-live ceiling and the unpriced south dock are shown but not counted; "everyone is excited" is a claim set beside a dock that has never flown.
+- **Move order, by what cannot move:** no certified pilot and the insurer not told (policy requires notice before use) block any flight, so: dated go-live plan, insurer notification, certification course, then a one-pager for the residents' board before its first-Monday vote.
+
+## H. The Ideas section: what I built and what I left out
+- **Read it as optional:** "pick one or two and do them well". I did not treat the list as a checklist.
+- **Built:** power map with champion and "waiting on"; people going cold (no contact over 45 days); each move shows worth and how many of its facts are verified; a Draft request writer that produces the internal message with owner, date and evidence, plus Copy.
+- **Left out on purpose:** a chance-of-success score. The data holds no outcomes to calibrate against, so any percentage would be invented, which breaks my own rule that nothing is a guess dressed as a fact. Ranking stays deadline and evidence. Also not built: customer-facing proposal drafts, because a draft that leaves the building needs a person's review, and I will not claim that.
+- **Fix found in testing:** the draft's recipient was parsed as a whole phrase ("Neel for training capacity..."); it now stops at the name.
+
+## I. Presentation and hygiene decisions
+- **Authorship:** commits are authored by srk-ch only; the repo was recreated once to remove a stale contributor, with your approval. I also dropped my own co-author trailer for the same reason.
+- **Docs:** the one-page thinking doc is kept to what it asks (what, for whom, how it decides, what it does not do, how AI was used); this log holds the longer reasoning.
+- **Known untested:** saving a note via `write_note` (it writes to the real game); phone, print and other browsers.
