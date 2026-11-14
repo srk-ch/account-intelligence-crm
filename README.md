@@ -18,7 +18,7 @@ checked against what actually exists before they are shown, so none can be inven
   `data/store.json`, then keeps re-reading `get_signals`, `whoami` and `list_notes`.
 - `analysis.js` turns the stored data into the five answers. Live events (signals) are added to the
   risks, moves and gaps automatically, with no code change.
-- `server.js` serves the page, `/api/crm`, `/api/health`, and `POST /api/note` which saves notes back to
+- `dev-server.js` serves the page, `/api/crm`, `/api/health`, and `POST /api/note` which saves notes back to
   the game with `write_note`.
 
 ## Run
@@ -26,13 +26,13 @@ Needs Node 20+ and no dependencies.
 
 ```
 cp .env.example .env     # put your token in AQ_TOKEN (Build > Connect > Show my token)
-node --env-file=.env server.js
+node --env-file=.env dev-dev-server.js
 # open http://localhost:3000
 ```
 The first start fetches everything (about 10 minutes at one call a minute); the page fills in as data
 arrives and refreshes itself every minute.
 
 ## Deploy
-Any Node host (Render, Railway, Fly). Start command `node server.js`. Set `AQ_TOKEN` as a server
+Any Node host (Render, Railway, Fly). Start command `node dev-dev-server.js`. Set `AQ_TOKEN` as a server
 environment variable. The token is only read on the server and is never sent to the browser or stored in
 this repository.

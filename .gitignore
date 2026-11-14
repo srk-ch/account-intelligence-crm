@@ -2,3 +2,5 @@
 .vercel/
 data/
 node_modules/
+
+.vercel
