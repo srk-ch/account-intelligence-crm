@@ -62,7 +62,7 @@ export function buildCrm(store) {
 
     const reqs = csv(rec("requests.csv")?.text);
     const openReqs = reqs.filter((r) => r.status !== "Closed");
-    const sig = (re) => signals.filter((s) => re.test(`${s.title} ${s.detail}`));
+    const sig = (re) => signals.filter((s) => (!s.account || s.account === acc.id) && re.test(`${s.title} ${s.detail}`));
 
     // ================= Q1 =================
     const q1 = { backed: [], unbacked: [], backedTotal: "", unbackedTotal: "not added up: claims and unaccepted offers are shown apart" };
@@ -133,7 +133,7 @@ export function buildCrm(store) {
     const moves = [];
     const w = sig(/westmere|5 december|public event/i), rh = sig(/rhys|moving on|successor|leaves/i);
     if (acc.id === "A") {
-      for (const s of w) moves.push({ pri: 0, move: "Reply in writing to Insp. Mbeki: training dates for new operators before the 5 December event, and who answers if a dock fails on the day", owner: "You (CSM), with Neel for training capacity and the support desk for on-call", due: "2026-11-25", deal: "Scale Westmere's fleet", why: "She wrote directly and logged a ticket; nobody has replied. Her last email (batteries, Aug) also had no reply.", sources: cite(s.id, "karen_mbeki", "a_westmere", P("emails/2026-08-11_karen_batteries.txt"), "km_staff_2") });
+      for (const s of w) moves.push({ pri: 0, move: "Reply in writing to Insp. Mbeki: training dates for new operators before the 5 December event, and who answers if a dock fails on the day", owner: "You (CSM), with Neel for training capacity and the support desk for on-call", due: addDays(3), deal: "Scale Westmere's fleet", why: "She wrote directly and logged a ticket; nobody has replied. Her last email (batteries, Aug) also had no reply.", sources: cite(s.id, "karen_mbeki", "a_westmere", P("emails/2026-08-11_karen_batteries.txt"), "km_staff_2") });
       for (const s of rh) moves.push({ pri: 1, move: "Ask Rhys for a named successor and a second contact in each force; get the alliance procurement lead's name", owner: "You (CSM)", due: addDays(10), deal: "Renew the alliance contract", why: "Every call on file was with Rhys alone and he leaves in January; the term ends before the renewal can be signed without him.", sources: cite(s.id, "rhys_calder", P("profile.json"), "a_renewal") });
       moves.push({ pri: 2, move: "Get Metro Central's drone overtime from Payroll (via Ewan) and finish the cost-per-flight against helicopter hours", owner: "You (CSM) with Ewan Brooks", due: addDays(7), deal: "Scale Westmere's fleet", why: "His CFO signs a call-off only with a cost per flight against £1,500 helicopter hours; overtime is not tracked separately.", sources: cite("eb_sign_2", "eb_drone_2", "eb_heli_1", "a_westmere", P("helicopter_cost_overtime")) });
       moves.push({ pri: 3, move: "Chase Fatima Osei's DPIA now she has the data-flow pack; agree the date she will sign, then offer the same pack to Norwold", owner: "You (CSM), engineering (SRV) on questions", due: addDays(21), deal: "Tarn Valley and Norwold go live", why: "She said she can finish in three weeks with the pack; Norwold is waiting to copy her assessment.", sources: cite("fo_needs_3", "srv_dataflow", "a_tarn", "dataflow_pack", "km_others_2") });
