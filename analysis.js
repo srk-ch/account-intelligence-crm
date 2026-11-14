@@ -4,6 +4,7 @@
 
 import { buildPaperworkAccount } from "./paperwork_account.js";
 import { buildExportAccount } from "./export_account.js";
+import { buildGenericExport } from "./generic_export.js";
 const DAY = 86_400_000;
 const iso = (d) => new Date(d).toISOString().slice(0, 10);
 const addDays = (n, from = Date.now()) => iso(from + n * DAY);
@@ -237,7 +238,7 @@ export function buildCrm(store) {
     if (!e || have.has(e[1]) || !F[k]?.data?.accounts?.[0]) continue;
     const id = e[1], exp2 = F[k].data.accounts[0], files = F[k].data.files || [], fileTexts = {};
     for (const f of files) fileTexts[f.id] = F["newfile_" + id + "_" + f.id]?.data?.text || "";
-    out.accounts.push(buildExportAccount(id, exp2, files, fileTexts, F["paperwork_" + id]?.data?.records || [], signals));
+    out.accounts.push((id === "K" ? buildExportAccount : buildGenericExport)(id, exp2, files, fileTexts, F["paperwork_" + id]?.data?.records || [], signals));
     have.add(id);
   }
   for (const k of Object.keys(F)) {

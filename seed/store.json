@@ -6004,6 +6004,263 @@
     "id": "K_insurance_schedule_1yo",
     "text": "Property insurance schedule (extract), Kestrel Estates\nPolicy period: 01 Apr 2026 - 31 Mar 2027\nInsured items: buildings, contents, perimeter CCTV\nNotifiable changes: any new aerial or robotic equipment must be notified to the insurer before use.\nDeclared security measures: CCTV at north and south entrances, night guard (Fri-Sat only)\nDrone or dock: not declared\n"
    }
+  },
+  "newaccount_H": {
+   "at": "2026-11-14T11:22:56.745Z",
+   "data": {
+    "format": "account-quest-v2-export/1",
+    "player": "drop-brindle",
+    "exported_at": "2026-11-14T17:15:00+05:30",
+    "minute": 0,
+    "world_closed": false,
+    "accounts": [
+     {
+      "id": "H",
+      "name": "Brindle Harbour Authority",
+      "official_story": "6 docks across three quays and a container yard. Saves about 400,000 a year. Ready to expand to two more harbours.",
+      "stakeholders": [
+       {
+        "id": "h_marcus_1yo",
+        "name": "Marcus Hale",
+        "role": "Head of port operations",
+        "relationship": "ally",
+        "available": true
+       },
+       {
+        "id": "h_priya_1yo",
+        "name": "Priya Nair",
+        "role": "Finance director",
+        "relationship": "guarded",
+        "available": true
+       },
+       {
+        "id": "h_elena_1yo",
+        "name": "Elena Varga",
+        "role": "Data protection lead",
+        "relationship": "neutral",
+        "available": true
+       },
+       {
+        "id": "h_tom_1yo",
+        "name": "Tom Reyes",
+        "role": "Rollout contractor",
+        "relationship": "warm",
+        "available": true
+       },
+       {
+        "id": "h_sam_1yo",
+        "name": "Sam Okoye",
+        "role": "IT infrastructure manager",
+        "relationship": "neutral",
+        "available": true
+       }
+      ],
+      "facts": [
+       {
+        "id": "h_saving_claim_1yo",
+        "text": "The programme saves about 400,000 a year.",
+        "said_by": "Marcus Hale",
+        "status": "claim",
+        "learned_at_minute": -70
+       },
+       {
+        "id": "h_saving_basis_1yo",
+        "text": "The 400,000 is Marcus's own estimate of security patrol hours the docks could replace.",
+        "said_by": "Marcus Hale",
+        "status": "told",
+        "learned_at_minute": -65
+       },
+       {
+        "id": "h_finance_unseen_1yo",
+        "text": "Finance has not seen the workings behind the saving, and no patrol contract has changed.",
+        "said_by": "Priya Nair",
+        "status": "told",
+        "learned_at_minute": -60
+       },
+       {
+        "id": "h_finance_renewal_1yo",
+        "text": "Priya signs the renewal. She will not renew on a saving she cannot see in the accounts.",
+        "said_by": "Priya Nair",
+        "status": "told",
+        "learned_at_minute": -58
+       },
+       {
+        "id": "h_two_quays_1yo",
+        "text": "Quays 1 and 2 fly every night. Quay 3 flies weekly. The container yard dock has never flown.",
+        "said_by": "Marcus Hale",
+        "status": "verified",
+        "verified_by": "h_flight_log_1yo",
+        "learned_at_minute": -50
+       },
+       {
+        "id": "h_yard_blocked_1yo",
+        "text": "The privacy assessment for the container yard cannot be signed until the vendor sends data retention and storage details.",
+        "said_by": "Elena Varga",
+        "status": "told",
+        "learned_at_minute": -45
+       },
+       {
+        "id": "h_vendor_silent_1yo",
+        "text": "Elena asked the vendor for those details in the spring. Nobody replied.",
+        "said_by": "Elena Varga",
+        "status": "verified",
+        "verified_by": "h_dp_request_1yo",
+        "learned_at_minute": -44
+       },
+       {
+        "id": "h_contractor_leaving_1yo",
+        "text": "Tom's contract ends next month. The launch steps, patrol routes and alert rota are in his head; nothing is written down.",
+        "said_by": "Tom Reyes",
+        "status": "told",
+        "learned_at_minute": -35
+       },
+       {
+        "id": "h_it_not_involved_1yo",
+        "text": "IT was not involved in the installs and has no record of what the docks need from the network.",
+        "said_by": "Sam Okoye",
+        "status": "told",
+        "learned_at_minute": -25
+       },
+       {
+        "id": "h_segmentation_1yo",
+        "text": "All yard devices move to a new segmented network in the autumn.",
+        "said_by": "Sam Okoye",
+        "status": "verified",
+        "verified_by": "h_network_notice_1yo",
+        "learned_at_minute": -24
+       },
+       {
+        "id": "h_expand_wish_1yo",
+        "text": "Marcus wants to expand to two more harbours this year.",
+        "said_by": "Marcus Hale",
+        "status": "claim",
+        "learned_at_minute": -10
+       }
+      ],
+      "opportunities": [
+       {
+        "id": "h_renewal_1yo",
+        "title": "Renew the six-dock contract",
+        "stage": "qualified",
+        "worth_up_to": 96000,
+        "size": null,
+        "blocker": {
+         "text": "Finance cannot see the saving the programme claims",
+         "status": "open"
+        },
+        "evidence": [
+         "h_saving_claim_1yo",
+         "h_saving_basis_1yo",
+         "h_finance_unseen_1yo",
+         "h_finance_renewal_1yo",
+         "h_two_quays_1yo",
+         "h_flight_log_1yo"
+        ],
+        "deadline": {
+         "text": "Renewal decision",
+         "minute": 216000
+        }
+       },
+       {
+        "id": "h_yard_1yo",
+        "title": "Get the container yard dock live",
+        "stage": "qualified",
+        "worth_up_to": 30000,
+        "size": null,
+        "blocker": {
+         "text": "The privacy assessment waits on documents the vendor never sent",
+         "status": "open"
+        },
+        "evidence": [
+         "h_yard_blocked_1yo",
+         "h_vendor_silent_1yo",
+         "h_dp_request_1yo"
+        ],
+        "deadline": null
+       },
+       {
+        "id": "h_harbours_1yo",
+        "title": "Docks for two more harbours",
+        "stage": "identified",
+        "worth_up_to": null,
+        "size": null,
+        "blocker": null,
+        "evidence": [
+         "h_expand_wish_1yo"
+        ],
+        "deadline": null
+       }
+      ],
+      "offers": [
+       {
+        "id": "h_rollout_pack_1yo",
+        "title": "Written rollout and alert-rota playbook, delivered with the contractor before he leaves",
+        "value": 12000,
+        "pitch_to": "Marcus Hale",
+        "status": "open"
+       }
+      ],
+      "deadlines": [
+       {
+        "text": "The rollout contractor leaves",
+        "minute": 43200,
+        "passed": false
+       },
+       {
+        "text": "Yard devices move to the segmented network",
+        "minute": 129600,
+        "passed": false
+       },
+       {
+        "text": "Renewal decision",
+        "minute": 216000,
+        "passed": false
+       }
+      ]
+     }
+    ],
+    "files": [
+     {
+      "id": "h_flight_log_1yo",
+      "title": "Flight log by dock, last three months",
+      "path": "files/h_flight_log_1yo.csv",
+      "account": "H"
+     },
+     {
+      "id": "h_dp_request_1yo",
+      "title": "Elena's request to the vendor (spring)",
+      "path": "files/h_dp_request_1yo.txt",
+      "account": "H"
+     },
+     {
+      "id": "h_network_notice_1yo",
+      "title": "IT notice: yard network segmentation",
+      "path": "files/h_network_notice_1yo.txt",
+      "account": "H"
+     }
+    ]
+   }
+  },
+  "newfile_H_h_flight_log_1yo": {
+   "at": "2026-11-14T11:23:58.596Z",
+   "data": {
+    "id": "h_flight_log_1yo",
+    "text": "dock,site,month,patrol_flights,test_flights\nD1,Quay 1,Aug 2026,31,0\nD2,Quay 2,Aug 2026,30,1\nD3,Quay 3,Aug 2026,4,0\nD4,Quay 3,Aug 2026,4,0\nD5,Container yard,Aug 2026,0,2\nD6,Container yard,Aug 2026,0,0\nD1,Quay 1,Sep 2026,30,0\nD2,Quay 2,Sep 2026,29,0\nD3,Quay 3,Sep 2026,5,0\nD4,Quay 3,Sep 2026,3,0\nD5,Container yard,Sep 2026,0,0\nD6,Container yard,Sep 2026,0,1\nD1,Quay 1,Oct 2026,31,0\nD2,Quay 2,Oct 2026,31,0\nD3,Quay 3,Oct 2026,4,1\nD4,Quay 3,Oct 2026,4,0\nD5,Container yard,Oct 2026,0,0\nD6,Container yard,Oct 2026,0,0\n"
+   }
+  },
+  "newfile_H_h_dp_request_1yo": {
+   "at": "2026-11-14T11:25:00.570Z",
+   "data": {
+    "id": "h_dp_request_1yo",
+    "text": "From: Elena Varga, Data Protection Lead, Brindle Harbour Authority\nTo: (vendor support address)\nDate: 14 April 2026\nSubject: Container yard drone dock - information needed for privacy assessment\n\nBefore the container yard dock can go live I need, in writing:\n1. What data the dock and platform collect (video, stills, telemetry, location).\n2. Where video is stored, and in which country.\n3. How long each kind of data is kept, and how it is deleted.\n4. Who at your company can access it, and under what controls.\n\nI cannot sign the assessment without these. Please reply to this address.\n\n[No reply on file.]\n"
+   }
+  },
+  "newfile_H_h_network_notice_1yo": {
+   "at": "2026-11-14T11:26:02.630Z",
+   "data": {
+    "id": "h_network_notice_1yo",
+    "text": "BRINDLE HARBOUR AUTHORITY - IT NOTICE\nSubject: Segmentation of yard and quay devices\nFrom: Sam Okoye, IT Infrastructure Manager\n\nFrom the autumn, every device on the yard and quay networks moves to a new segmented network.\nDevices not registered with IT by then will lose network access until an exception is approved.\nException requests need: device type, location, ports and destinations, data volumes, and an owner.\n\nRegistered so far: CCTV, gate controllers, crane telemetry.\nNot registered: (none recorded for drone docks)\n"
+   }
   }
  },
  "log": [
