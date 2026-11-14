@@ -28,13 +28,14 @@ button{font-family:inherit}
 .shell{max-width:1360px;margin:0 auto;background:var(--shell);border-radius:42px;box-shadow:0 30px 80px -30px rgba(20,24,40,.28),inset 0 0 0 1px rgba(255,255,255,.8);display:grid;grid-template-columns:78px minmax(0,1fr);min-height:calc(100vh - 36px)}
 
 /* rail */
-.rail{padding:22px 0 22px 20px;display:flex;flex-direction:column;align-items:center;gap:10px;position:sticky;top:18px;align-self:start;height:calc(100vh - 36px)}
+.rail{z-index:30;padding:22px 0 22px 20px;display:flex;flex-direction:column;align-items:center;gap:10px;position:sticky;top:18px;align-self:start;height:calc(100vh - 36px)}
 .logo{width:46px;height:46px;border-radius:50%;background:var(--card);display:grid;place-items:center;box-shadow:var(--sh);margin-bottom:10px}
 .rb{width:46px;height:46px;border-radius:50%;border:0;background:var(--card);display:grid;place-items:center;cursor:pointer;color:var(--ink2);box-shadow:var(--sh);text-decoration:none;position:relative;transition:transform .15s,background .15s}
 .rb:hover{transform:translateY(-1px);color:var(--ink)}
 .rb.on{background:var(--ink);color:#fff}
 .rb svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.rb .tip{position:absolute;left:58px;background:var(--ink);color:#fff;font-size:12px;font-weight:600;padding:5px 10px;border-radius:999px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;z-index:5}
+.rb .tip{position:absolute;left:60px;top:50%;transform:translate(-6px,-50%);background:var(--ink);color:#fff;font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:999px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s,transform .15s;box-shadow:0 10px 24px -8px rgba(20,24,40,.5)}
+.rb:hover .tip,.rb:focus-visible .tip{transform:translate(0,-50%)}
 .rb:hover .tip{opacity:1}
 .rail .sp{flex:1}
 .rb.dot::after{content:"";position:absolute;top:9px;right:10px;width:9px;height:9px;border-radius:50%;background:var(--green);border:2px solid var(--card)}
@@ -42,7 +43,7 @@ button{font-family:inherit}
 
 /* main */
 .main{padding:22px 34px 40px 22px;min-width:0}
-.top{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.top{display:flex;align-items:center;gap:16px;flex-wrap:wrap;position:sticky;top:0;z-index:25;margin:-22px -34px 0 -22px;padding:16px 34px 12px 22px;background:linear-gradient(var(--shell) 70%,rgba(244,245,248,0));backdrop-filter:blur(6px);border-radius:42px 42px 0 0}
 .pills{display:flex;gap:4px;flex:1;justify-content:center;flex-wrap:wrap}
 .pill{border:0;background:transparent;font-size:14px;font-weight:500;padding:9px 16px;border-radius:999px;cursor:pointer;color:var(--ink2);text-decoration:none}
 .pill:hover{color:var(--ink)}
@@ -64,7 +65,9 @@ button{font-family:inherit}
 .avs small{font-size:12px;color:var(--mute);font-weight:600;margin-left:4px}
 
 /* panels */
-.panel{background:var(--panel);border-radius:var(--r-xl);padding:26px 26px 28px;margin-top:20px;position:relative}
+.panel{scroll-margin-top:84px;background:var(--panel);border-radius:var(--r-xl);padding:26px 26px 28px;margin-top:20px;position:relative}
+.panel>h2::before{content:attr(data-n);display:inline-grid;place-items:center;width:30px;height:30px;margin-right:12px;border-radius:50%;background:var(--ink);color:#fff;font:700 14px var(--font);vertical-align:2px}
+.panel>h2[data-n='✎']::before{background:var(--green)}
 .panel>h2{font:700 20px/1.2 var(--font);letter-spacing:-.015em;margin:0}
 .panel>.cap{color:var(--mute);margin:4px 0 20px;font-size:13.5px;font-weight:500;max-width:720px}
 .card{background:var(--card);border-radius:var(--r-lg);padding:20px 22px;box-shadow:var(--sh)}
@@ -279,6 +282,7 @@ const dueDays=d=>Math.round((new Date(d+"T12:00:00")-new Date())/864e5);
 const dShort=d=>{try{return new Date(d+"T12:00:00").toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"})}catch{return d}};
 const dLong=d=>{try{return new Date(d+"T12:00:00").toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long"})}catch{return d}};
 const rel=n=>n<0?`${-n}d overdue`:n===0?"today":n===1?"tomorrow":`in ${n} days`;
+const hue=s=>[...s].reduce((a,c)=>(a*31+c.charCodeAt(0))%360,7);
 const initials=n=>n.replace(/^(Insp\.|Dr\.?|Mr\.?|Ms\.?)\s*/i,"").split(/\s+/).map(w=>w[0]).slice(0,2).join("").toUpperCase();
 const short=n=>n.name.includes("Eastern")?"EC":"AI";
 
@@ -328,7 +332,7 @@ function render(){
     <div class="next"><div class="lab">Do this first</div><h3>${esc(m0.move)}</h3><div class="nrow"><span class="tg">${esc(dLong(m0.due))}</span><span class="tg">${esc(rel(dueDays(m0.due)))}</span></div></div></div>
   ${events}${timeline(a)}
 
-  <section class="panel" id="q1"><h2>What is the book worth?</h2><div class="cap">Each deal at a value we can back, with the file or person behind it. What we cannot back is set apart and never added in.</div>
+  <section class="panel" id="q1"><h2 data-n="1">What is the book worth?</h2><div class="cap">Each deal at a value we can back, with the file or person behind it. What we cannot back is set apart and never added in.</div>
     <div class="tiles"><div class="tile blk"><span>Backed total</span><b class="num">${esc(k.backed)}</b></div><div class="tile"><span>Pipeline ceilings, not counted</span><b class="num">${esc(k.ceiling)}</b></div><div class="tile"><span>Claims set apart</span><b class="num">${k.claims}</b></div><div class="tile"><span>High-severity risks</span><b class="num" style="color:${k.high?"var(--red)":"inherit"}">${k.high}</b></div></div>
     ${compBar(a)}<div class="grp">Booked and backed <span>counts toward the total</span></div>
     <div class="rows">${booked.map(r=>`<div class="row"><div class="t">${esc(r.deal)}<small>${esc(r.basis||"")}</small></div>${receipts(r.sources,R)}<div class="v num">${esc(r.value)}</div></div>`).join("")}</div>
@@ -338,28 +342,28 @@ function render(){
       <div class="rows">${a.q1.unbacked.map(r=>`<div class="row"><div class="t"><span class="tg ${r.kind}">${r.kind==="claim"?"Claim":r.kind==="offer"?"Open offer":"Unpriced"}</span><br>${esc(r.deal)}<small>${r.said_by?"Said by "+esc(r.said_by)+". ":""}${esc(r.why)}</small></div>${receipts(r.sources,R)}<div class="v num" style="color:var(--ink2)">${esc(r.value.replace("claimed, not backed","unbacked"))}</div></div>`).join("")}</div></div>
   </section>
 
-  <section class="panel" id="q2"><h2>Who holds the power?</h2><div class="cap">For each deal: who decides, who pays, who uses it, who could block it, and where each person stands with us.</div>
+  <section class="panel" id="q2"><h2 data-n="2">Who holds the power?</h2><div class="cap">For each deal: who decides, who pays, who uses it, who could block it, and where each person stands with us.</div>
     ${a.q2.map(r=>`<div class="card deal"><div class="who"><div><h3>${esc(r.deal)}</h3>${receipts(r.sources,R)}</div>
-      <div class="people">${String(r.standing).split("; ").map(p=>{const m=p.match(/^(.*): (\w+)$/);return m?`<div class="person"><span class="ava ${m[2]}">${esc(initials(m[1]))}</span><div>${esc(m[1])}<small>${esc(m[2])} with us</small></div></div>`:`<div class="person"><small>${esc(p)}</small></div>`}).join("")}</div></div>
+      <div class="people">${String(r.standing).split("; ").map(p=>{const m=p.match(/^(.*): (\w+)$/);return m?`<div class="person"><span class="ava ${m[2]}" style="background:hsl(${hue(m[1])} 65% 90%);color:hsl(${hue(m[1])} 45% 28%)">${esc(initials(m[1]))}</span><div>${esc(m[1])}<small>${esc(m[2])} with us</small></div></div>`:`<div class="person"><small>${esc(p)}</small></div>`}).join("")}</div></div>
       <div class="roles"><div class="role first"><div class="lab">Decides</div><p>${esc(r.decides)}</p></div><div class="role"><div class="lab">Pays</div><p>${esc(r.pays)}</p></div><div class="role"><div class="lab">Uses it</div><p>${esc(r.uses)}</p></div><div class="role"><div class="lab">Could block</div><p>${esc(r.blocks)}</p></div></div></div>`).join("")}
   </section>
 
-  <section class="panel" id="q3"><h2>What do we do first?</h2><div class="cap">The first moves, ranked, each with one owner, a date and the deal it moves.</div>
+  <section class="panel" id="q3"><h2 data-n="3">What do we do first?</h2><div class="cap">The first moves, ranked, each with one owner, a date and the deal it moves.</div>
     <div class="flow">${a.q3.map((m,i)=>{const d=dueDays(m.due);return `<div class="step ${i===0?"first":""}"><div class="no">${m.rank}</div><h3>${esc(m.move)}</h3><p class="why">${esc(m.why)}</p>${receipts(m.sources,R)}
       <div class="meta"><span class="mp"><small>Owner</small>${esc(m.owner)}</span><span class="mp ${d<=10?"soon":""}"><small>By</small>${esc(dShort(m.due))} · ${esc(rel(d))}</span><span class="mp"><small>Moves</small>${esc(m.deal)}</span></div></div>`}).join("")}</div>
   </section>
 
-  <section class="panel" id="q4"><h2>What is about to go wrong?</h2><div class="cap">Deadlines at risk, requests going cold, deals that are stuck, and when each turns bad. Worst first.</div>
+  <section class="panel" id="q4"><h2 data-n="4">What is about to go wrong?</h2><div class="cap">Deadlines at risk, requests going cold, deals that are stuck, and when each turns bad. Worst first.</div>
     ${usageChart(a)}<div class="th risk"><span>Status</span><span>What</span><span>Turns bad</span></div>
     <div class="tbl">${a.q4.map(r=>`<div class="tr risk"><div><span class="sev ${esc(r.sev)}">${esc(r.sev==="med"?"Watch":r.sev)}</span></div><div><h4>${esc(r.risk)}</h4>${r.detail?`<div class="w" style="margin:-2px 0 8px">${esc(r.detail)}</div>`:""}${receipts(r.sources,R)}</div><div class="w">${esc(r.when)}</div></div>`).join("")}</div>
   </section>
 
-  <section class="panel" id="q5"><h2>What do we still not know?</h2><div class="cap">The gaps this plan rests on, why each one matters, and who could close it.</div>
+  <section class="panel" id="q5"><h2 data-n="5">What do we still not know?</h2><div class="cap">The gaps this plan rests on, why each one matters, and who could close it.</div>
     <div class="th gap"><span>Gap</span><span>Why it matters</span><span>Who could tell us</span></div>
     <div class="tbl">${a.q5.map(r=>`<div class="tr gap"><div class="g">${esc(r.gap)}</div><div class="w">${esc(r.why)}</div><div class="w" style="color:var(--ink);font-weight:600">${esc(r.who)}</div></div>`).join("")}</div>
   </section>
 
-  <section class="panel" id="notes"><h2>Write it back</h2><div class="cap">Saved to the game with write_note, so this plan and the system of record stay in step.</div>
+  <section class="panel" id="notes"><h2 data-n="✎">Write it back</h2><div class="cap">Saved to the game with write_note, so this plan and the system of record stay in step.</div>
     <form class="nf" id="nf"><label class="fl"><span class="lab">Account</span><select id="na">${data.accounts.map(x=>`<option value="${esc(x.id)}" ${x.id===a.id?"selected":""}>${esc(x.id)} · ${esc(x.name.split(" ").slice(0,2).join(" "))}</option>`).join("")}</select></label>
       <label class="fl"><span class="lab">Type</span><select id="nk"><option value="next_step">Next step</option><option value="risk">Risk</option><option value="task">Task</option><option value="note">Note</option></select></label>
       <label class="fl wide"><span class="lab">Note</span><input id="nt" maxlength="500" placeholder="What should be done or remembered?" autocomplete="off"></label><button class="go" id="ng" aria-label="Save note">+</button></form><div id="nm" role="status"></div>
