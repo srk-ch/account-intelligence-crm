@@ -214,6 +214,10 @@ export function buildCrm(store) {
     signals.forEach((s) => { refs[s.id] = { kind: "signal", label: s.title, meta: s.detail }; (s.recs || []).forEach((r) => (refs[r.path] = { kind: "record", label: r.path, meta: String(r.text || "").split(/[\r\n\t ]+/).join(" ").slice(0, 320) + "…" })); });
     const ceiling = acc.opportunities.filter((o) => o.worth_up_to && o !== renewalOpp).reduce((n, o) => n + o.worth_up_to, 0);
     q4.sort((a, b) => ({ high: 0, med: 1, low: 2 }[a.sev] - { high: 0, med: 1, low: 2 }[b.sev]));
+    for (const c of profile.contacts_on_file || []) {
+      const d = c.last_contact_before_handover ? daysSince(c.last_contact_before_handover) : 0;
+      if (d > 45) q4.push({ risk: `${c.name} has not been contacted for ${d} days`, detail: c.note, when: `Last contact ${fmtD(c.last_contact_before_handover)}; going cold`, sev: d > 90 ? "high" : "med", sources: cite(P("profile.json"), c.id) });
+    }
     const openOffers = acc.offers.filter((o) => o.status !== "won").reduce((n, o) => n + o.value, 0);
     const kpis = { backed: money(total), ceiling: money(ceiling), bookedN: total, ceilingN: ceiling, offersN: openOffers, high: q4.filter((r) => r.sev === "high").length, moves: q3.length, claims: q1.unbacked.filter((r) => /claimed/.test(r.value)).length, currency: cur };
     const series = weeks.map((w) => ({ w, flights: usage.filter((u) => u.week_start === w).reduce((n, u) => n + Number(u.flights || 0), 0), docks: new Set(usage.filter((u) => u.week_start === w && Number(u.flights) > 0).map((u) => u.dock_id)).size }));

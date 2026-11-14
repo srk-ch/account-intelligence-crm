@@ -238,6 +238,7 @@ footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin
 .sact button{flex:1;height:50px;border-radius:999px;font:700 14px var(--font);cursor:pointer;border:0}
 .sact .ghost{background:rgba(255,255,255,.7);color:var(--ink2);box-shadow:inset 0 0 0 1.5px rgba(13,14,17,.12)}.sact .dark{background:var(--ink);color:#fff}
 @media (max-width:560px){.two{grid-template-columns:1fr}}
+.mp.draft{border:0;background:var(--ink);color:#fff;cursor:pointer;font:600 12.5px var(--font)}.step.first .mp.draft{background:#fff;color:var(--ink)}
 /* polish */
 @keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .panel,.brief,.events,.tl{animation:up .55s cubic-bezier(.2,.7,.2,1) both}
@@ -427,6 +428,13 @@ function openSheet(id){
 }
 function closeSheet(){$("#sheet").classList.remove("open")}
 
+function champs(r){const p=String(r.standing).split("; ").map(s=>s.match(/^(.*): (\w+)$/)).filter(m=>m&&/ally|warm/.test(m[2])).map(m=>m[1]);return p.length?p.join(", "):"None yet: nobody on this deal is Warm or an Ally"}
+function waitingOn(a,r){const p=(a.pipeline||[]).find(x=>x.title===r.deal);const m=(p&&a.refs[p.id]&&a.refs[p.id].meta)||"";const i=m.indexOf("Blocker");return i>=0?m.slice(i).replace(/^Blocker \(\w+\): /,""):"Nothing recorded"}
+function worthOf(a,m){const p=(a.pipeline||[]).find(x=>x.title===m.deal);return p&&p.amount?money(p.amount,a.kpis.currency):""}
+function evidenceOf(a,m){const f=(m.sources||[]).map(id=>a.refs[id]).filter(r=>r&&r.kind==="fact");return f.length?f.filter(r=>r.status==="verified").length+" of "+f.length+" facts verified":""}
+function draftText(a,m){const R=a.refs||{};const who=((m.owner.match(/with (.+?)(?: \(| for | and |,|$)/)||[])[1]||"team").trim();const ev=(m.sources||[]).map(id=>{const r=R[id]||{};return "- "+id+": "+String(r.label||"").slice(0,110)+(r.kind==="fact"?" ("+r.status+")":"")}).join("\n");
+  return "To: "+who+"\nSubject: "+a.name+": "+m.deal+"\n\nHi "+who.split(" ")[0]+",\n\nI need your help on \""+m.deal+"\" at "+a.name+".\n\nWhy now: "+m.why+"\n\nWhat I need: "+m.move+"\nBy: "+dLong(m.due)+"\nOwner: "+m.owner+"\n\nEvidence:\n"+ev+"\n\nThanks,\n"}
+function openDraft(i){const a=data.accounts[cur],m=a.q3[i];$("#sheet").innerHTML='<div class="sbk" data-close="1"></div><div class="sc" role="dialog" aria-modal="true" aria-label="Draft request"><div class="sl">Draft request, ready to send</div><div class="fp ta" style="display:block;white-space:pre-wrap;font-family:var(--mono);font-size:12.5px" id="draftText">'+esc(draftText(a,m))+'</div><div class="sact"><button type="button" class="ghost" data-close="1">Close</button><button type="button" class="dark" data-copy="1">Copy</button></div></div>';$("#sheet").classList.add("open")}
 function render(){
   if(!data||!data.accounts){$("#view").innerHTML=`<div class="loading">Still reading the files (${esc((data?.fetched||[]).length)} of 10)…</div>`;return}
   const st=data.status||{};
@@ -463,12 +471,12 @@ function render(){
   <section class="panel" id="q2"><h2 data-n="2">Who holds the power?</h2><div class="cap">For each deal: who decides, who pays, who uses it, who could block it, and where each person stands with us.</div>
     ${a.q2.map(r=>`<div class="card deal"><div class="who"><div><h3>${esc(r.deal)}</h3>${receipts(r.sources,R)}</div>
       <div class="people">${String(r.standing).split("; ").map(p=>{const m=p.match(/^(.*): (\w+)$/);return m?`<div class="person"><span class="ava ${m[2]}" style="background:hsl(${hue(m[1])} 65% 90%);color:hsl(${hue(m[1])} 45% 28%)">${esc(initials(m[1]))}</span><div>${esc(m[1])}<small>${esc(m[2])} with us</small></div></div>`:`<div class="person"><small>${esc(p)}</small></div>`}).join("")}</div></div>
-      <div class="roles"><div class="role first"><div class="lab">Decides</div><p>${esc(r.decides)}</p></div><div class="role"><div class="lab">Pays</div><p>${esc(r.pays)}</p></div><div class="role"><div class="lab">Uses it</div><p>${esc(r.uses)}</p></div><div class="role"><div class="lab">Could block</div><p>${esc(r.blocks)}</p></div></div></div>`).join("")}
+      <div class="roles"><div class="role first"><div class="lab">Decides</div><p>${esc(r.decides)}</p></div><div class="role"><div class="lab">Pays</div><p>${esc(r.pays)}</p></div><div class="role"><div class="lab">Uses it</div><p>${esc(r.uses)}</p></div><div class="role"><div class="lab">Could block</div><p>${esc(r.blocks)}</p></div><div class="role"><div class="lab">Champion</div><p>${esc(champs(r))}</p></div><div class="role"><div class="lab">Waiting on</div><p>${esc(waitingOn(a,r))}</p></div></div></div>`).join("")}
   </section>
 
   <section class="panel" id="q3"><h2 data-n="3">What do we do first?</h2><div class="cap">The first moves, ranked, each with one owner, a date and the deal it moves.</div>
     <div class="flow">${a.q3.map((m,i)=>{const d=dueDays(m.due);return `<div class="step ${i===0?"first":""}"><div class="no">${m.rank}</div><h3>${esc(m.move)}</h3><p class="why">${esc(m.why)}</p>${receipts(m.sources,R)}
-      <div class="meta"><span class="mp"><small>Owner</small>${esc(m.owner)}</span><span class="mp ${d<=10?"soon":""}"><small>By</small>${esc(dShort(m.due))} · ${esc(rel(d))}</span><span class="mp"><small>Moves</small>${esc(m.deal)}</span></div></div>`}).join("")}</div>
+      <div class="meta"><span class="mp"><small>Owner</small>${esc(m.owner)}</span><span class="mp ${d<=10?"soon":""}"><small>By</small>${esc(dShort(m.due))} · ${esc(rel(d))}</span><span class="mp"><small>Moves</small>${esc(m.deal)}</span>${worthOf(a,m)?`<span class="mp"><small>Worth up to</small>${esc(worthOf(a,m))}</span>`:""}${evidenceOf(a,m)?`<span class="mp"><small>Evidence</small>${esc(evidenceOf(a,m))}</span>`:""}<button type="button" class="mp draft" data-draft="${i}">Draft request</button></div></div>`}).join("")}</div>
   </section>
 
   <section class="panel" id="q4"><h2 data-n="4">What is about to go wrong?</h2><div class="cap">Deadlines at risk, requests going cold, deals that are stuck, and when each turns bad. Worst first.</div>
@@ -507,6 +515,8 @@ function bind(){
 let io;function spy(){io&&io.disconnect();io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)document.querySelectorAll("[data-s]").forEach(a=>a.classList.toggle("on",a.dataset.s===e.target.id))})},{rootMargin:"-25% 0px -65% 0px"});document.querySelectorAll("section.panel[id]").forEach(s=>io.observe(s))}
 document.addEventListener("click",e=>{
   const c=e.target.closest(".chip");if(c){showReceipt(c.dataset.id);return}
+  const dr=e.target.closest("[data-draft]");if(dr){openDraft(+dr.dataset.draft);return}
+  const cp=e.target.closest("[data-copy]");if(cp){navigator.clipboard.writeText($("#draftText").textContent).then(()=>{cp.textContent="Copied"},()=>{cp.textContent="Select and copy"});return}
   const fl=e.target.closest("[data-flt]");if(fl){flt=fl.dataset.flt;render();return}
   const kc=e.target.closest(".kc");if(kc){openSheet(kc.dataset.id);return}
   if(e.target.closest("[data-close]")){closeSheet();return}
