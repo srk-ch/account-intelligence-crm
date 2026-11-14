@@ -5,313 +5,313 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light">
 <title>Account Review</title>
-<meta name="description" content="Monday briefing for Eastern Counties Police Alliance and Aldermoor Industrial Group: what is backed, who decides, what to do first, what could go wrong, and what we still do not know.">
+<meta name="description" content="Live account review for Eastern Counties Police Alliance and Aldermoor Industrial Group.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   color-scheme:light;
-  --paper:#f6f2e9; --sheet:#fffdf8; --ink:#1c1a15; --ink2:#524e44; --mute:#8a8579; --rule:#d9d1bf; --rule2:#ece6d6;
-  --green:#1d5a46; --green-bg:#e3eee7; --amber:#9a5400; --amber-bg:#f8ecd3; --red:#a3261b; --red-bg:#f7e1dc; --blue:#2a4f7a;
-  --serif:"Newsreader",Georgia,"Times New Roman",serif;
-  --sans:"Hanken Grotesk",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --bg1:#dcdfe6;--bg2:#eef0f4;--shell:#f4f5f8;--panel:#eceef3;--card:#ffffff;--ink:#0d0e11;--ink2:#4a4f5b;--mute:#8c919d;--line:#e1e4ea;
+  --blue:#5b8def;--blue-bg:#e4ecfd;--red:#e2564f;--red-bg:#fde8e6;--green:#2c9d69;--green-bg:#dff3e8;--amber:#c98a12;--amber-bg:#fbefd2;
+  --font:"Manrope",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --r-xl:34px;--r-lg:26px;--r-md:18px;
+  --sh:0 1px 1px rgba(20,24,40,.03),0 8px 24px -10px rgba(20,24,40,.12);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:20px}
-body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.6 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-a{color:inherit}
-.caps{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
-.num{font-variant-numeric:tabular-nums lining-nums}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;font:14.5px/1.55 var(--font);color:var(--ink);background:radial-gradient(1200px 700px at 12% -10%,#f7f8fb 0,transparent 60%),linear-gradient(160deg,var(--bg2),var(--bg1));-webkit-font-smoothing:antialiased;padding:18px}
+button{font-family:inherit}
+.num{font-variant-numeric:tabular-nums}
 
-/* masthead */
-.mast{border-bottom:2px solid var(--ink);background:var(--paper)}
-.mast-in{max-width:1220px;margin:0 auto;padding:18px 28px 14px;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
-.mast h1{font:500 30px/1.1 var(--serif);letter-spacing:-.01em;margin:4px 0 0}
-.mast h1 em{font-style:italic;color:var(--green)}
-.mast-r{display:flex;gap:18px;align-items:center;font-size:13px;color:var(--ink2)}
-.live{display:inline-flex;align-items:center;gap:8px}
-.pulse{width:8px;height:8px;border-radius:50%;background:var(--mute)}
-.pulse.on{background:#2f9e6e;box-shadow:0 0 0 0 rgba(47,158,110,.5);animation:pl 2.4s infinite}
-.pulse.warn{background:#d19a2a}
-@keyframes pl{70%{box-shadow:0 0 0 7px rgba(47,158,110,0)}100%{box-shadow:0 0 0 0 rgba(47,158,110,0)}}
-.refresh{font:inherit;font-size:13px;border:1px solid var(--ink);background:transparent;border-radius:999px;padding:5px 14px;cursor:pointer;color:var(--ink)}
-.refresh:hover{background:var(--ink);color:var(--paper)}
+/* shell */
+.shell{max-width:1360px;margin:0 auto;background:var(--shell);border-radius:42px;box-shadow:0 30px 80px -30px rgba(20,24,40,.28),inset 0 0 0 1px rgba(255,255,255,.8);display:grid;grid-template-columns:78px minmax(0,1fr);min-height:calc(100vh - 36px)}
 
-/* layout */
-.frame{max-width:1220px;margin:0 auto;padding:0 28px;display:grid;grid-template-columns:190px minmax(0,1fr);gap:48px}
-.rail{position:sticky;top:0;align-self:start;padding:28px 0}
-.rail nav{display:grid;gap:2px;margin-top:10px}
-.rail a{display:grid;grid-template-columns:24px 1fr;text-decoration:none;color:var(--ink2);font-size:14px;padding:7px 0;border-left:2px solid transparent;padding-left:12px;margin-left:-14px}
-.rail a b{font:500 15px var(--serif);color:var(--mute)}
-.rail a.on{color:var(--ink);border-left-color:var(--green);font-weight:600}
-.rail a.on b{color:var(--green)}
-.rail .note{margin-top:26px;font-size:12.5px;color:var(--mute);line-height:1.5;padding-right:6px}
-.rail .legend{margin-top:22px;display:grid;gap:6px;font-size:12px;color:var(--ink2)}
-.sq{display:inline-block;width:9px;height:9px;margin-right:7px;vertical-align:-1px}
-.sq.v{background:var(--green)}.sq.t{background:var(--ink)}.sq.c{background:#d19a2a}
+/* rail */
+.rail{padding:22px 0 22px 20px;display:flex;flex-direction:column;align-items:center;gap:10px;position:sticky;top:18px;align-self:start;height:calc(100vh - 36px)}
+.logo{width:46px;height:46px;border-radius:50%;background:var(--card);display:grid;place-items:center;box-shadow:var(--sh);margin-bottom:10px}
+.rb{width:46px;height:46px;border-radius:50%;border:0;background:var(--card);display:grid;place-items:center;cursor:pointer;color:var(--ink2);box-shadow:var(--sh);text-decoration:none;position:relative;transition:transform .15s,background .15s}
+.rb:hover{transform:translateY(-1px);color:var(--ink)}
+.rb.on{background:var(--ink);color:#fff}
+.rb svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.rb .tip{position:absolute;left:58px;background:var(--ink);color:#fff;font-size:12px;font-weight:600;padding:5px 10px;border-radius:999px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;z-index:5}
+.rb:hover .tip{opacity:1}
+.rail .sp{flex:1}
+.rb.dot::after{content:"";position:absolute;top:9px;right:10px;width:9px;height:9px;border-radius:50%;background:var(--green);border:2px solid var(--card)}
+.rb.dot.warn::after{background:var(--amber)}
 
-/* account switch */
-.accts{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--rule);margin-top:6px}
-.acct{font:inherit;text-align:left;background:transparent;border:0;border-bottom:3px solid transparent;padding:18px 20px 16px 0;cursor:pointer;color:var(--ink2)}
-.acct+.acct{padding-left:22px;border-left:1px solid var(--rule)}
-.acct .nm{font:500 22px/1.2 var(--serif);color:var(--ink);display:block}
-.acct .sb{display:flex;gap:10px;font-size:13px;margin-top:4px;align-items:baseline}
-.acct .sb b{font-weight:600;color:var(--green)}
-.acct.on{border-bottom-color:var(--green)}
-.acct:not(.on){opacity:.7}.acct:not(.on):hover{opacity:1}
+/* main */
+.main{padding:22px 34px 40px 22px;min-width:0}
+.top{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.pills{display:flex;gap:4px;flex:1;justify-content:center;flex-wrap:wrap}
+.pill{border:0;background:transparent;font-size:14px;font-weight:500;padding:9px 16px;border-radius:999px;cursor:pointer;color:var(--ink2);text-decoration:none}
+.pill:hover{color:var(--ink)}
+.pill.on{background:var(--ink);color:#fff;font-weight:600}
+.tools{display:flex;gap:10px;align-items:center}
+.ib{width:44px;height:44px;border-radius:50%;border:0;background:var(--card);display:grid;place-items:center;cursor:pointer;box-shadow:var(--sh);color:var(--ink)}
+.ib svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.status{display:inline-flex;gap:8px;align-items:center;font-size:12.5px;font-weight:600;color:var(--ink2);background:var(--card);border-radius:999px;padding:8px 14px;box-shadow:var(--sh)}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--mute)}
+.status i.on{background:var(--green);box-shadow:0 0 0 4px var(--green-bg)}.status i.warn{background:var(--amber)}
+
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin:30px 0 8px}
+.head h1{font:800 40px/1.05 var(--font);letter-spacing:-.03em;margin:0}
+.head .sub{color:var(--mute);font-size:14px;margin-top:6px;font-weight:500}
+.avs{display:flex;gap:10px;align-items:center}
+.av{position:relative;width:54px;height:54px;border-radius:50%;border:0;padding:0;cursor:pointer;font:700 15px var(--font);color:var(--ink);background:var(--card);box-shadow:var(--sh);outline:3px solid transparent;transition:outline-color .15s}
+.av.on{outline-color:var(--ink)}
+.av .bd{position:absolute;right:-3px;bottom:-3px;min-width:21px;height:21px;border-radius:999px;background:var(--red);color:#fff;font:700 11px/21px var(--font);text-align:center;border:2px solid var(--shell);padding:0 4px}
+.avs small{font-size:12px;color:var(--mute);font-weight:600;margin-left:4px}
+
+/* panels */
+.panel{background:var(--panel);border-radius:var(--r-xl);padding:26px 26px 28px;margin-top:20px;position:relative}
+.panel>h2{font:700 20px/1.2 var(--font);letter-spacing:-.015em;margin:0}
+.panel>.cap{color:var(--mute);margin:4px 0 20px;font-size:13.5px;font-weight:500;max-width:720px}
+.card{background:var(--card);border-radius:var(--r-lg);padding:20px 22px;box-shadow:var(--sh)}
+.lab{font:600 11px var(--font);letter-spacing:.09em;text-transform:uppercase;color:var(--mute)}
 
 /* brief */
-.brief{padding:34px 0 28px;border-bottom:1px solid var(--rule)}
-.brief p{font:400 25px/1.4 var(--serif);margin:10px 0 0;max-width:780px;letter-spacing:-.005em}
-.brief p b{font-weight:600;background:linear-gradient(transparent 62%,var(--green-bg) 62%)}
-.brief p .bad{background:linear-gradient(transparent 62%,var(--red-bg) 62%)}
-.brief small{display:block;margin-top:14px;color:var(--mute);font-size:13px}
+.brief{display:grid;grid-template-columns:1.6fr 1fr;gap:16px}
+.brief .card p{margin:8px 0 0;font:600 21px/1.45 var(--font);letter-spacing:-.015em}
+.brief em{font-style:normal;background:var(--green-bg);border-radius:8px;padding:0 6px}
+.brief em.bad{background:var(--red-bg)}
+.next{background:var(--ink);color:#fff;border-radius:var(--r-lg);padding:22px}
+.next .lab{color:#9aa0ae}.next h3{font:700 18px/1.35 var(--font);margin:10px 0 14px;letter-spacing:-.01em}
+.next .nrow{display:flex;gap:8px;flex-wrap:wrap}.next .tg{background:rgba(255,255,255,.12);border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:600}
 
-/* live events */
-.events{margin-top:26px;border:1px solid var(--red);background:var(--red-bg);padding:16px 20px}
-.events h3{margin:0 0 6px}
-.events .ev{padding:10px 0;border-top:1px solid rgba(163,38,27,.25)}
-.events .ev:first-of-type{border-top:0}
-.events .ev b{font:600 16px var(--serif)}
-.quiet{margin-top:22px;font-size:13px;color:var(--mute);display:flex;gap:8px;align-items:center}
+.events{background:var(--red-bg);border-radius:var(--r-xl);padding:22px 26px;margin-top:20px}
+.events .ev{background:var(--card);border-radius:var(--r-md);padding:14px 18px;margin-top:10px}
+.events .ev b{font-size:15.5px}
+.quiet{display:flex;gap:10px;align-items:center;margin-top:18px;color:var(--ink2);font-size:13px;font-weight:500;padding-left:6px}
 
-/* sections */
-section.q{padding:44px 0 8px;border-top:0}
-.qh{display:grid;grid-template-columns:64px 1fr;gap:6px 14px;align-items:baseline;margin-bottom:22px;border-top:2px solid var(--ink);padding-top:16px}
-.qh .n{font:400 54px/1 var(--serif);color:var(--green)}
-.qh h2{font:500 30px/1.15 var(--serif);margin:0;letter-spacing:-.01em}
-.qh p{grid-column:2;margin:0;color:var(--ink2);max-width:680px}
-h3.grp{font:600 11px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin:30px 0 4px;display:flex;justify-content:space-between;border-bottom:1px solid var(--ink);padding-bottom:6px}
-h3.grp span{font-weight:500;letter-spacing:0;text-transform:none;color:var(--mute)}
-table{width:100%;border-collapse:collapse;table-layout:auto}
-td.deal{width:32%}td.val{width:24%}
-th{font:600 11px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--mute);text-align:left;padding:10px 14px 8px 0;border-bottom:1px solid var(--rule)}
-td{padding:14px 14px 14px 0;border-bottom:1px solid var(--rule2);vertical-align:top}
-th.r,td.r{text-align:right;padding-right:0;white-space:nowrap}
-td.deal{font:500 17px/1.3 var(--serif);min-width:190px}
-td.deal small{display:block;font:400 13px/1.4 var(--sans);color:var(--ink2);margin-top:3px}
-td.val{font:500 19px var(--serif)}
-tr.total td{border-top:2px solid var(--ink);border-bottom:0;padding-top:14px}
-tr.total td.val{font-size:30px;color:var(--green)}
-tr.total td:first-child{font:600 11px var(--sans);letter-spacing:.12em;text-transform:uppercase}
-.setapart{background:var(--sheet);border:1px solid var(--rule);border-left:4px solid var(--amber);padding:2px 20px 10px;margin-top:34px}
-.setapart h3.grp{border-color:var(--amber);color:var(--amber)}
-.ceil td.val{color:var(--ink2)}
-.setapart td.deal .tag{display:table;margin:0 0 6px}
-.tag{display:inline-block;font:600 10.5px var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border:1px solid var(--rule);color:var(--ink2);margin-right:6px;background:var(--sheet)}
-.tag.claim{color:var(--amber);border-color:var(--amber);background:var(--amber-bg)}
-.tag.offer{color:var(--blue);border-color:#b7c8de}
+/* book tiles */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.tile{background:var(--card);border-radius:var(--r-lg);padding:18px 20px;box-shadow:var(--sh);min-height:112px;display:flex;flex-direction:column;justify-content:space-between}
+.tile b{font:800 28px/1 var(--font);letter-spacing:-.03em}
+.tile span{font-size:12.5px;color:var(--mute);font-weight:600}
+.tile.blk{background:var(--ink);color:#fff}.tile.blk span{color:#9aa0ae}
+.rows{display:grid;gap:8px}
+.row{display:grid;grid-template-columns:minmax(200px,1.1fr) minmax(0,1.5fr) auto;gap:20px;align-items:center;background:var(--card);border-radius:var(--r-md);padding:14px 20px;box-shadow:var(--sh)}
+.row .t{font-weight:700;font-size:15px;line-height:1.35}
+.row .t small{display:block;font-weight:500;font-size:12.5px;color:var(--mute);margin-top:2px}
+.row .v{font:800 19px var(--font);letter-spacing:-.02em;text-align:right;white-space:nowrap}
+.rows.soft .row{box-shadow:none;background:rgba(255,255,255,.6)}.rows.soft .v{color:var(--ink2)}
+.grp{display:flex;justify-content:space-between;align-items:baseline;margin:24px 4px 10px;font-weight:700;font-size:14px}
+.grp span{color:var(--mute);font-weight:500;font-size:12.5px}
+.apart{border:2px dashed #e2c98a;border-radius:var(--r-xl);padding:8px 20px 20px;margin-top:26px;background:rgba(251,239,210,.35)}
+.tg{display:inline-block;font:700 10.5px var(--font);letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px;margin-bottom:5px}
+.tg.claim{background:var(--amber-bg);color:var(--amber)}.tg.offer{background:var(--blue-bg);color:var(--blue)}.tg.unpriced{background:#e8e9ee;color:var(--ink2)}
 
-/* receipts (citations) */
-.rc{display:flex;flex-wrap:wrap;gap:5px 7px;margin-top:8px}
-.r{font:inherit}
-.chip{font:400 11.5px var(--mono);color:var(--ink2);background:transparent;border:0;border-bottom:1px dotted var(--mute);padding:0 0 1px;cursor:pointer;display:inline-flex;align-items:center;max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.chip:hover,.chip.sel{color:var(--green);border-bottom-color:var(--green)}
-.chip i{display:inline-block;width:7px;height:7px;margin-right:6px;flex:none}
-.chip i.v{background:var(--green)}.chip i.t{background:var(--ink)}.chip i.c{background:#d19a2a}.chip i.o{background:#b9b2a1}
-.nosrc{font-size:12px;color:var(--red)}
+/* receipts */
+.rc{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:500 11.5px var(--mono);color:var(--ink2);background:#f1f2f6;border:0;border-radius:999px;padding:4px 10px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chip:hover,.chip.sel{background:var(--ink);color:#fff}
+.chip i{width:7px;height:7px;border-radius:50%;flex:none;background:#b8bcc7}
+.chip i.v{background:var(--green)}.chip i.t{background:var(--blue)}.chip i.c{background:#e0a526}
+.nosrc{font-size:12px;color:var(--red);font-weight:600}
 
 /* power */
-.dossier{padding:22px 0;border-bottom:1px solid var(--rule)}
-.dossier:first-of-type{padding-top:6px}
-.dossier h3{font:500 21px/1.25 var(--serif);margin:0 0 14px}
-.roles{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.roles div p{margin:3px 0 0;font-size:14px;line-height:1.5}
-.stand{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:16px;padding-top:12px;border-top:1px dashed var(--rule)}
-.who{font-size:13.5px;display:inline-flex;align-items:center;gap:7px}
-.who i{width:9px;height:9px;border-radius:50%;flex:none}
-.who small{color:var(--mute);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
-.s-ally i{background:#1d7a55}.s-warm i{background:#7bb48f}.s-neutral i{background:#c9c3b3;border:1px solid #9a9484}.s-guarded i{background:var(--red)}
+.deal{margin-top:14px;display:grid;grid-template-columns:minmax(220px,.9fr) 1.7fr;gap:16px}
+.deal:first-of-type{margin-top:0}
+.deal .who{display:flex;flex-direction:column;gap:14px;justify-content:space-between}
+.deal h3{font:700 18px/1.3 var(--font);letter-spacing:-.01em;margin:0 0 4px}
+.people{display:flex;flex-direction:column;gap:10px}
+.person{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:600}
+.ava{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font:700 13px var(--font);flex:none;position:relative;background:#e8ebf2;color:var(--ink)}
+.ava::after{content:"";position:absolute;right:-1px;bottom:-1px;width:12px;height:12px;border-radius:50%;border:2px solid var(--card);background:#c4c8d2}
+.ava.ally::after{background:var(--green)}.ava.warm::after{background:#8ccaa6}.ava.neutral::after{background:var(--blue)}.ava.guarded::after{background:var(--red)}
+.person small{display:block;color:var(--mute);font-weight:500;font-size:11.5px}
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.role{background:var(--panel);border-radius:var(--r-md);padding:14px 16px}
+.role.first{background:var(--ink);color:#fff}.role.first .lab{color:#9aa0ae}
+.role p{margin:5px 0 0;font-size:13.5px;line-height:1.45;font-weight:500}
 
-/* moves */
-.move{display:grid;grid-template-columns:64px 1fr 230px;gap:0 22px;padding:26px 0;border-bottom:1px solid var(--rule)}
-.move:first-of-type{padding-top:8px}
-.move .no{font:400 56px/.9 var(--serif);color:var(--green)}
-.move h3{font:500 21px/1.35 var(--serif);margin:0 0 8px}
-.move .why{margin:0;color:var(--ink2)}
-.meta{display:grid;gap:12px;align-content:start;font-size:14px}
-.meta b{font:500 15px var(--sans);display:block;margin-top:2px}
-.meta .due b{font:500 18px var(--serif)}
-.meta .due small{color:var(--mute);font-size:12.5px;font-weight:500}
-.meta .due.soon small{color:var(--red);font-weight:600}
+/* flow (moves) */
+.flow{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(290px,1fr);gap:46px;overflow-x:auto;padding:4px 4px 14px}
+.step{background:var(--card);border-radius:var(--r-lg);padding:20px 22px;box-shadow:var(--sh);position:relative;display:flex;flex-direction:column;gap:12px}
+.step::after{content:"";position:absolute;top:44px;right:-46px;width:46px;border-top:2px solid #cfd3dc}
+.step::before{content:"";position:absolute;top:40px;right:-48px;width:8px;height:8px;border-radius:50%;background:#cfd3dc}
+.step:last-child::after,.step:last-child::before{display:none}
+.step.first{background:var(--ink);color:#fff}
+.step .no{width:40px;height:40px;border-radius:50%;background:var(--panel);display:grid;place-items:center;font:800 16px var(--font);color:var(--ink)}
+.step.first .no{background:#fff}
+.step h3{font:700 17px/1.4 var(--font);letter-spacing:-.01em;margin:0}
+.step .why{font-size:13.5px;color:var(--ink2);margin:0;font-weight:500}
+.step.first .why{color:#c3c7d2}
+.step .chip{background:var(--panel)}.step.first .chip{background:rgba(255,255,255,.14);color:#fff}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+.mp{background:var(--panel);border-radius:999px;padding:6px 13px;font-size:12.5px;font-weight:600}
+.step.first .mp{background:rgba(255,255,255,.14)}
+.mp.soon{background:var(--red-bg);color:var(--red)}.step.first .mp.soon{background:var(--red);color:#fff}
+.mp small{color:var(--mute);font-weight:600;margin-right:5px;text-transform:uppercase;letter-spacing:.06em;font-size:10px}
+.step.first .mp small{color:#b3b8c4}
 
-/* risks */
-.risk{display:grid;grid-template-columns:70px 1fr 230px;gap:0 22px;padding:16px 0;border-bottom:1px solid var(--rule2)}
-.sev{font:700 10.5px var(--sans);letter-spacing:.1em;text-transform:uppercase;padding-top:5px;display:flex;align-items:flex-start;gap:7px}
-.sev::before{content:"";width:9px;height:9px;margin-top:3px;flex:none}
-.sev.high{color:var(--red)}.sev.high::before{background:var(--red)}
-.sev.med{color:var(--amber)}.sev.med::before{background:#d19a2a}
-.sev.low{color:var(--green)}.sev.low::before{background:var(--green)}
-.risk h4{font:500 17px/1.4 var(--serif);margin:0}
-.risk .w{font-size:13.5px;color:var(--ink2)}
-.risk .w b{display:block;font:600 10.5px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-bottom:2px}
+/* table style rows (risks, unknowns) */
+.tbl{display:grid;gap:8px}
+.tr{display:grid;gap:18px;align-items:center;background:var(--card);border-radius:var(--r-md);padding:14px 20px;box-shadow:var(--sh)}
+.tr.risk{grid-template-columns:96px minmax(0,1.6fr) minmax(0,1fr)}
+.tr.gap{grid-template-columns:minmax(0,1.1fr) minmax(0,1.3fr) minmax(0,1fr)}
+.th{display:grid;gap:18px;padding:0 20px 2px;font:600 11px var(--font);letter-spacing:.09em;text-transform:uppercase;color:var(--mute)}
+.th.risk{grid-template-columns:96px minmax(0,1.6fr) minmax(0,1fr)}.th.gap{grid-template-columns:minmax(0,1.1fr) minmax(0,1.3fr) minmax(0,1fr)}
+.sev{display:inline-block;text-align:center;font:700 11px var(--font);letter-spacing:.05em;text-transform:uppercase;border-radius:999px;padding:6px 12px}
+.sev.high{background:var(--red-bg);color:var(--red)}.sev.med{background:var(--amber-bg);color:var(--amber)}.sev.low{background:var(--green-bg);color:var(--green)}
+.tr h4{margin:0 0 6px;font:700 15px/1.4 var(--font);letter-spacing:-.005em}
+.tr .w{font-size:13.5px;color:var(--ink2);font-weight:500}
+.tr.gap .g{font-weight:700;font-size:14.5px;line-height:1.4}
 
 /* notes */
-.noteform{display:grid;grid-template-columns:200px 150px 1fr auto;gap:14px;align-items:end;margin-top:6px}
-label.f{display:block}
-label.f span{display:block;margin-bottom:4px}
-select,input{font:inherit;font-size:15px;width:100%;background:transparent;border:0;border-bottom:1px solid var(--ink);padding:8px 2px;color:var(--ink);border-radius:0}
-input:focus,select:focus{outline:0;border-bottom:2px solid var(--green)}
-.go{font:600 14px var(--sans);background:var(--ink);color:var(--paper);border:0;padding:11px 22px;cursor:pointer;border-radius:999px}
-.go:hover{background:var(--green)}.go:disabled{opacity:.5}
-#nm{margin-top:10px;font-size:13.5px;color:var(--ink2);min-height:20px}
-.saved{margin-top:8px}
-.saved div{padding:12px 0;border-top:1px solid var(--rule2);font-size:14px}
-.saved small{display:block;color:var(--mute);font-size:12px;margin-bottom:2px}
+.nf{display:grid;grid-template-columns:200px 150px 1fr auto;gap:12px;align-items:end}
+.fl span{display:block;margin-bottom:6px}
+select,input{font:500 14.5px var(--font);width:100%;border:0;background:var(--card);border-radius:16px;padding:13px 16px;color:var(--ink);box-shadow:var(--sh)}
+input:focus,select:focus{outline:2px solid var(--ink)}
+.go{width:52px;height:52px;border-radius:50%;border:0;background:var(--ink);color:#fff;font-size:24px;cursor:pointer;display:grid;place-items:center}
+.go:hover{background:#2b2e36}.go:disabled{opacity:.5}
+#nm{margin-top:10px;font-size:13.5px;color:var(--ink2);min-height:20px;font-weight:500}
+.saved{display:grid;gap:8px;margin-top:10px}
+.saved .card{padding:12px 18px;font-size:14px;border-radius:var(--r-md);font-weight:500}.saved small{display:block;color:var(--mute);font-weight:600;font-size:11.5px;margin-bottom:2px}
 
-footer{max-width:1220px;margin:60px auto 0;padding:22px 28px 50px;border-top:2px solid var(--ink);color:var(--mute);font-size:12.5px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:26px;padding:0 8px;color:var(--mute);font-size:12.5px;font-weight:500}
 
 /* receipt drawer */
-#drawer{position:fixed;top:0;right:0;height:100%;width:380px;max-width:100%;background:var(--sheet);border-left:2px solid var(--ink);padding:28px 26px;transform:translateX(102%);transition:transform .25s ease;z-index:30;overflow:auto;box-shadow:-18px 0 40px rgba(40,30,10,.12)}
-#drawer.open{transform:none}
-#drawer .x{position:absolute;top:14px;right:16px;font-size:26px;line-height:1;border:0;background:transparent;cursor:pointer;color:var(--mute)}
-#drawer .id{font:500 13px var(--mono);color:var(--green);word-break:break-all;margin:6px 0 16px}
-#drawer blockquote{margin:0;font:400 20px/1.45 var(--serif);border-left:3px solid var(--green);padding-left:16px}
-#drawer .st{margin-top:20px;font-size:13.5px;color:var(--ink2)}
-#drawer .st b{display:inline-block;font:700 10.5px var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;margin-bottom:6px;color:#fff}
-#drawer .st b.v{background:var(--green)}#drawer .st b.t{background:var(--ink)}#drawer .st b.c{background:var(--amber)}#drawer .st b.o{background:#8a8579}
+#drawer{position:fixed;right:30px;bottom:30px;width:400px;max-width:calc(100vw - 40px);background:var(--card);border-radius:var(--r-xl);box-shadow:0 30px 80px -20px rgba(20,24,40,.45);padding:26px 26px 24px;z-index:40;transform:translateY(20px);opacity:0;pointer-events:none;transition:all .22s ease}
+#drawer.open{transform:none;opacity:1;pointer-events:auto}
+#drawer .x{position:absolute;top:14px;right:16px;width:34px;height:34px;border-radius:50%;border:0;background:var(--panel);cursor:pointer;font-size:18px;line-height:1}
+#drawer .id{font:500 12.5px var(--mono);color:var(--ink2);background:var(--panel);display:inline-block;border-radius:999px;padding:4px 12px;margin:8px 0 14px;word-break:break-all}
+#drawer blockquote{margin:0;font:600 18px/1.45 var(--font);letter-spacing:-.01em}
+#drawer .st{margin-top:18px;font-size:13.5px;color:var(--ink2);font-weight:500}
+#drawer .st b{display:inline-block;font:700 10.5px var(--font);letter-spacing:.08em;text-transform:uppercase;padding:4px 11px;border-radius:999px;margin-bottom:8px}
+.st b.v{background:var(--green-bg);color:var(--green)}.st b.t{background:var(--blue-bg);color:var(--blue)}.st b.c{background:var(--amber-bg);color:var(--amber)}.st b.o{background:var(--panel);color:var(--ink2)}
 
-.loading{padding:90px 0;text-align:center;color:var(--ink2);font:italic 22px var(--serif)}
+.loading{padding:110px 0;text-align:center;color:var(--ink2);font-weight:600;font-size:18px}
 
-@media (max-width:1020px){
-  .frame{grid-template-columns:1fr;gap:0}
-  .rail{position:static;padding:14px 0 0;border-bottom:1px solid var(--rule)}
-  .rail nav{grid-auto-flow:column;overflow-x:auto;margin:0 0 10px}
-  .rail a{border-left:0;margin:0;padding:6px 14px 6px 0;grid-template-columns:auto auto;gap:6px;white-space:nowrap}
-  .rail .note,.rail .legend{display:none}
-  .roles{grid-template-columns:1fr 1fr}
-  .move,.risk{grid-template-columns:52px 1fr}.move .meta,.risk .w{grid-column:2;margin-top:12px}
-  .risk{grid-template-columns:64px 1fr}
-  .noteform{grid-template-columns:1fr 1fr}.noteform label.f.wide{grid-column:1/-1}
-  .accts{grid-template-columns:1fr}.acct+.acct{padding-left:0;border-left:0;border-top:1px solid var(--rule)}
+@media (max-width:1100px){
+  .tiles{grid-template-columns:1fr 1fr}.brief{grid-template-columns:1fr}.deal{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr auto}.row .rc{grid-column:1/-1;order:3}
+  .tr.risk,.th.risk{grid-template-columns:90px 1fr}.tr.risk .w{grid-column:2}.th{display:none}
+  .tr.gap{grid-template-columns:1fr}
 }
-@media (max-width:640px){
-  .mast-in,.frame,footer{padding-left:18px;padding-right:18px}
-  .brief p{font-size:21px}.qh{grid-template-columns:44px 1fr}.qh .n{font-size:40px}.qh h2{font-size:25px}
-  .roles{grid-template-columns:1fr}
-  table,thead,tbody,tr,th,td{display:block}thead{display:none}
-  tr{padding:12px 0;border-bottom:1px solid var(--rule2)}td{border:0;padding:3px 0}td.r{text-align:left}
+@media (max-width:820px){
+  body{padding:0}.shell{border-radius:0;grid-template-columns:1fr;min-height:100vh}
+  .rail{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);height:auto;flex-direction:row;padding:8px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-radius:999px;box-shadow:0 14px 40px -10px rgba(20,24,40,.4);z-index:30;top:auto;gap:4px}
+  .rail .logo,.rail .sp,.rail .tip{display:none}.rb{width:42px;height:42px;box-shadow:none;background:transparent}.rb.on{background:var(--ink)}
+  .main{padding:16px 16px 100px}.pills{display:none}.head h1{font-size:30px}
+  .nf{grid-template-columns:1fr 1fr}.nf .fl.wide{grid-column:1/-1}.go{justify-self:end}
+  .roles{grid-template-columns:1fr}.panel{padding:20px 16px;border-radius:28px}
+  #drawer{right:12px;bottom:84px}
 }
-@media print{
-  body{background:#fff}.rail,.refresh,.noteform,#drawer,#nm{display:none}.frame{display:block}
-  .q{break-inside:avoid-page}.setapart,.dossier,.move,.risk{break-inside:avoid}
-}
-@media (prefers-reduced-motion:reduce){.pulse.on{animation:none}html{scroll-behavior:auto}#drawer{transition:none}}
+@media print{body{background:#fff;padding:0}.shell{box-shadow:none;display:block}.rail,.tools,.pills,.nf,#drawer{display:none}.panel{break-inside:avoid}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 </style>
 </head>
 <body>
-<header class="mast"><div class="mast-in">
-  <div><div class="caps" id="today">Account review</div><h1>Monday briefing, <em>two accounts</em></h1></div>
-  <div class="mast-r"><span class="live" id="status"><span class="pulse"></span><span>Loading</span></span><button class="refresh" id="refresh" type="button">Refresh</button></div>
-</div></header>
+<div class="shell">
+  <nav class="rail" id="rail" aria-label="Sections">
+    <div class="logo" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0d0e11" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5"/></svg></div>
+    <a class="rb" href="#q1" data-s="q1"><svg viewBox="0 0 24 24"><rect x="4" y="3.5" width="16" height="17" rx="3"/><path d="M8 9h8M8 13h8M8 17h4"/></svg><span class="tip">Book</span></a>
+    <a class="rb" href="#q2" data-s="q2"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.4-3.2 2.7-5 5.5-5s5.1 1.800 5.500 5"/><circle cx="17" cy="9" r="2.4"/><path d="M16 14.200c2.800-.3 4.600 1.200 5 4"/></svg><span class="tip">Power</span></a>
+    <a class="rb" href="#q3" data-s="q3"><svg viewBox="0 0 24 24"><circle cx="5.500" cy="12" r="2"/><circle cx="18.500" cy="6" r="2"/><circle cx="18.500" cy="18" r="2"/><path d="M7.500 12h4c2 0 2-6 5-6M11.500 12c3 0 3 6 5 6"/></svg><span class="tip">First moves</span></a>
+    <a class="rb" href="#q4" data-s="q4"><svg viewBox="0 0 24 24"><path d="M12 4 2.800 19.500h18.400L12 4Z"/><path d="M12 10v4.500M12 17.200v.1"/></svg><span class="tip">Risks</span></a>
+    <a class="rb" href="#q5" data-s="q5"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.500 9.500a2.500 2.500 0 1 1 3.600 2.200c-.7.400-1.100.9-1.100 1.800M12 17v.1"/></svg><span class="tip">Unknowns</span></a>
+    <a class="rb" href="#notes" data-s="notes"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9a2.800 2.800 0 0 0-4-4L4 16v4Z"/></svg><span class="tip">Write back</span></a>
+    <div class="sp"></div>
+    <button class="rb dot" id="railstat" type="button" aria-label="Live status"><svg viewBox="0 0 24 24"><path d="M5 12a7 7 0 0 1 14 0M8 12a4 4 0 0 1 8 0"/><circle cx="12" cy="15" r="1.2"/></svg><span class="tip" id="railtip">Live</span></button>
+  </nav>
 
-<div class="frame">
-  <aside class="rail" aria-label="Sections">
-    <div class="caps">In this briefing</div>
-    <nav id="rail">
-      <a href="#q1" data-s="q1"><b>1</b>Book</a><a href="#q2" data-s="q2"><b>2</b>Power</a><a href="#q3" data-s="q3"><b>3</b>First moves</a><a href="#q4" data-s="q4"><b>4</b>Risks</a><a href="#q5" data-s="q5"><b>5</b>Unknowns</a><a href="#notes" data-s="notes"><b>✎</b>Notes</a>
-    </nav>
-    <div class="legend"><div class="caps">Reading the receipts</div>
-      <div><i class="sq v"></i>Verified against a file</div><div><i class="sq t"></i>Told to us, not checked</div><div><i class="sq c"></i>A claim, unverified</div></div>
-    <p class="note">Every figure here cites the fact, file or record behind it. Click any underlined id to read it.</p>
-  </aside>
-  <main id="view"><div class="loading">Reading the files…</div></main>
+  <div class="main">
+    <header class="top">
+      <div class="pills" id="pills">
+        <a class="pill" href="#q1" data-s="q1">Book</a><a class="pill" href="#q2" data-s="q2">Power</a><a class="pill" href="#q3" data-s="q3">First moves</a><a class="pill" href="#q4" data-s="q4">Risks</a><a class="pill" href="#q5" data-s="q5">Unknowns</a><a class="pill" href="#notes" data-s="notes">Write back</a>
+      </div>
+      <div class="tools"><span class="status" id="status"><i></i>Loading</span>
+        <button class="ib" id="refresh" type="button" aria-label="Refresh"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.300 6.300M20 4v7h-7"/></svg></button></div>
+    </header>
+    <div id="view"><div class="loading">Reading the files…</div></div>
+  </div>
 </div>
 
-<footer><span id="foot">Built from the account export and paperwork on file.</span><span>Unbacked value is shown apart and never added into a total.</span></footer>
-
-<aside id="drawer" aria-live="polite" aria-label="Receipt"><button class="x" type="button" aria-label="Close" id="dx">×</button>
-  <div class="caps" id="dk"></div><div class="id" id="di"></div><blockquote id="dl"></blockquote><div class="st" id="ds"></div></aside>
+<aside id="drawer" aria-live="polite" aria-label="Receipt"><button class="x" type="button" id="dx" aria-label="Close">×</button>
+  <div class="lab" id="dk"></div><div class="id" id="di"></div><blockquote id="dl"></blockquote><div class="st" id="ds"></div></aside>
 
 <script>
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 let data,cur=0;
-
 const KIND={fact:"Fact on file",deal:"Deal",person:"Person",file:"Data room file",record:"Paperwork record",signal:"Live event"};
-function mark(r){if(!r)return"o";if(r.kind==="fact")return r.status==="verified"?"v":r.status==="claim"?"c":"t";return"o"}
-function receipts(ids,refs){
-  if(!ids||!ids.length)return '<div class="rc"><span class="nosrc">no source</span></div>';
-  return '<div class="rc">'+ids.map(id=>{const r=refs[id];return `<button type="button" class="chip" data-id="${esc(id)}" title="${esc(r?.label||id)}"><i class="${mark(r)}"></i>${esc(id)}</button>`}).join("")+"</div>";
-}
+const mark=r=>!r?"o":r.kind==="fact"?(r.status==="verified"?"v":r.status==="claim"?"c":"t"):"o";
+const receipts=(ids,R)=>(!ids||!ids.length)?'<div class="rc"><span class="nosrc">no source</span></div>':'<div class="rc">'+ids.map(id=>{const r=R[id];return `<button type="button" class="chip" data-id="${esc(id)}" title="${esc(r?.label||id)}"><i class="${mark(r)}"></i>${esc(id)}</button>`}).join("")+"</div>";
 const dueDays=d=>Math.round((new Date(d+"T12:00:00")-new Date())/864e5);
-const longDate=d=>{try{return new Date(d+"T12:00:00").toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"long",year:"numeric"})}catch{return d}};
-const rel=n=>n<0?`${-n} days overdue`:n===0?"today":n===1?"tomorrow":`in ${n} days`;
-
-function summary(a){
-  const k=a.kpis,m=a.q3[0];
-  const claims=k.claims?`<b class="bad">${k.claims} claim${k.claims>1?"s":""}</b> from the customer ${k.claims>1?"are":"is"} set apart because nothing backs ${k.claims>1?"them":"it"}.`:"";
-  const risk=k.high?` ${k.high} risk${k.high>1?"s are":" is"} high.`:"";
-  return `<b>${esc(k.backed)}</b> is on the books and backed by a signed order or a won offer, with a further ${esc(k.ceiling)} of pipeline we are not counting yet. ${claims}${risk} Start with: <i>${esc(m.move.replace(/\.$/,""))}</i>, by ${esc(longDate(m.due))}.`;
-}
-
-function ledger(rows,R,cls=""){
-  return `<table class="${cls}"><thead><tr><th>Deal</th><th>Backed by</th><th class="r">Value</th></tr></thead><tbody>${rows.map(r=>`<tr><td class="deal">${esc(r.deal)}<small>${esc(r.basis||"")}</small></td><td>${receipts(r.sources,R)}</td><td class="r val num">${esc(r.value)}</td></tr>`).join("")}</tbody></table>`;
-}
+const dShort=d=>{try{return new Date(d+"T12:00:00").toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"})}catch{return d}};
+const dLong=d=>{try{return new Date(d+"T12:00:00").toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long"})}catch{return d}};
+const rel=n=>n<0?`${-n}d overdue`:n===0?"today":n===1?"tomorrow":`in ${n} days`;
+const initials=n=>n.replace(/^(Insp\.|Dr\.?|Mr\.?|Ms\.?)\s*/i,"").split(/\s+/).map(w=>w[0]).slice(0,2).join("").toUpperCase();
+const short=n=>n.name.includes("Eastern")?"EC":"AI";
 
 function render(){
   if(!data||!data.accounts){$("#view").innerHTML=`<div class="loading">Still reading the files (${esc((data?.fetched||[]).length)} of 10)…</div>`;return}
   const st=data.status||{};
-  $("#today").textContent=new Date().toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
-  $("#status").innerHTML=st.mode==="live"?`<span class="pulse on"></span><span>Live feed, checked ${new Date(st.liveAt).toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"})}</span>`:`<span class="pulse warn"></span><span>${st.mode==="connecting"?"Connecting to live feed":"Snapshot"}</span>`;
-  $("#foot").textContent="Data pulled "+(st.dataAsOf?new Date(st.dataAsOf).toLocaleString("en-GB",{day:"numeric",month:"long",hour:"2-digit",minute:"2-digit"}):"at build time")+". Built from the account export and the paperwork on file.";
+  const live=st.mode==="live";
+  $("#status").innerHTML=live?`<i class="on"></i>Live · checked ${new Date(st.liveAt).toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"})}`:`<i class="warn"></i>${st.mode==="connecting"?"Connecting to live feed":"Snapshot"}`;
+  $("#railstat").classList.toggle("warn",!live);$("#railtip").textContent=live?"Live feed on":"Snapshot";
   const a=data.accounts[cur],R=a.refs||{},k=a.kpis||{};
   const sigs=data.live?.signals||[];
   const booked=a.q1.backed.filter(r=>r.kind==="booked"),ceil=a.q1.backed.filter(r=>r.kind==="ceiling"),ben=a.q1.backed.filter(r=>r.kind==="benefit");
+  const m0=a.q3[0];
 
-  const events=sigs.length?`<div class="events"><div class="caps" style="color:var(--red)">New since the data was pulled · ${sigs.length}</div>${sigs.map(s=>`<div class="ev"><b>${esc(s.title)}</b> ${s.account?`<span class="tag">Account ${esc(s.account)}</span>`:""}<div class="caps" style="margin:2px 0 4px">${esc(s.date)}</div><div>${esc(s.detail)}</div></div>`).join("")}<div style="margin-top:8px;font-size:13px">These are already reflected in the risks, first moves and unknowns below.</div></div>`
-    :`<div class="quiet"><span class="pulse on"></span>No live events yet. The page watches the feed and will add them here, and into sections 3 to 5, as they arrive.</div>`;
+  const events=sigs.length?`<div class="events"><div class="lab" style="color:var(--red)">New since the data was pulled · ${sigs.length}</div>${sigs.map(s=>`<div class="ev"><b>${esc(s.title)}</b> ${s.account?`<span class="tg offer">Account ${esc(s.account)}</span>`:""}<div class="lab" style="margin:3px 0 5px">${esc(s.date)}</div><div>${esc(s.detail)}</div></div>`).join("")}<div style="margin-top:10px;font-size:13px;font-weight:600">Already reflected in sections 3 to 5.</div></div>`
+    :`<div class="quiet"><i class="status" style="padding:0;box-shadow:none;background:none"><i class="on"></i></i>No live events yet. New ones appear here, and flow into sections 3 to 5, as they arrive.</div>`;
 
   $("#view").innerHTML=`
-  <div class="accts" role="tablist">${data.accounts.map((x,i)=>`<button class="acct ${i===cur?"on":""}" role="tab" aria-selected="${i===cur}" data-tab="${i}"><span class="nm">${esc(x.name)}</span><span class="sb"><span>Account ${esc(x.id)}</span><span>Backed <b class="num">${esc(x.kpis.backed)}</b></span></span></button>`).join("")}</div>
+  <div class="head"><div><h1>${esc(a.name)}</h1><div class="sub">Account ${esc(a.id)} · ${new Date().toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"})} · Monday briefing</div></div>
+    <div class="avs">${data.accounts.map((x,i)=>`<button class="av ${i===cur?"on":""}" data-tab="${i}" title="${esc(x.name)}" aria-label="${esc(x.name)}">${short(x)}${x.kpis.high?`<span class="bd">${x.kpis.high}</span>`:""}</button>`).join("")}<small>high risks</small></div></div>
 
-  <div class="brief"><div class="caps">The short version</div><p>${summary(a)}</p></div>
+  <div class="brief" style="margin-top:22px"><div class="card"><div class="lab">The short version</div>
+    <p><em>${esc(k.backed)}</em> is on the books and backed by a signed order or a won offer, with a further ${esc(k.ceiling)} of pipeline not yet counted. ${k.claims?`<em class="bad">${k.claims} customer claim${k.claims>1?"s":""}</em> set apart because nothing backs ${k.claims>1?"them":"it"}.`:""} ${k.high?`${k.high} risk${k.high>1?"s are":" is"} high.`:""}</p></div>
+    <div class="next"><div class="lab">Do this first</div><h3>${esc(m0.move)}</h3><div class="nrow"><span class="tg">${esc(dLong(m0.due))}</span><span class="tg">${esc(rel(dueDays(m0.due)))}</span></div></div></div>
   ${events}
 
-  <section class="q" id="q1"><div class="qh"><div class="n">1</div><h2>What is the book worth?</h2><p>Each deal at a value we can back, with the file or person behind it. What we cannot back is set apart, not added in.</p></div>
-    <h3 class="grp">Booked and backed <span>counts toward the total</span></h3>
-    <table><thead><tr><th>Deal</th><th>Backed by</th><th class="r">Value</th></tr></thead><tbody>
-      ${booked.map(r=>`<tr><td class="deal">${esc(r.deal)}<small>${esc(r.basis||"")}</small></td><td>${receipts(r.sources,R)}</td><td class="r val num">${esc(r.value)}</td></tr>`).join("")}
-      <tr class="total"><td colspan="2">Backed total</td><td class="r val num">${esc(k.backed)}</td></tr></tbody></table>
-    ${ceil.length?`<h3 class="grp">Pipeline ceilings <span>not counted: blockers still open</span></h3>${ledger(ceil,R,"ceil")}`:""}
-    ${ben.length?`<h3 class="grp">Customer benefit <span>verified, but not FlytBase revenue</span></h3>${ledger(ben,R,"ceil")}`:""}
-    <div class="setapart"><h3 class="grp">Set apart: not backed <span>never added to a total</span></h3>
-      <table><thead><tr><th>Item</th><th>Why we cannot back it</th><th>Where it came from</th><th class="r">Value</th></tr></thead><tbody>${a.q1.unbacked.map(r=>`<tr><td class="deal"><span class="tag ${r.kind}">${r.kind==="claim"?"Claim":r.kind==="offer"?"Open offer":"Unpriced"}</span>${esc(r.deal)}${r.said_by?`<small>Said by ${esc(r.said_by)}</small>`:""}</td><td>${esc(r.why)}</td><td>${receipts(r.sources,R)}</td><td class="r val num" style="color:var(--ink2)">${esc(r.value.replace("claimed, not backed","unbacked"))}</td></tr>`).join("")}</tbody></table></div>
+  <section class="panel" id="q1"><h2>What is the book worth?</h2><div class="cap">Each deal at a value we can back, with the file or person behind it. What we cannot back is set apart and never added in.</div>
+    <div class="tiles"><div class="tile blk"><span>Backed total</span><b class="num">${esc(k.backed)}</b></div><div class="tile"><span>Pipeline ceilings, not counted</span><b class="num">${esc(k.ceiling)}</b></div><div class="tile"><span>Claims set apart</span><b class="num">${k.claims}</b></div><div class="tile"><span>High-severity risks</span><b class="num" style="color:${k.high?"var(--red)":"inherit"}">${k.high}</b></div></div>
+    <div class="grp">Booked and backed <span>counts toward the total</span></div>
+    <div class="rows">${booked.map(r=>`<div class="row"><div class="t">${esc(r.deal)}<small>${esc(r.basis||"")}</small></div>${receipts(r.sources,R)}<div class="v num">${esc(r.value)}</div></div>`).join("")}</div>
+    ${ceil.length?`<div class="grp">Pipeline ceilings <span>not counted: blockers still open</span></div><div class="rows soft">${ceil.map(r=>`<div class="row"><div class="t">${esc(r.deal)}<small>${esc(r.basis||"")}</small></div>${receipts(r.sources,R)}<div class="v num">${esc(r.value)}</div></div>`).join("")}</div>`:""}
+    ${ben.length?`<div class="grp">Customer benefit <span>verified, but not FlytBase revenue</span></div><div class="rows soft">${ben.map(r=>`<div class="row"><div class="t">${esc(r.deal)}<small>${esc(r.basis||"")}</small></div>${receipts(r.sources,R)}<div class="v num">${esc(r.value)}</div></div>`).join("")}</div>`:""}
+    <div class="apart"><div class="grp" style="margin-top:20px">Set apart: not backed <span>never added to a total</span></div>
+      <div class="rows">${a.q1.unbacked.map(r=>`<div class="row"><div class="t"><span class="tg ${r.kind}">${r.kind==="claim"?"Claim":r.kind==="offer"?"Open offer":"Unpriced"}</span><br>${esc(r.deal)}<small>${r.said_by?"Said by "+esc(r.said_by)+". ":""}${esc(r.why)}</small></div>${receipts(r.sources,R)}<div class="v num" style="color:var(--ink2)">${esc(r.value.replace("claimed, not backed","unbacked"))}</div></div>`).join("")}</div></div>
   </section>
 
-  <section class="q" id="q2"><div class="qh"><div class="n">2</div><h2>Who holds the power?</h2><p>For each deal: who decides, who pays, who uses it, who could block it, and where each person stands with us.</p></div>
-    ${a.q2.map(r=>`<div class="dossier"><h3>${esc(r.deal)}</h3>
-      <div class="roles"><div><div class="caps">Decides</div><p>${esc(r.decides)}</p></div><div><div class="caps">Pays</div><p>${esc(r.pays)}</p></div><div><div class="caps">Uses it</div><p>${esc(r.uses)}</p></div><div><div class="caps">Could block</div><p>${esc(r.blocks)}</p></div></div>
-      <div class="stand">${String(r.standing).split("; ").map(p=>{const m=p.match(/^(.*): (\w+)$/);return m?`<span class="who s-${m[2]}"><i></i>${esc(m[1])} <small>${esc(m[2])}</small></span>`:`<span class="who"><small>${esc(p)}</small></span>`}).join("")}</div>
-      ${receipts(r.sources,R)}</div>`).join("")}
+  <section class="panel" id="q2"><h2>Who holds the power?</h2><div class="cap">For each deal: who decides, who pays, who uses it, who could block it, and where each person stands with us.</div>
+    ${a.q2.map(r=>`<div class="card deal"><div class="who"><div><h3>${esc(r.deal)}</h3>${receipts(r.sources,R)}</div>
+      <div class="people">${String(r.standing).split("; ").map(p=>{const m=p.match(/^(.*): (\w+)$/);return m?`<div class="person"><span class="ava ${m[2]}">${esc(initials(m[1]))}</span><div>${esc(m[1])}<small>${esc(m[2])} with us</small></div></div>`:`<div class="person"><small>${esc(p)}</small></div>`}).join("")}</div></div>
+      <div class="roles"><div class="role first"><div class="lab">Decides</div><p>${esc(r.decides)}</p></div><div class="role"><div class="lab">Pays</div><p>${esc(r.pays)}</p></div><div class="role"><div class="lab">Uses it</div><p>${esc(r.uses)}</p></div><div class="role"><div class="lab">Could block</div><p>${esc(r.blocks)}</p></div></div></div>`).join("")}
   </section>
 
-  <section class="q" id="q3"><div class="qh"><div class="n">3</div><h2>What do we do first?</h2><p>The first moves, ranked, each with one owner, a date and the deal it moves.</p></div>
-    ${a.q3.map(m=>{const d=dueDays(m.due);return `<div class="move"><div class="no">${m.rank}</div><div><h3>${esc(m.move)}</h3><p class="why">${esc(m.why)}</p>${receipts(m.sources,R)}</div>
-      <div class="meta"><div><div class="caps">Owner</div><b>${esc(m.owner)}</b></div><div class="due ${d<=10?"soon":""}"><div class="caps">By</div><b>${esc(longDate(m.due))}</b><small>${rel(d)}</small></div><div><div class="caps">Moves</div><b>${esc(m.deal)}</b></div></div></div>`}).join("")}
+  <section class="panel" id="q3"><h2>What do we do first?</h2><div class="cap">The first moves, ranked, each with one owner, a date and the deal it moves.</div>
+    <div class="flow">${a.q3.map((m,i)=>{const d=dueDays(m.due);return `<div class="step ${i===0?"first":""}"><div class="no">${m.rank}</div><h3>${esc(m.move)}</h3><p class="why">${esc(m.why)}</p>${receipts(m.sources,R)}
+      <div class="meta"><span class="mp"><small>Owner</small>${esc(m.owner)}</span><span class="mp ${d<=10?"soon":""}"><small>By</small>${esc(dShort(m.due))} · ${esc(rel(d))}</span><span class="mp"><small>Moves</small>${esc(m.deal)}</span></div></div>`}).join("")}</div>
   </section>
 
-  <section class="q" id="q4"><div class="qh"><div class="n">4</div><h2>What is about to go wrong?</h2><p>Deadlines at risk, requests going cold, deals that are stuck, and when each turns bad. Worst first.</p></div>
-    ${a.q4.map(r=>`<div class="risk"><div class="sev ${esc(r.sev)}">${esc(r.sev==="med"?"Watch":r.sev)}</div><div><h4>${esc(r.risk)}</h4>${receipts(r.sources,R)}</div><div class="w"><b>Turns bad</b>${esc(r.when)}</div></div>`).join("")}
+  <section class="panel" id="q4"><h2>What is about to go wrong?</h2><div class="cap">Deadlines at risk, requests going cold, deals that are stuck, and when each turns bad. Worst first.</div>
+    <div class="th risk"><span>Status</span><span>What</span><span>Turns bad</span></div>
+    <div class="tbl">${a.q4.map(r=>`<div class="tr risk"><div><span class="sev ${esc(r.sev)}">${esc(r.sev==="med"?"Watch":r.sev)}</span></div><div><h4>${esc(r.risk)}</h4>${receipts(r.sources,R)}</div><div class="w">${esc(r.when)}</div></div>`).join("")}</div>
   </section>
 
-  <section class="q" id="q5"><div class="qh"><div class="n">5</div><h2>What do we still not know?</h2><p>The gaps this plan rests on, why each one matters, and who could close it.</p></div>
-    <table><thead><tr><th>Gap</th><th>Why it matters</th><th>Who could tell us</th></tr></thead><tbody>${a.q5.map(r=>`<tr><td class="deal">${esc(r.gap)}</td><td>${esc(r.why)}</td><td>${esc(r.who)}</td></tr>`).join("")}</tbody></table>
+  <section class="panel" id="q5"><h2>What do we still not know?</h2><div class="cap">The gaps this plan rests on, why each one matters, and who could close it.</div>
+    <div class="th gap"><span>Gap</span><span>Why it matters</span><span>Who could tell us</span></div>
+    <div class="tbl">${a.q5.map(r=>`<div class="tr gap"><div class="g">${esc(r.gap)}</div><div class="w">${esc(r.why)}</div><div class="w" style="color:var(--ink);font-weight:600">${esc(r.who)}</div></div>`).join("")}</div>
   </section>
 
-  <section class="q" id="notes"><div class="qh"><div class="n">✎</div><h2>Write it back</h2><p>Saved to the game with write_note, so this plan and the system of record stay in step.</p></div>
-    <form class="noteform" id="nf"><label class="f"><span class="caps">Account</span><select id="na">${data.accounts.map(x=>`<option value="${esc(x.id)}" ${x.id===a.id?"selected":""}>${esc(x.id)} · ${esc(x.name.split(" ").slice(0,2).join(" "))}</option>`).join("")}</select></label>
-      <label class="f"><span class="caps">Type</span><select id="nk"><option value="next_step">Next step</option><option value="risk">Risk</option><option value="task">Task</option><option value="note">Note</option></select></label>
-      <label class="f wide"><span class="caps">Note</span><input id="nt" maxlength="500" placeholder="What should be done or remembered?" autocomplete="off"></label><button class="go" id="ng">Save</button></form><div id="nm" role="status"></div>
-    <div class="saved">${(data.notes||[]).slice(-5).reverse().map(n=>`<div><small>${esc(n.kind||"note")} · ${esc(n.account||"")} ${esc(n.created_at||n.at||"")}</small>${esc(n.text||n.title||"")}</div>`).join("")}</div>
-  </section>`;
+  <section class="panel" id="notes"><h2>Write it back</h2><div class="cap">Saved to the game with write_note, so this plan and the system of record stay in step.</div>
+    <form class="nf" id="nf"><label class="fl"><span class="lab">Account</span><select id="na">${data.accounts.map(x=>`<option value="${esc(x.id)}" ${x.id===a.id?"selected":""}>${esc(x.id)} · ${esc(x.name.split(" ").slice(0,2).join(" "))}</option>`).join("")}</select></label>
+      <label class="fl"><span class="lab">Type</span><select id="nk"><option value="next_step">Next step</option><option value="risk">Risk</option><option value="task">Task</option><option value="note">Note</option></select></label>
+      <label class="fl wide"><span class="lab">Note</span><input id="nt" maxlength="500" placeholder="What should be done or remembered?" autocomplete="off"></label><button class="go" id="ng" aria-label="Save note">+</button></form><div id="nm" role="status"></div>
+    <div class="saved">${(data.notes||[]).slice(-5).reverse().map(n=>`<div class="card"><small>${esc(n.kind||"note")} · ${esc(n.account||"")} ${esc(n.created_at||n.at||"")}</small>${esc(n.text||n.title||"")}</div>`).join("")}</div>
+  </section>
+  <footer><span>Data pulled ${st.dataAsOf?esc(new Date(st.dataAsOf).toLocaleString("en-GB",{day:"numeric",month:"long",hour:"2-digit",minute:"2-digit"})):"at build time"}. Built from the account export and paperwork on file.</span><span>Click any id to read the fact behind it.</span></footer>`;
   bind();spy();
 }
 
 function showReceipt(id){
-  const r=data.accounts[cur].refs[id]||{};const m=mark(r);
+  const r=data.accounts[cur].refs[id]||{},m=mark(r);
   $("#dk").textContent=KIND[r.kind]||"Source";$("#di").textContent=id;$("#dl").textContent=r.label||"On file";
   const why={v:["Verified","Checked against a file or record on the account."],t:["Told","Said to us in conversation. Not independently checked."],c:["Claim","A statement nobody has backed. Shown, but never counted."],o:[KIND[r.kind]||"Source",""]}[m];
   $("#ds").innerHTML=`<b class="${m}">${esc(why[0])}</b><div>${esc(r.meta||"")}</div><div style="margin-top:6px">${esc(why[1])}</div>`;
@@ -323,7 +323,7 @@ function bind(){
     try{const r=await fetch("/api/note",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({text,account:$("#na").value,kind:$("#nk").value})});
       const j=await r.json();$("#nm").textContent=r.ok?"Saved to the game.":(j.error||"Could not save.");if(r.ok)$("#nt").value=""}catch(err){$("#nm").textContent="Could not save: "+err.message}$("#ng").disabled=false};
 }
-let io;function spy(){io&&io.disconnect();io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)document.querySelectorAll("#rail a").forEach(a=>a.classList.toggle("on",a.dataset.s===e.target.id))})},{rootMargin:"-20% 0px -70% 0px"});document.querySelectorAll("section.q").forEach(s=>io.observe(s))}
+let io;function spy(){io&&io.disconnect();io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)document.querySelectorAll("[data-s]").forEach(a=>a.classList.toggle("on",a.dataset.s===e.target.id))})},{rootMargin:"-25% 0px -65% 0px"});document.querySelectorAll("section.panel").forEach(s=>io.observe(s))}
 document.addEventListener("click",e=>{
   const c=e.target.closest(".chip");if(c){showReceipt(c.dataset.id);return}
   const t=e.target.closest("[data-tab]");if(t){cur=+t.dataset.tab;render();return}
