@@ -167,7 +167,7 @@ button{font-family:inherit}
 .fl span{display:block;margin-bottom:6px}
 select,input{font:500 14.5px var(--font);width:100%;border:0;background:var(--card);border-radius:16px;padding:13px 16px;color:var(--ink);box-shadow:var(--sh)}
 input:focus,select:focus{outline:2px solid var(--ink)}
-.go{width:52px;height:52px;border-radius:50%;border:0;background:var(--ink);color:#fff;font-size:24px;cursor:pointer;display:grid;place-items:center}
+.go{height:50px;padding:0 28px;border-radius:999px;border:0;background:var(--ink);color:#fff;font:700 14px var(--font);cursor:pointer}
 .go:hover{background:#2b2e36}.go:disabled{opacity:.5}
 #nm{margin-top:10px;font-size:13.5px;color:var(--ink2);min-height:20px;font-weight:500}
 .saved{display:grid;gap:8px;margin-top:10px}
@@ -176,7 +176,7 @@ input:focus,select:focus{outline:2px solid var(--ink)}
 footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:26px;padding:0 8px;color:var(--mute);font-size:12.5px;font-weight:500}
 
 /* receipt drawer */
-#drawer{position:fixed;right:30px;bottom:30px;width:400px;max-width:calc(100vw - 40px);background:var(--card);border-radius:var(--r-xl);box-shadow:0 30px 80px -20px rgba(20,24,40,.45);padding:26px 26px 24px;z-index:40;transform:translateY(20px);opacity:0;pointer-events:none;transition:all .22s ease}
+#drawer{z-index:90!important;position:fixed;right:30px;bottom:30px;width:400px;max-width:calc(100vw - 40px);background:var(--card);border-radius:var(--r-xl);box-shadow:0 30px 80px -20px rgba(20,24,40,.45);padding:26px 26px 24px;z-index:40;transform:translateY(20px);opacity:0;pointer-events:none;transition:all .22s ease}
 #drawer.open{transform:none;opacity:1;pointer-events:auto}
 #drawer .x{position:absolute;top:14px;right:16px;width:34px;height:34px;border-radius:50%;border:0;background:var(--panel);cursor:pointer;font-size:18px;line-height:1}
 #drawer .id{font:500 12.5px var(--mono);color:var(--ink2);background:var(--panel);display:inline-block;border-radius:999px;padding:4px 12px;margin:8px 0 14px;word-break:break-all}
@@ -216,6 +216,28 @@ footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin
 .ringw svg{width:100%;max-width:130px}.ringw text{font:800 20px var(--font);fill:var(--ink)}.ringw b{display:block;font-size:13px;margin-top:4px}.ringw small{color:var(--mute);font-weight:500;font-size:11.5px}
 @media (max-width:1100px){.kb{grid-template-columns:1fr 1fr}.duo{grid-template-columns:1fr}.brand span{display:none}}
 @media (max-width:640px){.kb{grid-template-columns:1fr}.rings{grid-template-columns:1fr}}
+/* deal sheet (after the shot's New Case form) */
+.sheet{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:20px;pointer-events:none;visibility:hidden}
+.sheet.open{pointer-events:auto;visibility:visible}
+.sbk{position:absolute;inset:0;background:rgba(214,221,238,.55);backdrop-filter:blur(0);opacity:0;transition:opacity .3s,backdrop-filter .3s}
+.sheet.open .sbk{opacity:1;backdrop-filter:blur(14px)}
+.sc{scrollbar-width:none;position:relative;width:min(480px,100%);max-height:calc(100vh - 40px);overflow:auto;background:rgba(255,255,255,.88);backdrop-filter:blur(20px);border-radius:36px;padding:26px 26px 22px;box-shadow:0 40px 90px -30px rgba(30,40,90,.5),inset 0 0 0 1px rgba(255,255,255,.9);opacity:0;transform:translateY(18px) scale(.95);filter:blur(6px);transition:all .38s cubic-bezier(.2,.8,.2,1)}
+.sheet.open .sc{opacity:1;transform:none;filter:none}
+.sl{font:600 12px var(--font);color:var(--ink2);margin:16px 6px 7px}.sc>.sl:first-child{margin-top:0}
+.fp{display:flex;align-items:center;gap:12px;background:#fff;border-radius:999px;padding:11px 18px;box-shadow:0 1px 1px rgba(20,24,40,.04),0 8px 20px -12px rgba(20,24,40,.18);font-weight:600;font-size:14.5px}
+.fp b{display:block;font-size:14.5px;line-height:1.3}.fp small{display:block;font-weight:500;color:var(--mute);font-size:12px}
+.fp .chev{margin-left:auto;color:var(--ink2);display:grid}
+.fp.ta{border-radius:24px;align-items:flex-start;font-weight:500;font-size:13.5px;line-height:1.5}
+.fp.val2{flex-wrap:wrap;border-radius:26px}.fp.val2 b{font:800 22px var(--font);letter-spacing:-.02em}
+.pg{flex:1;min-width:90px;height:8px;border-radius:99px;background:#e1e6f1;overflow:hidden}.pg i{display:block;height:100%;background:#5b8def;border-radius:99px}
+.fp.val2 small{flex-basis:100%}
+.ag .agr{display:flex}.ag .agr .ava{margin-left:-10px;border:3px solid #fff;width:42px;height:42px}.ag .agr .ava:first-child{margin-left:0}
+.fp .ava{width:38px;height:38px;flex:none}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sact{display:flex;gap:12px;margin-top:22px}
+.sact button{flex:1;height:50px;border-radius:999px;font:700 14px var(--font);cursor:pointer;border:0}
+.sact .ghost{background:rgba(255,255,255,.7);color:var(--ink2);box-shadow:inset 0 0 0 1.5px rgba(13,14,17,.12)}.sact .dark{background:var(--ink);color:#fff}
+@media (max-width:560px){.two{grid-template-columns:1fr}}
 /* polish */
 @keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .panel,.brief,.events,.tl{animation:up .55s cubic-bezier(.2,.7,.2,1) both}
@@ -298,6 +320,7 @@ footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin
   </div>
 </div>
 
+<div id="sheet" class="sheet" aria-live="polite"></div>
 <aside id="drawer" aria-live="polite" aria-label="Receipt"><button class="x" type="button" id="dx" aria-label="Close">×</button>
   <div class="lab" id="dk"></div><div class="id" id="di"></div><blockquote id="dl"></blockquote><div class="st" id="ds"></div></aside>
 
@@ -362,6 +385,32 @@ function driversMetrics(a){
 }
 function overview(a){return pipelinePanel(a)+driversMetrics(a)}
 
+const CHEV='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>';
+function avatar(n,cls=""){return `<span class="ava ${cls}" style="background:hsl(${hue(n)} 65% 90%);color:hsl(${hue(n)} 45% 28%)">${esc(initials(n))}</span>`}
+function openSheet(id){
+  const a=data.accounts[cur],R=a.refs||{},cs=a.kpis.currency,p=(a.pipeline||[]).find(x=>x.id===id);if(!p)return showReceipt(id);
+  const q2=a.q2.find(r=>r.deal===p.title),q1=[...a.q1.backed,...a.q1.unbacked].find(r=>r.deal===p.title),mv=a.q3.filter(m=>m.deal===p.title);
+  const people=q2?String(q2.standing).split("; ").map(s=>{const m=s.match(/^(.*): (\w+)$/);return m?{n:m[1],r:m[2]}:null}).filter(Boolean):[];
+  const key=p.person||(people[0]&&people[0].n)||"";
+  const role=Object.values(R).find(r=>r.kind==="person"&&key&&r.label.startsWith(key))?.label.split(", ").slice(1).join(", ")||"";
+  const meta=(R[id]&&R[id].meta)||"";
+  const booked=p.col==="agreed";
+  const label={agreed:"Agreed",qualified:"Qualified",identified:"Identified",offer:"Open offer"}[p.col];
+  const srcs=(q2&&q2.sources)||(q1&&q1.sources)||[id];
+  $("#sheet").innerHTML=`<div class="sbk" data-close="1"></div><div class="sc" role="dialog" aria-modal="true" aria-label="${esc(p.title)}">
+    <div class="sl">Deal</div><div class="fp">${esc(p.title)}<span class="tg offer" style="margin:0 0 0 auto">${label}</span></div>
+    <div class="sl">Key person</div><div class="fp">${key?avatar(key):""}<div><b>${esc(key||"Not met yet")}</b><small>${esc(role)}</small></div><span class="chev">${CHEV}</span></div>
+    <div class="sl">People involved</div><div class="fp ag">${people.length?`<div class="agr">${people.slice(0,4).map(x=>avatar(x.n,x.r)).join("")}</div><div><b>${esc(people.map(x=>x.n.split(" ")[0]).join(", "))}</b><small>${people.length} on this deal</small></div>`:'<small>Nobody on file</small>'}<span class="chev">${CHEV}</span></div>
+    <div class="sl">${booked?"Booked value":"Value, not yet counted"}</div><div class="fp val2"><b class="num">${p.amount?money(p.amount,cs):"No value on file"}</b><div class="pg"><i style="width:${booked?100:0}%"></i></div><small>${booked?"Backed":"Counted at 0 until the blocker clears"}</small></div>
+    ${q2?`<div class="two"><div><div class="sl">Decides</div><div class="fp ta">${esc(q2.decides)}</div></div><div><div class="sl">Pays</div><div class="fp ta">${esc(q2.pays)}</div></div></div>`:""}
+    <div class="sl">What is in the way</div><div class="fp ta">${esc(meta.replace(/^Stage: \w+( · )?/,"")||"Nothing recorded")}</div>
+    ${mv.length?`<div class="sl">Next move</div><div class="fp ta"><div><b>${esc(mv[0].move)}</b><small>${esc(mv[0].owner)} · by ${esc(dShort(mv[0].due))}</small></div></div>`:""}
+    <div class="sl">Evidence</div><div class="fp ta" style="display:block">${receipts(srcs,R)}</div>
+    <div class="sact"><button type="button" class="ghost" data-close="1">Close</button><button type="button" class="dark" data-note="${esc(p.title)}">Add a note</button></div></div>`;
+  $("#sheet").classList.add("open");
+}
+function closeSheet(){$("#sheet").classList.remove("open")}
+
 function render(){
   if(!data||!data.accounts){$("#view").innerHTML=`<div class="loading">Still reading the files (${esc((data?.fetched||[]).length)} of 10)…</div>`;return}
   const st=data.status||{};
@@ -419,7 +468,7 @@ function render(){
   <section class="panel" id="notes"><h2 data-n="✎">Write it back</h2><div class="cap">Saved to the game with write_note, so this plan and the system of record stay in step.</div>
     <form class="nf" id="nf"><label class="fl"><span class="lab">Account</span><select id="na">${data.accounts.map(x=>`<option value="${esc(x.id)}" ${x.id===a.id?"selected":""}>${esc(x.id)} · ${esc(x.name.split(" ").slice(0,2).join(" "))}</option>`).join("")}</select></label>
       <label class="fl"><span class="lab">Type</span><select id="nk"><option value="next_step">Next step</option><option value="risk">Risk</option><option value="task">Task</option><option value="note">Note</option></select></label>
-      <label class="fl wide"><span class="lab">Note</span><input id="nt" maxlength="500" placeholder="What should be done or remembered?" autocomplete="off"></label><button class="go" id="ng" aria-label="Save note">+</button></form><div id="nm" role="status"></div>
+      <label class="fl wide"><span class="lab">Note</span><input id="nt" maxlength="500" placeholder="What should be done or remembered?" autocomplete="off"></label><button class="go" id="ng" aria-label="Save note">Save note</button></form><div id="nm" role="status"></div>
     <div class="saved">${(data.notes||[]).slice(-5).reverse().map(n=>`<div class="card"><small>${esc(n.kind||"note")} · ${esc(n.account||"")} ${esc(n.created_at||n.at||"")}</small>${esc(n.text||n.title||"")}</div>`).join("")}</div>
   </section>
   <footer><span>Data pulled ${st.dataAsOf?esc(new Date(st.dataAsOf).toLocaleString("en-GB",{day:"numeric",month:"long",hour:"2-digit",minute:"2-digit"})):"at build time"}. Built from the account export and paperwork on file.</span><span>Click any id to read the fact behind it.</span></footer>`;
@@ -443,12 +492,14 @@ let io;function spy(){io&&io.disconnect();io=new IntersectionObserver(es=>{es.fo
 document.addEventListener("click",e=>{
   const c=e.target.closest(".chip");if(c){showReceipt(c.dataset.id);return}
   const fl=e.target.closest("[data-flt]");if(fl){flt=fl.dataset.flt;render();return}
-  const kc=e.target.closest(".kc");if(kc){showReceipt(kc.dataset.id);return}
+  const kc=e.target.closest(".kc");if(kc){openSheet(kc.dataset.id);return}
+  if(e.target.closest("[data-close]")){closeSheet();return}
+  const nb=e.target.closest("[data-note]");if(nb){closeSheet();const inp=$("#nt");if(inp){inp.value="Re: "+nb.dataset.note+": ";document.getElementById("notes").scrollIntoView({behavior:"smooth"});setTimeout(()=>inp.focus(),400)}return}
   const t=e.target.closest("[data-tab]");if(t){cur=+t.dataset.tab;render();return}
   if(!e.target.closest("#drawer")){$("#drawer").classList.remove("open");document.querySelectorAll(".chip.sel").forEach(x=>x.classList.remove("sel"))}
 });
 $("#dx").onclick=()=>$("#drawer").classList.remove("open");
-document.addEventListener("keydown",e=>{if(e.key==="Escape")$("#drawer").classList.remove("open")});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){$("#drawer").classList.remove("open");closeSheet()}});
 async function load(){try{data=await (await fetch("/api/crm",{cache:"no-store"})).json();render()}catch(e){$("#view").innerHTML='<div class="loading">Cannot reach the server: '+esc(e.message)+"</div>"}}
 $("#refresh").onclick=load;load();setInterval(load,75000);
 </script>
