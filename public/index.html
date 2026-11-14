@@ -184,6 +184,42 @@ footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin
 
 .loading{padding:110px 0;text-align:center;color:var(--ink2);font-weight:600;font-size:18px}
 
+
+/* polish */
+@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.panel,.brief,.events,.tl{animation:up .55s cubic-bezier(.2,.7,.2,1) both}
+.panel:nth-of-type(2){animation-delay:.05s}.panel:nth-of-type(3){animation-delay:.1s}
+.row,.step,.deal,.tr,.tile{transition:transform .18s ease,box-shadow .18s ease}
+.row:hover,.tr:hover,.tile:hover{transform:translateY(-2px);box-shadow:0 14px 30px -14px rgba(20,24,40,.25)}
+.step:hover,.deal:hover{box-shadow:0 18px 36px -16px rgba(20,24,40,.28)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:10px}
+.tr h4+.w{font-weight:500;color:var(--mute);font-size:13px}
+
+/* composition bar */
+.comp{margin:4px 0 8px;background:var(--card);border-radius:var(--r-lg);padding:16px 20px;box-shadow:var(--sh)}
+.bar{display:flex;height:16px;border-radius:999px;overflow:hidden;background:var(--panel);gap:3px;margin:10px 0 12px}
+.bar i{display:block;min-width:6px;border-radius:999px}
+.leg{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:12.5px;font-weight:600;color:var(--ink2)}
+.leg span{display:inline-flex;align-items:center;gap:7px}.leg b{color:var(--ink);font-weight:800}.leg em{width:10px;height:10px;border-radius:50%;display:inline-block}
+
+/* 90-day timeline */
+.tl{background:var(--card);border-radius:var(--r-xl);padding:20px 26px 16px;margin-top:18px;box-shadow:var(--sh)}
+.tl .lab{margin-bottom:4px}
+.track{position:relative;height:118px;margin:6px 14px 0}
+.track::before{content:"";position:absolute;left:0;right:0;top:57px;border-top:2px solid var(--line)}
+.pt{position:absolute;top:50px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:#c4c8d2;border:3px solid var(--card);box-shadow:0 0 0 1px var(--line)}
+.pt.m1{background:var(--ink)}.pt.deadline{background:var(--red)}.pt.today{background:var(--green);box-shadow:0 0 0 5px var(--green-bg)}
+.pl{position:absolute;font-size:12.5px;font-weight:700;line-height:1.25;white-space:nowrap;transform:translateX(-50%)}
+.pl small{display:block;font-weight:500;color:var(--mute)}
+.pl.up{top:6px}.pl.dn{top:78px}
+
+/* usage chart */
+.chart{background:var(--card);border-radius:var(--r-lg);padding:18px 22px 12px;box-shadow:var(--sh);margin-bottom:16px}
+.chart .hd{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:baseline}
+.chart h3{margin:0;font:800 17px var(--font);letter-spacing:-.02em}
+.chart .hd span{font-size:12.5px;color:var(--ink2);font-weight:600}
+.chart svg{width:100%;height:auto;margin-top:8px;display:block}
+.chart text{font:600 8px var(--font);fill:var(--mute)}
 @media (max-width:1100px){
   .tiles{grid-template-columns:1fr 1fr}.brief{grid-template-columns:1fr}.deal{grid-template-columns:1fr}
   .row{grid-template-columns:1fr auto}.row .rc{grid-column:1/-1;order:3}
@@ -246,6 +282,29 @@ const rel=n=>n<0?`${-n}d overdue`:n===0?"today":n===1?"tomorrow":`in ${n} days`;
 const initials=n=>n.replace(/^(Insp\.|Dr\.?|Mr\.?|Ms\.?)\s*/i,"").split(/\s+/).map(w=>w[0]).slice(0,2).join("").toUpperCase();
 const short=n=>n.name.includes("Eastern")?"EC":"AI";
 
+const money=(n,c)=>c+Math.round(n).toLocaleString("en-GB");
+function compBar(a){
+  const k=a.kpis,tot=k.bookedN+k.ceilingN+k.offersN||1;
+  const seg=[["Booked and backed",k.bookedN,"#0d0e11"],["Pipeline ceilings (not counted)",k.ceilingN,"#8aa6e8"],["Open offers (not accepted)",k.offersN,"#d9dce4"]].filter(s=>s[1]>0);
+  return `<div class="comp"><div class="lab">How the book splits</div><div class="bar">${seg.map(s=>`<i style="width:${(s[1]/tot*100).toFixed(1)}%;background:${s[2]}" title="${esc(s[0])}"></i>`).join("")}</div><div class="leg">${seg.map(s=>`<span><em style="background:${s[2]}"></em>${esc(s[0])} <b class="num">${money(s[1],k.currency)}</b></span>`).join("")}</div></div>`;
+}
+function timeline(a){
+  const t0=new Date();t0.setHours(12,0,0,0);
+  const items=(a.timeline||[]).map(x=>({...x,d:new Date(x.date+"T12:00:00")})).filter(x=>x.d>=t0).sort((p,q)=>p.d-q.d);
+  if(!items.length)return"";
+  const span=Math.max(...items.map(x=>x.d-t0),864e5*30)*1.04;
+  const pos=d=>Math.min(97,Math.max(3,(d-t0)/span*100));
+  return `<div class="tl"><div class="lab">The next ${Math.ceil(span/864e5)} days</div><div class="track"><div class="pt today" style="left:3%"></div><div class="pl dn" style="left:3%">Today<small>${esc(t0.toLocaleDateString("en-GB",{day:"numeric",month:"short"}))}</small></div>${items.map((x,i)=>`<div class="pt ${x.kind==="deadline"?"deadline":x.label==="Move 1"?"m1":""}" style="left:${pos(x.d)}%"></div><div class="pl ${i%2?"dn":"up"}" style="left:${pos(x.d)}%">${esc(x.label)}<small>${esc(dShort(x.date))}</small></div>`).join("")}</div></div>`;
+}
+function usageChart(a){
+  const s=a.usage?.series||[];if(s.length<4)return"";
+  const W=640,H=130,bw=W/s.length,max=Math.max(...s.map(x=>x.flights),1);
+  const last4=s.slice(-4).reduce((n,x)=>n+x.flights,0),prev4=s.slice(-8,-4).reduce((n,x)=>n+x.flights,0);
+  const bars=s.map((x,i)=>{const hh=Math.max(2,x.flights/max*(H-26));const recent=i>=s.length-4;return `<rect x="${(i*bw+2).toFixed(1)}" y="${(H-14-hh).toFixed(1)}" width="${(bw-4).toFixed(1)}" height="${hh.toFixed(1)}" rx="3" fill="${recent?"#0d0e11":"#cfd3dc"}"><title>${esc(x.w)}: ${x.flights} flights, ${x.docks} docks flew</title></rect>`}).join("");
+  const lbl=[0,Math.floor(s.length/2),s.length-1].map(i=>`<text x="${(i*bw+bw/2).toFixed(1)}" y="${H}" text-anchor="${i===0?"start":i===s.length-1?"end":"middle"}">${esc(dShort(s[i].w))}</text>`).join("");
+  const delta=prev4?Math.round((last4-prev4)/prev4*100):0;
+  return `<div class="chart"><div class="hd"><h3>Flights per week</h3><span>${a.usage.flyingNow} of ${a.usage.docks} docks flew in the last 4 weeks · ${last4} flights vs ${prev4} in the 4 before (${delta>0?"+":""}${delta}%)</span></div><svg viewBox="0 0 ${W} ${H+2}" role="img" aria-label="Flights per week">${bars}${lbl}</svg></div>`;
+}
 function render(){
   if(!data||!data.accounts){$("#view").innerHTML=`<div class="loading">Still reading the files (${esc((data?.fetched||[]).length)} of 10)…</div>`;return}
   const st=data.status||{};
@@ -267,11 +326,11 @@ function render(){
   <div class="brief" style="margin-top:22px"><div class="card"><div class="lab">The short version</div>
     <p><em>${esc(k.backed)}</em> is on the books and backed by a signed order or a won offer, with a further ${esc(k.ceiling)} of pipeline not yet counted. ${k.claims?`<em class="bad">${k.claims} customer claim${k.claims>1?"s":""}</em> set apart because nothing backs ${k.claims>1?"them":"it"}.`:""} ${k.high?`${k.high} risk${k.high>1?"s are":" is"} high.`:""}</p></div>
     <div class="next"><div class="lab">Do this first</div><h3>${esc(m0.move)}</h3><div class="nrow"><span class="tg">${esc(dLong(m0.due))}</span><span class="tg">${esc(rel(dueDays(m0.due)))}</span></div></div></div>
-  ${events}
+  ${events}${timeline(a)}
 
   <section class="panel" id="q1"><h2>What is the book worth?</h2><div class="cap">Each deal at a value we can back, with the file or person behind it. What we cannot back is set apart and never added in.</div>
     <div class="tiles"><div class="tile blk"><span>Backed total</span><b class="num">${esc(k.backed)}</b></div><div class="tile"><span>Pipeline ceilings, not counted</span><b class="num">${esc(k.ceiling)}</b></div><div class="tile"><span>Claims set apart</span><b class="num">${k.claims}</b></div><div class="tile"><span>High-severity risks</span><b class="num" style="color:${k.high?"var(--red)":"inherit"}">${k.high}</b></div></div>
-    <div class="grp">Booked and backed <span>counts toward the total</span></div>
+    ${compBar(a)}<div class="grp">Booked and backed <span>counts toward the total</span></div>
     <div class="rows">${booked.map(r=>`<div class="row"><div class="t">${esc(r.deal)}<small>${esc(r.basis||"")}</small></div>${receipts(r.sources,R)}<div class="v num">${esc(r.value)}</div></div>`).join("")}</div>
     ${ceil.length?`<div class="grp">Pipeline ceilings <span>not counted: blockers still open</span></div><div class="rows soft">${ceil.map(r=>`<div class="row"><div class="t">${esc(r.deal)}<small>${esc(r.basis||"")}</small></div>${receipts(r.sources,R)}<div class="v num">${esc(r.value)}</div></div>`).join("")}</div>`:""}
     ${ben.length?`<div class="grp">Customer benefit <span>verified, but not FlytBase revenue</span></div><div class="rows soft">${ben.map(r=>`<div class="row"><div class="t">${esc(r.deal)}<small>${esc(r.basis||"")}</small></div>${receipts(r.sources,R)}<div class="v num">${esc(r.value)}</div></div>`).join("")}</div>`:""}
@@ -291,8 +350,8 @@ function render(){
   </section>
 
   <section class="panel" id="q4"><h2>What is about to go wrong?</h2><div class="cap">Deadlines at risk, requests going cold, deals that are stuck, and when each turns bad. Worst first.</div>
-    <div class="th risk"><span>Status</span><span>What</span><span>Turns bad</span></div>
-    <div class="tbl">${a.q4.map(r=>`<div class="tr risk"><div><span class="sev ${esc(r.sev)}">${esc(r.sev==="med"?"Watch":r.sev)}</span></div><div><h4>${esc(r.risk)}</h4>${receipts(r.sources,R)}</div><div class="w">${esc(r.when)}</div></div>`).join("")}</div>
+    ${usageChart(a)}<div class="th risk"><span>Status</span><span>What</span><span>Turns bad</span></div>
+    <div class="tbl">${a.q4.map(r=>`<div class="tr risk"><div><span class="sev ${esc(r.sev)}">${esc(r.sev==="med"?"Watch":r.sev)}</span></div><div><h4>${esc(r.risk)}</h4>${r.detail?`<div class="w" style="margin:-2px 0 8px">${esc(r.detail)}</div>`:""}${receipts(r.sources,R)}</div><div class="w">${esc(r.when)}</div></div>`).join("")}</div>
   </section>
 
   <section class="panel" id="q5"><h2>What do we still not know?</h2><div class="cap">The gaps this plan rests on, why each one matters, and who could close it.</div>

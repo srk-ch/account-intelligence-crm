@@ -16,6 +16,17 @@ function csv(text) {
   });
 }
 
+const fmtD = (s) => new Date(s).toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+function niceReq(r) {
+  const x = `${r.request_id} ${r.summary}`;
+  if (/FB-10412|data-flow|Document request/i.test(x)) return "Tarn Valley's request for data-flow documents has gone unanswered";
+  if (/FB-10903|offline|network link/i.test(x)) return "A Plant 11 dock keeps dropping offline and is waiting on the customer's IT";
+  if (/batter/i.test(x)) return "Insp. Mbeki's email about failing batteries was never answered";
+  if (/renewal quote|cost for each plant/i.test(x)) return "Group finance asked for a per-plant renewal quote and heard nothing";
+  if (/case study/i.test(x)) return "Stefan Roy's case study request has not been started";
+  return r.summary;
+}
+
 export function buildCrm(store) {
   const F = store.fetched;
   const exp = F.accounts?.data;
@@ -159,7 +170,7 @@ export function buildCrm(store) {
         : /case study/i.test(r.summary) ? P("emails/2026-09-22_stefan_case_study.txt")
         : /battery|batteries/i.test(r.summary) ? P("emails/2026-08-11_karen_batteries.txt")
         : P("emails/2026-10-08_finance_mailbox.txt");
-      q4.push({ risk: `Open request ${r.request_id.startsWith("FB-") ? r.request_id : "(email, no ticket)"}: ${r.summary}`, when: `Waiting ${daysSince(r.opened)} days since ${r.opened}; no owner`, sev: daysSince(r.opened) > 60 ? "high" : "med", sources: cite(P("requests.csv"), ticket) });
+      q4.push({ risk: niceReq(r), detail: r.summary, when: `${daysSince(r.opened)} days with no reply, since ${fmtD(r.opened)}`, sev: daysSince(r.opened) > 60 ? "high" : "med", sources: cite(P("requests.csv"), ticket) });
     }
     if (acc.id === "A") {
       q4.push({ risk: "Single point of contact: every call since May 2026 was with Rhys Calder", when: "Any day he is unavailable", sev: "med", sources: cite(P("profile.json"), "rhys_calder") });
@@ -200,8 +211,12 @@ export function buildCrm(store) {
     signals.forEach((s) => (refs[s.id] = { kind: "signal", label: s.title, meta: s.detail }));
     const ceiling = acc.opportunities.filter((o) => o.worth_up_to && o !== renewalOpp).reduce((n, o) => n + o.worth_up_to, 0);
     q4.sort((a, b) => ({ high: 0, med: 1, low: 2 }[a.sev] - { high: 0, med: 1, low: 2 }[b.sev]));
-    const kpis = { backed: money(total), ceiling: money(ceiling), high: q4.filter((r) => r.sev === "high").length, moves: q3.length, claims: q1.unbacked.filter((r) => /claimed/.test(r.value)).length, currency: cur };
-    out.accounts.push({ id: acc.id, name: acc.name, refs, kpis, q1, q2, q3, q4: q4.sort((a, b) => ({ high: 0, med: 1, low: 2 }[a.sev] - { high: 0, med: 1, low: 2 }[b.sev])), q5 });
+    const openOffers = acc.offers.filter((o) => o.status !== "won").reduce((n, o) => n + o.value, 0);
+    const kpis = { backed: money(total), ceiling: money(ceiling), bookedN: total, ceilingN: ceiling, offersN: openOffers, high: q4.filter((r) => r.sev === "high").length, moves: q3.length, claims: q1.unbacked.filter((r) => /claimed/.test(r.value)).length, currency: cur };
+    const series = weeks.map((w) => ({ w, flights: usage.filter((u) => u.week_start === w).reduce((n, u) => n + Number(u.flights || 0), 0), docks: new Set(usage.filter((u) => u.week_start === w && Number(u.flights) > 0).map((u) => u.dock_id)).size }));
+    const timeline = [...q3.map((m) => ({ date: m.due, label: "Move " + m.rank, kind: "move" })), ...(profile.renewal ? [{ date: profile.renewal.term_ends, label: "Contract term ends", kind: "deadline" }] : [])]
+      .concat(signals.filter((s) => (!s.account || s.account === acc.id) && /5 dec/i.test(s.detail)).map(() => ({ date: "2026-12-05", label: "Westmere public event", kind: "deadline" })));
+    out.accounts.push({ id: acc.id, name: acc.name, refs, kpis, usage: { series, docks: docks.length, flyingNow: flyingNow.length, last4 }, timeline, q1, q2, q3, q4: q4.sort((a, b) => ({ high: 0, med: 1, low: 2 }[a.sev] - { high: 0, med: 1, low: 2 }[b.sev])), q5 });
   }
   return out;
 }
