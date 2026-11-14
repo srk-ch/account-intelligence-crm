@@ -60,11 +60,15 @@
    }
   },
   "whoami": {
-   "at": "2026-11-14T09:03:06.946Z",
+   "at": "2026-11-14T10:55:00.000Z",
    "data": {
-    "player_id": "REDACTED-PLAYER-ID",
-    "your_morning_over": true,
-    "new_accounts": [],
+    "new_accounts": [
+     {
+      "id": "K",
+      "name": "Kestrel Estates",
+      "path": "/drops/K"
+     }
+    ],
     "pack": [
      {
       "account": "A",
@@ -73,25 +77,13 @@
      {
       "account": "B",
       "open": true
+     },
+     {
+      "account": "K",
+      "open": true
      }
     ],
-    "signals": 0,
-    "paths": [
-     "/me",
-     "/export",
-     "/files/:id",
-     "/pack",
-     "/pack/team",
-     "/pack/:account",
-     "/pack/:account/all",
-     "/pack/:account/<path>",
-     "/pack/search?q=",
-     "/pack/feature-requests",
-     "/pack/release-notes",
-     "/signals",
-     "/schema",
-     "/notes (GET, POST)"
-    ]
+    "signals": 3
    }
   },
   "notes": {
@@ -5806,6 +5798,211 @@
       "text": "week_start,dock_id,flights,days_online\n2026-09-14,KE-D01,0,7\n2026-09-21,KE-D01,0,7\n2026-09-28,KE-D01,0,7\n2026-10-05,KE-D01,0,7\n2026-10-12,KE-D01,0,7\n2026-10-19,KE-D01,0,7\n2026-10-26,KE-D01,0,7\n"
      }
     ]
+   }
+  },
+  "newaccount_K": {
+   "at": "2026-11-14T10:57:31.053Z",
+   "data": {
+    "format": "account-quest-v2-export/1",
+    "player": "drop-kestrel",
+    "exported_at": "2026-11-14T16:00:00+05:30",
+    "minute": 0,
+    "world_closed": false,
+    "accounts": [
+     {
+      "id": "K",
+      "name": "Kestrel Estates",
+      "official_story": "1 dock paid, 0 flying. Waiting on go-live.",
+      "stakeholders": [
+       {
+        "id": "k_dana_1yo",
+        "name": "Dana Whitfield",
+        "role": "Estate manager",
+        "relationship": "warm",
+        "available": true
+       },
+       {
+        "id": "k_graham_1yo",
+        "name": "Graham Okafor",
+        "role": "Chair, residents' board",
+        "relationship": "neutral",
+        "available": true
+       },
+       {
+        "id": "k_lucy_1yo",
+        "name": "Lucy Pratt",
+        "role": "Insurance broker",
+        "relationship": "neutral",
+        "available": true
+       }
+      ],
+      "facts": [
+       {
+        "id": "k_keen_1yo",
+        "text": "Everyone here is excited. We are just waiting to go live.",
+        "said_by": "Dana Whitfield",
+        "status": "claim",
+        "learned_at_minute": -50
+       },
+       {
+        "id": "k_installer_gone_1yo",
+        "text": "A local installer put the dock in, then moved on. He no longer answers calls.",
+        "said_by": "Dana Whitfield",
+        "status": "told",
+        "learned_at_minute": -45
+       },
+       {
+        "id": "k_not_commissioned_1yo",
+        "text": "Power and network were tested at install, but no test flight was done because there was no certified pilot on site.",
+        "said_by": "Dana Whitfield",
+        "status": "verified",
+        "verified_by": "K_install_note_1yo",
+        "learned_at_minute": -40
+       },
+       {
+        "id": "k_no_pilot_1yo",
+        "text": "Nobody at the estate holds a drone pilot certificate. Dana assumed the system flies itself once switched on.",
+        "said_by": "Dana Whitfield",
+        "status": "told",
+        "learned_at_minute": -38
+       },
+       {
+        "id": "k_insurer_not_told_1yo",
+        "text": "The property insurance requires any new aerial equipment to be notified before use. The dock is not declared.",
+        "said_by": "Lucy Pratt",
+        "status": "verified",
+        "verified_by": "K_insurance_schedule_1yo",
+        "learned_at_minute": -30
+       },
+       {
+        "id": "k_need_entrances_1yo",
+        "text": "What the estate needs is night patrol of the two entrances. The sales pitch was about mapping the whole estate, which they do not need.",
+        "said_by": "Dana Whitfield",
+        "status": "told",
+        "learned_at_minute": -25
+       },
+       {
+        "id": "k_board_pays_1yo",
+        "text": "Any spend beyond the original purchase needs a vote of the residents' board, which meets on the first Monday of each month.",
+        "said_by": "Graham Okafor",
+        "status": "told",
+        "learned_at_minute": -20
+       },
+       {
+        "id": "k_board_doubts_1yo",
+        "text": "Some residents already ask why they paid for a drone that has never flown.",
+        "said_by": "Graham Okafor",
+        "status": "told",
+        "learned_at_minute": -18
+       },
+       {
+        "id": "k_south_unassessed_1yo",
+        "text": "The south entrance was raised at install but never assessed for coverage.",
+        "said_by": "Dana Whitfield",
+        "status": "verified",
+        "verified_by": "K_install_note_1yo",
+        "learned_at_minute": -15
+       },
+       {
+        "id": "k_south_wish_1yo",
+        "text": "If it works at the north gate, Dana would like a second dock for the south entrance.",
+        "said_by": "Dana Whitfield",
+        "status": "claim",
+        "learned_at_minute": -10
+       }
+      ],
+      "opportunities": [
+       {
+        "id": "k_golive_1yo",
+        "title": "Get the north-entrance dock flying night patrols",
+        "stage": "qualified",
+        "worth_up_to": 14000,
+        "size": null,
+        "blocker": {
+         "text": "Nobody can fly it: no certified pilot, never commissioned, and the insurer has not been told",
+         "status": "open"
+        },
+        "evidence": [
+         "k_not_commissioned_1yo",
+         "k_no_pilot_1yo",
+         "k_insurer_not_told_1yo",
+         "k_need_entrances_1yo",
+         "k_installer_gone_1yo",
+         "k_board_pays_1yo",
+         "k_board_doubts_1yo",
+         "K_install_note_1yo",
+         "K_insurance_schedule_1yo"
+        ],
+        "deadline": {
+         "text": "Board meeting: residents vote on renewing the security budget",
+         "minute": 4320
+        }
+       },
+       {
+        "id": "k_south_1yo",
+        "title": "Second dock for the south entrance",
+        "stage": "identified",
+        "worth_up_to": null,
+        "size": null,
+        "blocker": null,
+        "evidence": [
+         "k_south_wish_1yo",
+         "k_south_unassessed_1yo"
+        ],
+        "deadline": null
+       }
+      ],
+      "offers": [
+       {
+        "id": "k_training_1yo",
+        "title": "Pilot certification course for two estate staff",
+        "value": 4000,
+        "pitch_to": "Dana Whitfield",
+        "status": "open"
+       }
+      ],
+      "deadlines": [
+       {
+        "text": "Go-live plan promised to Dana",
+        "minute": 2880,
+        "passed": false
+       },
+       {
+        "text": "Board meeting: residents vote on renewing the security budget",
+        "minute": 4320,
+        "passed": false
+       }
+      ]
+     }
+    ],
+    "files": [
+     {
+      "id": "K_install_note_1yo",
+      "title": "Installer's note",
+      "path": "files/K_install_note_1yo.txt",
+      "account": "K"
+     },
+     {
+      "id": "K_insurance_schedule_1yo",
+      "title": "Insurance schedule extract",
+      "path": "files/K_insurance_schedule_1yo.txt",
+      "account": "K"
+     }
+    ]
+   }
+  },
+  "newfile_K_K_install_note_1yo": {
+   "at": "2026-11-14T10:58:32.997Z",
+   "data": {
+    "id": "K_install_note_1yo",
+    "text": "INSTALLATION NOTE (supplied by installer)\nSite: Kestrel Estates, SSP\nInstall date: 14/09/2026\nDock: 1 unit, mounted on gatehouse roof (north entrance)\nCommissioning: power and network tested. Test flight: not done (no certified pilot on site).\nHandover: keys and login left with estate office.\nInstaller contact: (number no longer in service)\nNotes: customer asked about south entrance coverage - not assessed.\n"
+   }
+  },
+  "newfile_K_K_insurance_schedule_1yo": {
+   "at": "2026-11-14T10:59:35.086Z",
+   "data": {
+    "id": "K_insurance_schedule_1yo",
+    "text": "Property insurance schedule (extract), Kestrel Estates\nPolicy period: 01 Apr 2026 - 31 Mar 2027\nInsured items: buildings, contents, perimeter CCTV\nNotifiable changes: any new aerial or robotic equipment must be notified to the insurer before use.\nDeclared security measures: CCTV at north and south entrances, night guard (Fri-Sat only)\nDrone or dock: not declared\n"
    }
   }
  },

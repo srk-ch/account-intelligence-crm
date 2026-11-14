@@ -3,6 +3,7 @@
 // are shown apart and never added into the backed total.
 
 import { buildPaperworkAccount } from "./paperwork_account.js";
+import { buildExportAccount } from "./export_account.js";
 const DAY = 86_400_000;
 const iso = (d) => new Date(d).toISOString().slice(0, 10);
 const addDays = (n, from = Date.now()) => iso(from + n * DAY);
@@ -56,6 +57,7 @@ export function buildCrm(store) {
       ...exp.files.filter((f) => f.account === acc.id).map((f) => f.id),
       ...pw.map((r) => `${acc.id}/${r.path}`),
       ...signals.map((s) => s.id),
+      ...signals.flatMap((s) => s.paths || []),
     ]);
     const cite = (...ids) => [...new Set(ids.flat().filter((i) => known.has(i)))];
     const P = (p) => `${acc.id}/${p}`;
@@ -145,13 +147,13 @@ export function buildCrm(store) {
     const moves = [];
     const w = sig(/westmere|5 december|public event/i), rh = sig(/rhys|moving on|successor|leaves/i);
     if (acc.id === "A") {
-      for (const s of w) moves.push({ pri: 0, move: "Reply in writing to Insp. Mbeki: training dates for new operators before the 5 December event, and who answers if a dock fails on the day", owner: "You (CSM), with Neel for training capacity and the support desk for on-call", due: addDays(3), deal: "Scale Westmere's fleet", why: "She wrote directly and logged a ticket; nobody has replied. Her last email (batteries, Aug) also had no reply.", sources: cite(s.id, "karen_mbeki", "a_westmere", P("emails/2026-08-11_karen_batteries.txt"), "km_staff_2") });
-      for (const s of rh) moves.push({ pri: 1, move: "Ask Rhys for a named successor and a second contact in each force; get the alliance procurement lead's name", owner: "You (CSM)", due: addDays(10), deal: "Renew the alliance contract", why: "Every call on file was with Rhys alone and he leaves in January; the term ends before the renewal can be signed without him.", sources: cite(s.id, "rhys_calder", P("profile.json"), "a_renewal") });
+      for (const s of w) moves.push({ pri: 0, move: "Reply in writing to Insp. Mbeki: training dates for new operators before the 5 December event, and who answers if a dock fails on the day", owner: "You (CSM), with Neel for training capacity and the support desk for on-call", due: addDays(3), deal: "Scale Westmere's fleet", why: "She wrote directly and logged a ticket; nobody has replied. Her last email (batteries, Aug) also had no reply.", sources: cite(s.paths || [], s.id, "karen_mbeki", "a_westmere", P("emails/2026-08-11_karen_batteries.txt"), "km_staff_2") });
+      for (const s of rh) moves.push({ pri: 1, move: "Ask Rhys for a named successor and a second contact in each force; get the alliance procurement lead's name", owner: "You (CSM)", due: addDays(10), deal: "Renew the alliance contract", why: "Every call on file was with Rhys alone and he leaves in January; the term ends before the renewal can be signed without him.", sources: cite(s.paths || [], s.id, "rhys_calder", P("profile.json"), "a_renewal") });
       moves.push({ pri: 2, move: "Get Metro Central's drone overtime from Payroll (via Ewan) and finish the cost-per-flight against helicopter hours", owner: "You (CSM) with Ewan Brooks", due: addDays(7), deal: "Scale Westmere's fleet", why: "His CFO signs a call-off only with a cost per flight against £1,500 helicopter hours; overtime is not tracked separately.", sources: cite("eb_sign_2", "eb_drone_2", "eb_heli_1", "a_westmere", P("helicopter_cost_overtime")) });
       moves.push({ pri: 3, move: "Chase Fatima Osei's DPIA now she has the data-flow pack; agree the date she will sign, then offer the same pack to Norwold", owner: "You (CSM), engineering (SRV) on questions", due: addDays(21), deal: "Tarn Valley and Norwold go live", why: "She said she can finish in three weeks with the pack; Norwold is waiting to copy her assessment.", sources: cite("fo_needs_3", "srv_dataflow", "a_tarn", "dataflow_pack", "km_others_2") });
       moves.push({ pri: 4, move: "Open the renewal with each force's finance lead before term end (28 Feb 2027); ask each CFO what a call-off needs", owner: "You (CSM) with Achal Negi (commercial owner)", due: "2027-01-15", deal: "Renew the alliance contract", why: "No automatic renewal; each force signs its own call-off.", sources: cite("hd_calloff_2", "rc_funding_2", P("contract.txt"), P("profile.json")) });
     } else {
-      for (const s of sig(/dock|flew|usage|stopped/i)) moves.push({ pri: 0, move: "Find out why the docks that flew most nights went quiet while staying online: call the plant managers, check tickets, ask Owen about the network", owner: "You (CSM) with the support desk", due: addDays(3), deal: "Bring the idle plants into regular patrol", why: "Usage fell to zero with no ticket and no word from the customer.", sources: cite(s.id, "b_idle", P("usage_weekly.csv"), P("device_events.csv")) });
+      for (const s of sig(/dock|flew|usage|stopped/i)) moves.push({ pri: 0, move: "Find out why the docks that flew most nights went quiet while staying online: call the plant managers, check tickets, ask Owen about the network", owner: "You (CSM) with the support desk", due: addDays(3), deal: "Bring the idle plants into regular patrol", why: "Usage fell to zero with no ticket and no word from the customer.", sources: cite(s.paths || [], s.id, "b_idle", P("usage_weekly.csv"), P("device_events.csv")) });
       moves.push({ pri: 2, move: "Put a pilot network-exception plan to Owen Fitch (two engineer days offered) before segmentation starts; name an owner per plant", owner: "You (CSM) with Owen Fitch", due: addDays(14), deal: "Bring the idle plants into regular patrol", why: "Segmentation starts in about four months and will cut the docks' connectivity; nobody has told Owen the docks exist.", sources: cite("of_seg_2", "of_offer_3", "network_plan", "b_idle") });
       moves.push({ pri: 1, move: "Capture the deputy's rollout know-how and Beatriz's night-patrol checklist into one written template; find the deputy's name", owner: "You (CSM) with Beatriz Alonso", due: addDays(10), deal: "Bring the idle plants into regular patrol", why: "The deputy set up most docks, is leaving, and nothing is written down.", sources: cite("sr_repl_2", "ba_deputy_0", "ba_playbook_2", "plant7_checklist", "b_idle") });
       moves.push({ pri: 3, move: "Answer group finance: send the renewal quote broken down by plant, after agreeing it with Stefan Roy", owner: "You (CSM) with Achal Negi", due: addDays(14), deal: "Renew the Aldermoor contract", why: "Unsigned finance email asked for a per-plant quote on 8 Oct and was not answered; the term ends 31 Jan 2027.", sources: cite(P("emails/2026-10-08_finance_mailbox.txt"), P("contract.txt"), "b_renewal") });
@@ -162,7 +164,7 @@ export function buildCrm(store) {
     // ================= Q4 =================
     const q4 = [];
     for (const s of signals.filter((s) => !s.account || s.account === acc.id))
-      q4.push({ risk: `${s.title}${s.detail ? ": " + s.detail : ""}`, when: s.date ? `Reported ${s.date}` : "Live event", sev: "high", sources: cite(s.id) });
+      q4.push({ risk: `${s.title}${s.detail ? ": " + s.detail : ""}`, when: s.date ? `Reported ${s.date}` : "Live event", sev: "high", sources: cite(s.paths || [], s.id) });
     if (profile.renewal) q4.push({ risk: "Contract term ends with no automatic renewal", when: `${profile.renewal.term_ends} (${Math.ceil((new Date(profile.renewal.term_ends) - Date.now()) / DAY)} days)`, sev: acc.id === "B" ? "high" : "med", sources: cite(P("contract.txt"), P("profile.json")) });
     for (const o of acc.opportunities.filter((o) => o.deadline && !o.deadline.met))
       q4.push({ risk: o.deadline.text, when: "Date not on file; turns bad when he leaves", sev: "high", sources: cite(o.id, "sr_repl_2", "ba_deputy_0") });
@@ -209,7 +211,7 @@ export function buildCrm(store) {
     acc.stakeholders.forEach((s) => (refs[s.id] = { kind: "person", label: `${s.name}, ${s.role}`, meta: `${s.relationship} with us` }));
     exp.files.filter((f) => f.account === acc.id).forEach((f) => (refs[f.id] = { kind: "file", label: f.title, meta: F["file_" + f.id]?.data?.text ? String(F["file_" + f.id].data.text).split(/[\r\n\t ]+/).join(" ").slice(0, 320) + "…" : "Data room file" }));
     pw.forEach((r) => (refs[P(r.path)] = { kind: "record", label: r.path, meta: r.text ? String(r.text).split(/[\r\n\t ]+/).join(" ").slice(0, 320) + "…" : JSON.stringify(r.data || "").slice(0, 320) + "…" }));
-    signals.forEach((s) => (refs[s.id] = { kind: "signal", label: s.title, meta: s.detail }));
+    signals.forEach((s) => { refs[s.id] = { kind: "signal", label: s.title, meta: s.detail }; (s.recs || []).forEach((r) => (refs[r.path] = { kind: "record", label: r.path, meta: String(r.text || "").split(/[\r\n\t ]+/).join(" ").slice(0, 320) + "…" })); });
     const ceiling = acc.opportunities.filter((o) => o.worth_up_to && o !== renewalOpp).reduce((n, o) => n + o.worth_up_to, 0);
     q4.sort((a, b) => ({ high: 0, med: 1, low: 2 }[a.sev] - { high: 0, med: 1, low: 2 }[b.sev]));
     const openOffers = acc.offers.filter((o) => o.status !== "won").reduce((n, o) => n + o.value, 0);
@@ -224,11 +226,19 @@ export function buildCrm(store) {
     const metrics = { facts: acc.facts.length, verified: acc.facts.filter((f) => f.status === "verified").length, opps: acc.opportunities.length, agreed: acc.opportunities.filter((o) => o.stage === "agreed").length };
     out.accounts.push({ id: acc.id, name: acc.name, refs, kpis, pipeline, metrics, usage: { series, docks: docks.length, flyingNow: flyingNow.length, last4 }, timeline, q1, q2, q3, q4: q4.sort((a, b) => ({ high: 0, med: 1, low: 2 }[a.sev] - { high: 0, med: 1, low: 2 }[b.sev])), q5 });
   }
-  // accounts that have paperwork but no discovery export (for example a third account dropped mid-build)
+  // accounts released mid-build: a full export (get_new_account) plus paperwork, or paperwork alone
   const have = new Set(out.accounts.map((a) => a.id));
   for (const k of Object.keys(F)) {
-    const mm = k.match(/^paperwork_(.+)$/);
-    if (mm && !have.has(mm[1]) && F[k]?.data?.records) out.accounts.push(buildPaperworkAccount(mm[1], F[k].data.records, signals));
+    const e = k.match(/^newaccount_(.+)$/);
+    if (!e || have.has(e[1]) || !F[k]?.data?.accounts?.[0]) continue;
+    const id = e[1], exp2 = F[k].data.accounts[0], files = F[k].data.files || [], fileTexts = {};
+    for (const f of files) fileTexts[f.id] = F["newfile_" + id + "_" + f.id]?.data?.text || "";
+    out.accounts.push(buildExportAccount(id, exp2, files, fileTexts, F["paperwork_" + id]?.data?.records || [], signals));
+    have.add(id);
+  }
+  for (const k of Object.keys(F)) {
+    const m = k.match(/^paperwork_(.+)$/);
+    if (m && !have.has(m[1]) && F[k]?.data?.records) out.accounts.push(buildPaperworkAccount(m[1], F[k].data.records, signals));
   }
   return out;
 }
@@ -238,8 +248,10 @@ function normaliseSignals(d) {
   return arr.map((s, i) => ({
     id: s.id || s.signal_id || `signal-${i + 1}`,
     account: s.account || s.account_id || "",
-    date: s.date || s.at || s.created_at || "",
+    date: s.dated || s.date || (s.set_off_at ? String(s.set_off_at).slice(0, 10) : ""),
     title: s.title || s.headline || s.type || "Live event",
-    detail: s.detail || s.summary || s.text || s.body || (typeof s === "string" ? s : ""),
+    detail: s.summary || s.detail || s.text || s.body || (typeof s === "string" ? s : ""),
+    recs: s.records || [],
+    paths: (s.records || []).map((r) => r.path),
   }));
 }
